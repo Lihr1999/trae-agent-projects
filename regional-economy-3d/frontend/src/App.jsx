@@ -2,10 +2,10 @@ import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { MapScene } from './components/MapScene.js';
 
 const PRESETS = [
-  { id: 1, name: '预设一', description: '东部沿海经济带', focus: ['北京', '上海', '广东', '江苏', '浙江'] },
-  { id: 2, name: '预设二', description: '长江经济带', focus: ['上海', '江苏', '浙江', '安徽', '湖北', '湖南', '重庆', '四川'] },
-  { id: 3, name: '预设三', description: '京津冀协同发展', focus: ['北京', '天津', '河北'] },
-  { id: 4, name: '预设四', description: '粤港澳大湾区', focus: ['广东', '香港', '澳门'] },
+  { id: 1, name: '预设一', description: '东部沿海经济带', focus: ['北京', '上海', '广东', '江苏', '浙江'], center: [121.5, 33.0], cameraHeight: 55 },
+  { id: 2, name: '预设二', description: '长江经济带', focus: ['上海', '江苏', '浙江', '安徽', '湖北', '湖南', '重庆', '四川'], center: [112.0, 30.5], cameraHeight: 60 },
+  { id: 3, name: '预设三', description: '京津冀协同发展', focus: ['北京', '天津', '河北'], center: [116.0, 39.0], cameraHeight: 35 },
+  { id: 4, name: '预设四', description: '粤港澳大湾区', focus: ['广东', '香港', '澳门'], center: [113.8, 22.8], cameraHeight: 28 },
 ];
 
 export default function App() {

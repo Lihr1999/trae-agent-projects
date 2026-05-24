@@ -1,16 +1,24 @@
 import * as THREE from 'three';
 
 export function geoToScene([lng, lat]) {
-  const x = (lng - 104) * 2;
-  const z = (35 - lat) * 2;
+  const l = isFinite(lng) ? lng : 104;
+  const a = isFinite(lat) ? lat : 35;
+  const x = (l - 104) * 2;
+  const z = (35 - a) * 2;
   return new THREE.Vector3(x, 0, z);
+}
+
+function isValidPoint(p) {
+  return Array.isArray(p) && p.length >= 2 && isFinite(p[0]) && isFinite(p[1]);
 }
 
 function clipRing(ring) {
   if (!ring || ring.length < 3) return null;
+  const valid = ring.filter(isValidPoint);
+  if (valid.length < 3) return null;
   const clipped = [];
   let prev = null;
-  for (const p of ring) {
+  for (const p of valid) {
     if (!prev || Math.hypot(p[0] - prev[0], p[1] - prev[1]) > 0.05) {
       clipped.push(p);
       prev = p;

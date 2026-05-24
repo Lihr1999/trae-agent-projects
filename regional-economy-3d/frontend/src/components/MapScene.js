@@ -246,10 +246,9 @@ export class MapScene {
 
   applyPreset(preset) {
     if (!preset) return;
-    const { camera: cam } = preset;
-    if (cam) {
-      this._animateCameraTo([104, 35], { height: cam.height, distance: cam.height });
-    }
+    const center = preset.center || [104, 35];
+    const height = preset.cameraHeight || 50;
+    this._animateCameraTo(center, { height, distance: height });
   }
 
   _animate() {
