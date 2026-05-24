@@ -1,12 +1,26 @@
 const API_BASE = '/api';
 
 async function req(path, options = {}) {
-  const res = await fetch(API_BASE + path, {
-    headers: { 'Content-Type': 'application/json' },
+  const method = (options.method || 'GET').toUpperCase();
+  const hasBody = options.body !== undefined;
+  const headers = {};
+  if (hasBody) headers['Content-Type'] = 'application/json';
+  const init = {
+    headers,
     ...options,
-    body: options.body !== undefined ? JSON.stringify(options.body) : undefined
-  });
-  if (!res.ok) throw new Error(`HTTP ${res.status}: ${res.statusText}`);
+    body: hasBody ? JSON.stringify(options.body) : undefined
+  };
+  if (method !== 'GET' && !hasBody) {
+    init.body = '{}';
+    init.headers['Content-Type'] = 'application/json';
+  }
+  const res = await fetch(API_BASE + path, init);
+  if (!res.ok) {
+    const text = await res.text();
+    let detail = '';
+    try { detail = ' - ' + JSON.parse(text).message; } catch {}
+    throw new Error(`HTTP ${res.status}: ${res.statusText}${detail}`);
+  }
   return res.json();
 }
 
