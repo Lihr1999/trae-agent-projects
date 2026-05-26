@@ -22,7 +22,7 @@ interface CursorPosition {
 
 @WebSocketGateway({
   cors: {
-    origin: 'http://localhost:5173',
+    origin: ['http://localhost:5173', 'http://localhost:5174', 'http://localhost:5175'],
     credentials: true,
   },
   namespace: 'editor',
@@ -168,6 +168,10 @@ export class EditorGateway implements OnGatewayConnection, OnGatewayDisconnect {
       } else {
         client.emit('bulk-operations-complete', {
           versionVector: this.crdtService.getVersionVector(),
+          text: this.crdtService.getText(),
+          tombstoneCount: this.crdtService.getTombstoneCount(),
+          totalNodeCount: this.crdtService.getTotalNodeCount(),
+          nodes: this.crdtService.getNodes(),
         });
       }
     };

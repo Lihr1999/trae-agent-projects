@@ -6,9 +6,12 @@ import '../styles/Editor.css';
 interface EditorProps {
   text: string;
   onChange: (text: string) => void;
+  onCompositionStart?: () => void;
+  onCompositionEnd?: (text: string) => void;
   cursorPositions: CursorPosition[];
   siteId: string;
   activeAnomaly: string | null;
+  onlineUsers?: number;
 }
 
 const userColors: { [key: string]: string } = {
@@ -20,11 +23,21 @@ const userColors: { [key: string]: string } = {
   'user-offline': '#06b6d4',
 };
 
-function Editor({ text, onChange, cursorPositions, siteId, activeAnomaly }: EditorProps) {
+function Editor({
+  text,
+  onChange,
+  onCompositionStart,
+  onCompositionEnd,
+  cursorPositions,
+  siteId,
+  activeAnomaly,
+  onlineUsers,
+}: EditorProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [isShaking, setIsShaking] = useState(false);
   const [insertedChars, setInsertedChars] = useState<{ char: string; index: number; id: number }[]>([]);
   const lastTextLength = useRef(0);
+  const isInternalUpdate = useRef(false);
 
   useEffect(() => {
     if (text.length > lastTextLength.current) {
@@ -52,9 +65,30 @@ function Editor({ text, onChange, cursorPositions, siteId, activeAnomaly }: Edit
 
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-      onChange(e.target.value);
+      const newText = e.target.value;
+      if (isInternalUpdate.current) {
+        isInternalUpdate.current = false;
+        return;
+      }
+      onChange(newText);
     },
     [onChange],
+  );
+
+  const handleCompositionStart = useCallback(() => {
+    if (onCompositionStart) {
+      onCompositionStart();
+    }
+  }, [onCompositionStart]);
+
+  const handleCompositionEnd = useCallback(
+    (e: React.CompositionEvent<HTMLTextAreaElement>) => {
+      if (onCompositionEnd) {
+        const composedText = e.currentTarget.value;
+        onCompositionEnd(composedText);
+      }
+    },
+    [onCompositionEnd],
   );
 
   const getCursorColor = (userId: string): string => {
@@ -65,6 +99,7 @@ function Editor({ text, onChange, cursorPositions, siteId, activeAnomaly }: Edit
   };
 
   const otherCursors = cursorPositions.filter((c) => c.siteId !== siteId);
+  const displayUsers = onlineUsers ?? cursorPositions.length + 1;
 
   return (
     <div className={`editor-container ${isShaking ? 'shaking' : ''}`}>
@@ -109,6 +144,8 @@ function Editor({ text, onChange, cursorPositions, siteId, activeAnomaly }: Edit
           className="editor-textarea"
           value={text}
           onChange={handleChange}
+          onCompositionStart={handleCompositionStart}
+          onCompositionEnd={handleCompositionEnd}
           placeholder="开始输入..."
           spellCheck={false}
         />
@@ -142,7 +179,7 @@ function Editor({ text, onChange, cursorPositions, siteId, activeAnomaly }: Edit
 
       <div className="editor-footer">
         <span>字符数: {text.length}</span>
-        <span>在线用户: {cursorPositions.length + 1}</span>
+        <span>在线用户: {displayUsers}</span>
       </div>
     </div>
   );

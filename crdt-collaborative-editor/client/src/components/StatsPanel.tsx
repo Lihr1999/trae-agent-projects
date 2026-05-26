@@ -97,6 +97,26 @@ function StatsPanel({
         </div>
       </div>
 
+      <div className="connected-clients">
+        <h4>已连接客户端</h4>
+        <div className="client-list">
+          {connectedClients.map((clientId) => (
+            <motion.div
+              key={clientId}
+              className="client-item"
+              initial={{ x: -10, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+            >
+              <span className="client-dot" />
+              <span className="client-id">{clientId.slice(0, 12)}</span>
+            </motion.div>
+          ))}
+          {connectedClients.length === 0 && (
+            <span className="empty">暂无连接</span>
+          )}
+        </div>
+      </div>
+
       {activeAnomaly && (
         <motion.div
           className="anomaly-info"

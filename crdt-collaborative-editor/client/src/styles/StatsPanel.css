@@ -135,3 +135,43 @@
   color: #78350f;
   line-height: 1.6;
 }
+
+.connected-clients {
+  margin-bottom: 20px;
+}
+
+.connected-clients h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 10px;
+}
+
+.client-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.client-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  background: #f3f4f6;
+  border-radius: 6px;
+}
+
+.client-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+  animation: pulse 2s infinite;
+}
+
+.client-id {
+  font-size: 11px;
+  font-family: monospace;
+  color: #6b7280;
+}

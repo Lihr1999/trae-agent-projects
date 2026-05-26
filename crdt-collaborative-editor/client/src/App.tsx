@@ -37,6 +37,13 @@ function App() {
   const [showMergeAnimation, setShowMergeAnimation] = useState(false);
 
   const lastOperationRef = useRef<number>(0);
+  const isComposingRef = useRef<boolean>(false);
+  const localClockRef = useRef<number>(0);
+
+  const generateId = useCallback(() => {
+    localClockRef.current = Math.max(localClockRef.current, Date.now());
+    return localClockRef.current;
+  }, []);
 
   useEffect(() => {
     const newSocket = connectSocket();
@@ -72,12 +79,14 @@ function App() {
                   n.id.clock === insertOp.afterId!.clock,
               ) + 1
             : 0;
-          newNodes.splice(insertIndex, 0, {
-            id: insertOp.id,
-            value: insertOp.value,
-            tombstone: false,
-            nextId: null,
-          });
+          if (insertIndex >= 0 && insertIndex <= newNodes.length) {
+            newNodes.splice(insertIndex, 0, {
+              id: insertOp.id,
+              value: insertOp.value,
+              tombstone: false,
+              nextId: null,
+            });
+          }
           return newNodes;
         });
       } else if (data.operation.type === 'delete') {
@@ -94,6 +103,12 @@ function App() {
 
       if (data.operation.versionVector) {
         setVersionVector(data.operation.versionVector);
+      }
+    });
+
+    newSocket.on('operation-ack', (data: { operationId: { siteId: string; clock: number }; versionVector: VersionVector }) => {
+      if (data.versionVector) {
+        setVersionVector(data.versionVector);
       }
     });
 
@@ -129,11 +144,19 @@ function App() {
       setTombstoneCount(state.tombstoneCount);
       setTotalNodeCount(state.totalNodeCount);
       setActiveAnomaly(null);
+      localClockRef.current = 0;
     });
 
-    newSocket.on('bulk-operations-complete', () => {
+    newSocket.on('bulk-operations-complete', (data: { versionVector: VersionVector; text: string; tombstoneCount: number; totalNodeCount: number; nodes: any[] }) => {
       setIsSyncing(false);
       setSyncProgress(100);
+      if (data) {
+        setText(data.text || text);
+        setTombstoneCount(data.tombstoneCount || tombstoneCount);
+        setTotalNodeCount(data.totalNodeCount || totalNodeCount);
+        if (data.nodes) setNodes(data.nodes);
+        if (data.versionVector) setVersionVector(data.versionVector);
+      }
       setTimeout(() => setSyncProgress(0), 1000);
     });
 
@@ -190,42 +213,105 @@ function App() {
 
   const handleTextChange = useCallback(
     (newText: string) => {
-      if (!socket) return;
+      if (!socket || isComposingRef.current) return;
+
       const now = Date.now();
-      if (now - lastOperationRef.current < 50) return;
+      if (now - lastOperationRef.current < 30) return;
       lastOperationRef.current = now;
 
       if (newText.length > text.length) {
-        const insertedChar = newText[newText.length - 1];
-        const position = newText.length - 1;
+        const insertedChars = newText.slice(text.length);
+        const startPosition = text.length;
 
-        let afterId = null;
-        if (position > 0 && nodes.length > 0) {
-          const visibleNodes = nodes.filter((n) => !n.tombstone);
-          if (visibleNodes[position - 1]) {
-            afterId = visibleNodes[position - 1].id;
+        for (let i = 0; i < insertedChars.length; i++) {
+          const char = insertedChars[i];
+          const position = startPosition + i;
+          const clock = generateId();
+
+          let afterId = null;
+          if (position > 0 && nodes.length > 0) {
+            const visibleNodes = nodes.filter((n) => !n.tombstone);
+            if (visibleNodes[position - 1]) {
+              afterId = visibleNodes[position - 1].id;
+            } else if (visibleNodes.length > 0) {
+              afterId = visibleNodes[visibleNodes.length - 1].id;
+            }
+          }
+
+          const newVersionVector = { ...versionVector };
+          if (!newVersionVector[siteId]) {
+            newVersionVector[siteId] = 0;
+          }
+          newVersionVector[siteId]++;
+
+          socket.emit('operation', {
+            operation: {
+              type: 'insert',
+              id: { siteId, clock },
+              value: char,
+              afterId,
+              versionVector: newVersionVector,
+              siteId,
+              timestamp: now,
+            },
+          });
+        }
+      } else if (newText.length < text.length) {
+        const deletedCount = text.length - newText.length;
+        const startPosition = newText.length;
+
+        const visibleNodes = nodes.filter((n) => !n.tombstone);
+
+        for (let i = 0; i < deletedCount; i++) {
+          const nodeToDelete = visibleNodes[startPosition + deletedCount - 1 - i];
+          if (nodeToDelete) {
+            const newVersionVector = { ...versionVector };
+            if (!newVersionVector[siteId]) {
+              newVersionVector[siteId] = 0;
+            }
+            newVersionVector[siteId]++;
+
+            socket.emit('operation', {
+              operation: {
+                type: 'delete',
+                targetId: nodeToDelete.id,
+                versionVector: newVersionVector,
+                siteId,
+                timestamp: now,
+              },
+            });
           }
         }
+      }
 
-        socket.emit('operation', {
-          operation: {
-            type: 'insert',
-            id: { siteId, clock: Date.now() },
-            value: insertedChar,
-            afterId,
-            versionVector,
-            siteId,
-            timestamp: Date.now(),
-          },
-        });
+      setText(newText);
+    },
+    [socket, text, nodes, versionVector, generateId],
+  );
+
+  const handleCompositionStart = useCallback(() => {
+    isComposingRef.current = true;
+  }, []);
+
+  const handleCompositionEnd = useCallback(
+    (composedText: string) => {
+      isComposingRef.current = false;
+      if (composedText && composedText !== text) {
+        handleTextChange(composedText);
       }
     },
-    [socket, text, nodes, versionVector],
+    [text, handleTextChange],
   );
 
   const handleReset = useCallback(() => {
     if (socket) {
       socket.emit('reset-document');
+      setText('');
+      setNodes([]);
+      setVersionVector({});
+      setTombstoneCount(0);
+      setTotalNodeCount(0);
+      localClockRef.current = 0;
     }
   }, [socket]);
 
@@ -235,6 +321,8 @@ function App() {
       socket.emit('create-branch', { name, parentBranchId: 'main-branch' });
     }
   }, [socket]);
+
+  const onlineUsers = cursorPositions.length + 1;
 
   return (
     <div className="app-container">
@@ -280,9 +368,12 @@ function App() {
           <Editor
             text={text}
             onChange={handleTextChange}
+            onCompositionStart={handleCompositionStart}
+            onCompositionEnd={handleCompositionEnd}
             cursorPositions={cursorPositions}
             siteId={siteId}
             activeAnomaly={activeAnomaly}
+            onlineUsers={onlineUsers}
           />
 
           <SyncProgress isSyncing={isSyncing} progress={syncProgress} />
