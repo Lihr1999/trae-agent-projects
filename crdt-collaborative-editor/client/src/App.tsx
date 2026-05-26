@@ -39,6 +39,8 @@ function App() {
   const lastOperationRef = useRef<number>(0);
   const isComposingRef = useRef<boolean>(false);
   const localClockRef = useRef<number>(0);
+  const lastInsertedIdRef = useRef<{ siteId: string; clock: number } | null>(null);
+  const pendingOperationsRef = useRef<number>(0);
 
   const generateId = useCallback(() => {
     localClockRef.current = Math.max(localClockRef.current, Date.now());
@@ -61,6 +63,13 @@ function App() {
       setBranches(state.branches);
       setConnectedClients(state.connectedClients);
       setCursorPositions(state.cursorPositions);
+
+      const visibleNodes = state.nodes.filter((n: any) => !n.tombstone);
+      if (visibleNodes.length > 0) {
+        lastInsertedIdRef.current = visibleNodes[visibleNodes.length - 1].id;
+      } else {
+        lastInsertedIdRef.current = null;
+      }
     });
 
     newSocket.on('operation', (data: { operation: CRDTOperation; text: string; tombstoneCount: number; totalNodeCount: number }) => {
@@ -87,18 +96,33 @@ function App() {
               nextId: null,
             });
           }
+
+          const visibleNodes = newNodes.filter((n) => !n.tombstone);
+          if (visibleNodes.length > 0) {
+            lastInsertedIdRef.current = visibleNodes[visibleNodes.length - 1].id;
+          }
+
           return newNodes;
         });
       } else if (data.operation.type === 'delete') {
         const deleteOp = data.operation as DeleteOperation;
-        setNodes((prev) =>
-          prev.map((n) =>
+        setNodes((prev) => {
+          const newNodes = prev.map((n) =>
             n.id.siteId === deleteOp.targetId.siteId &&
             n.id.clock === deleteOp.targetId.clock
               ? { ...n, tombstone: true }
               : n,
-          ),
-        );
+          );
+
+          const visibleNodes = newNodes.filter((n) => !n.tombstone);
+          if (visibleNodes.length > 0) {
+            lastInsertedIdRef.current = visibleNodes[visibleNodes.length - 1].id;
+          } else {
+            lastInsertedIdRef.current = null;
+          }
+
+          return newNodes;
+        });
       }
 
       if (data.operation.versionVector) {
@@ -145,6 +169,8 @@ function App() {
       setTotalNodeCount(state.totalNodeCount);
       setActiveAnomaly(null);
       localClockRef.current = 0;
+      lastInsertedIdRef.current = null;
+      pendingOperationsRef.current = 0;
     });
 
     newSocket.on('bulk-operations-complete', (data: { versionVector: VersionVector; text: string; tombstoneCount: number; totalNodeCount: number; nodes: any[] }) => {
@@ -216,71 +242,68 @@ function App() {
       if (!socket || isComposingRef.current) return;
 
       const now = Date.now();
-      if (now - lastOperationRef.current < 30) return;
       lastOperationRef.current = now;
 
       if (newText.length > text.length) {
         const insertedChars = newText.slice(text.length);
-        const startPosition = text.length;
 
         for (let i = 0; i < insertedChars.length; i++) {
           const char = insertedChars[i];
-          const position = startPosition + i;
           const clock = generateId();
+          const newId = { siteId, clock };
 
-          let afterId = null;
-          if (position > 0 && nodes.length > 0) {
+          let afterId = lastInsertedIdRef.current;
+          if (!afterId && nodes.length > 0) {
             const visibleNodes = nodes.filter((n) => !n.tombstone);
-            if (visibleNodes[position - 1]) {
-              afterId = visibleNodes[position - 1].id;
-            } else if (visibleNodes.length > 0) {
+            if (visibleNodes.length > 0) {
               afterId = visibleNodes[visibleNodes.length - 1].id;
             }
           }
 
-          const newVersionVector = { ...versionVector };
-          if (!newVersionVector[siteId]) {
-            newVersionVector[siteId] = 0;
-          }
-          newVersionVector[siteId]++;
+          pendingOperationsRef.current++;
 
           socket.emit('operation', {
             operation: {
               type: 'insert',
-              id: { siteId, clock },
+              id: newId,
               value: char,
               afterId,
-              versionVector: newVersionVector,
+              versionVector: versionVector,
               siteId,
               timestamp: now,
             },
           });
+
+          lastInsertedIdRef.current = newId;
         }
       } else if (newText.length < text.length) {
         const deletedCount = text.length - newText.length;
-        const startPosition = newText.length;
 
         const visibleNodes = nodes.filter((n) => !n.tombstone);
 
         for (let i = 0; i < deletedCount; i++) {
-          const nodeToDelete = visibleNodes[startPosition + deletedCount - 1 - i];
+          const nodeIndex = visibleNodes.length - 1 - i;
+          const nodeToDelete = visibleNodes[nodeIndex];
           if (nodeToDelete) {
-            const newVersionVector = { ...versionVector };
-            if (!newVersionVector[siteId]) {
-              newVersionVector[siteId] = 0;
-            }
-            newVersionVector[siteId]++;
-
             socket.emit('operation', {
               operation: {
                 type: 'delete',
                 targetId: nodeToDelete.id,
-                versionVector: newVersionVector,
+                versionVector: versionVector,
                 siteId,
                 timestamp: now,
               },
             });
           }
+        }
+
+        if (visibleNodes.length - deletedCount > 0) {
+          const lastRemaining = visibleNodes[visibleNodes.length - deletedCount - 1];
+          if (lastRemaining) {
+            lastInsertedIdRef.current = lastRemaining.id;
+          }
+        } else {
+          lastInsertedIdRef.current = null;
         }
       }
 
@@ -322,7 +345,7 @@ function App() {
     }
   }, [socket]);
 
-  const onlineUsers = cursorPositions.length + 1;
+  const onlineUsers = connectedClients.length;
 
   return (
     <div className="app-container">
