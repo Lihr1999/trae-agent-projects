@@ -36,17 +36,37 @@ export default function App() {
   const [simulationStatus, setSimulationStatus] = useState(null);
   const rotationCountRef = useRef(0);
   const rotationTimersRef = useRef([]);
+  const simulateScenarioRef = useRef(null);
+
+  const handleSimulateScenario = useCallback(async (scenario) => {
+    setSimulationStatus(`正在模拟: ${scenario}...`);
+    try {
+      const result = await simulateScenario(scenario);
+      setSimulationStatus(`模拟完成: ${result.message || scenario}`);
+
+      if (scenario === 'invalid_chars') {
+        setFrozen(true);
+        setFrozenMessage(result.message || '输入已冻结');
+      }
+
+      if (scenario === 'loading') {
+        setSimulationStatus(`词库加载完成: ${result.wordsLoaded} 个词汇，用时 ${result.loadTimeMs}ms`);
+      }
+
+      if (scenario === 'high_frequency') {
+        setSimulationStatus(`状态同步延迟: ${result.delayMs}ms`);
+      }
+
+      setTimeout(() => setSimulationStatus(null), 5000);
+    } catch (err) {
+      setError(err.message || 'Simulation failed');
+      setSimulationStatus(null);
+    }
+  }, []);
 
   useEffect(() => {
-    const init = async () => {
-      try {
-        await getModes();
-      } catch (e) {
-        console.warn('Mode fetch failed, using defaults');
-      }
-    };
-    init();
-  }, []);
+    simulateScenarioRef.current = handleSimulateScenario;
+  }, [handleSimulateScenario]);
 
   const handleGenerateLevel = useCallback(async (mode) => {
     setLoading(true);
@@ -76,8 +96,16 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    const init = async () => {
+      try {
+        await getModes();
+      } catch (e) {
+        console.warn('Mode fetch failed, using defaults');
+      }
+    };
+    init();
     handleGenerateLevel('basic');
-  }, []);
+  }, [handleGenerateLevel]);
 
   const handleModeSelect = (modeId) => {
     handleGenerateLevel(modeId);
@@ -87,15 +115,16 @@ export default function App() {
     if (frozen) return;
 
     const key = `${row}-${col}`;
-    const existingIndex = selectedLetters.findIndex(l => l.key === key);
-
-    if (existingIndex >= 0) {
-      setSelectedLetters(selectedLetters.filter((_, i) => i !== existingIndex));
-    } else {
-      setSelectedLetters([...selectedLetters, { key, row, col, letter }]);
-    }
+    setSelectedLetters(prev => {
+      const existingIndex = prev.findIndex(l => l.key === key);
+      if (existingIndex >= 0) {
+        return prev.filter((_, i) => i !== existingIndex);
+      } else {
+        return [...prev, { key, row, col, letter }];
+      }
+    });
     setSelectedWordValid(null);
-  }, [frozen, selectedLetters]);
+  }, [frozen]);
 
   const handleLetterRotate = useCallback((row, col, direction = 1) => {
     if (frozen) return;
@@ -112,7 +141,9 @@ export default function App() {
     rotationTimersRef.current = rotationTimersRef.current.filter(t => now - t < 1000);
 
     if (rotationTimersRef.current.length > 15) {
-      handleSimulateScenario('high_frequency');
+      if (simulateScenarioRef.current) {
+        simulateScenarioRef.current('high_frequency');
+      }
       rotationTimersRef.current = [];
     }
 
@@ -120,7 +151,7 @@ export default function App() {
       ...prev,
       [key]: ((prev[key] || 0) + direction * 90 + 360) % 360
     }));
-  }, [frozen, lastRotateTime, handleSimulateScenario]);
+  }, [frozen, lastRotateTime]);
 
   const handleValidateWord = useCallback(async () => {
     if (selectedLetters.length < 2) {
@@ -131,13 +162,17 @@ export default function App() {
     const word = selectedLetters.map(l => l.letter).join('');
 
     if (word.length > 20) {
-      handleSimulateScenario('long_word');
+      if (simulateScenarioRef.current) {
+        simulateScenarioRef.current('long_word');
+      }
       return;
     }
 
     const validChars = /^[a-zA-Z]+$/;
     if (!validChars.test(word)) {
-      handleSimulateScenario('invalid_chars');
+      if (simulateScenarioRef.current) {
+        simulateScenarioRef.current('invalid_chars');
+      }
       return;
     }
 
@@ -157,45 +192,19 @@ export default function App() {
     }
   }, [selectedLetters, currentMode, level, solvedWords]);
 
-  const handleClearSelection = () => {
+  const handleClearSelection = useCallback(() => {
     setSelectedLetters([]);
     setSelectedWordValid(null);
-  };
-
-  const handleResetGame = () => {
-    handleGenerateLevel(currentMode);
-  };
-
-  const handleSimulateScenario = useCallback(async (scenario) => {
-    setSimulationStatus(`正在模拟: ${scenario}...`);
-    try {
-      const result = await simulateScenario(scenario);
-      setSimulationStatus(`模拟完成: ${result.message || scenario}`);
-
-      if (scenario === 'invalid_chars') {
-        setFrozen(true);
-        setFrozenMessage(result.message || '输入已冻结');
-      }
-
-      if (scenario === 'loading') {
-        setSimulationStatus(`词库加载完成: ${result.wordsLoaded} 个词汇，用时 ${result.loadTimeMs}ms`);
-      }
-
-      if (scenario === 'high_frequency') {
-        setSimulationStatus(`状态同步延迟: ${result.delayMs}ms`);
-      }
-
-      setTimeout(() => setSimulationStatus(null), 5000);
-    } catch (err) {
-      setError(err.message || 'Simulation failed');
-      setSimulationStatus(null);
-    }
   }, []);
 
-  const handleUnfreeze = () => {
+  const handleResetGame = useCallback(() => {
+    handleGenerateLevel(currentMode);
+  }, [currentMode, handleGenerateLevel]);
+
+  const handleUnfreeze = useCallback(() => {
     setFrozen(false);
     setFrozenMessage('');
-  };
+  }, []);
 
   const progress = level ? (solvedWords.length / level.words.length) * 100 : 0;
 
