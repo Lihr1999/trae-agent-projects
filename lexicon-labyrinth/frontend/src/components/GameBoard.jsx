@@ -16,6 +16,7 @@ export default function GameBoard({
   const stageRef = useRef(null);
   const containerRef = useRef(null);
   const [flippingCells, setFlippingCells] = useState({});
+  const isRightClickRef = useRef(false);
 
   const gridSize = grid?.length || 0;
   const boardWidth = gridSize * (CELL_SIZE + CELL_GAP);
@@ -47,14 +48,8 @@ export default function GameBoard({
     onLetterClick(row, col, letter);
   }, [onLetterClick]);
 
-  const handleCellContextMenu = useCallback((e, row, col, letter) => {
+  const handleCellRotate = useCallback((row, col, letter) => {
     if (!letter) return;
-
-    if (e.evt) {
-      e.evt.preventDefault();
-      e.evt.stopPropagation();
-    }
-    e.cancelBubble = true;
 
     const key = `${row}-${col}`;
 
@@ -74,6 +69,39 @@ export default function GameBoard({
       });
     }, 400);
   }, [onLetterRotate]);
+
+  const handleMouseDown = useCallback((e, row, col, letter) => {
+    if (!letter) return;
+
+    const button = e.evt?.button;
+
+    if (button === 2) {
+      isRightClickRef.current = true;
+      handleCellRotate(row, col, letter);
+    } else if (button === 0) {
+      isRightClickRef.current = false;
+    }
+  }, [handleCellRotate]);
+
+  const handleMouseUp = useCallback((e, row, col, letter) => {
+    if (!letter) return;
+
+    const button = e.evt?.button;
+
+    if (button === 0 && !isRightClickRef.current) {
+      handleCellClick(row, col, letter);
+    }
+
+    isRightClickRef.current = false;
+  }, [handleCellClick]);
+
+  const handleContextMenu = useCallback((e, row, col, letter) => {
+    if (e.evt) {
+      e.evt.preventDefault();
+      e.evt.stopPropagation();
+    }
+    e.cancelBubble = true;
+  }, []);
 
   const renderCell = (cell, row, col) => {
     const x = col * (CELL_SIZE + CELL_GAP);
@@ -187,9 +215,9 @@ export default function GameBoard({
           height={CELL_SIZE}
           cornerRadius={10}
           fill="rgba(0,0,0,0.001)"
-          onClick={() => handleCellClick(row, col, cell.letter)}
-          onTap={() => handleCellClick(row, col, cell.letter)}
-          onContextMenu={(e) => handleCellContextMenu(e, row, col, cell.letter)}
+          onMouseDown={(e) => handleMouseDown(e, row, col, cell.letter)}
+          onMouseUp={(e) => handleMouseUp(e, row, col, cell.letter)}
+          onContextMenu={(e) => handleContextMenu(e, row, col, cell.letter)}
           onMouseEnter={() => {
             const container = stageRef.current?.container();
             if (container) container.style.cursor = 'pointer';
