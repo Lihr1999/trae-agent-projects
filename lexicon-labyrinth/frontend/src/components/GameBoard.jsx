@@ -1,8 +1,5 @@
 import { useRef, useEffect, useState, useCallback } from 'react';
-import { Stage, Layer, Rect, Text, Group, Transformer, Circle } from 'react-konva';
-import Konva from 'konva';
-import ParticleEffect from './ParticleEffect.jsx';
-import PulseWarning from './PulseWarning.jsx';
+import { Stage, Layer, Rect, Text, Group } from 'react-konva';
 
 const CELL_SIZE = 60;
 const CELL_GAP = 6;
@@ -17,8 +14,7 @@ export default function GameBoard({
   mode
 }) {
   const stageRef = useRef(null);
-  const [particles, setParticles] = useState([]);
-  const [pulseActive, setPulseActive] = useState(false);
+  const containerRef = useRef(null);
   const [flippingCells, setFlippingCells] = useState({});
 
   const gridSize = grid?.length || 0;
@@ -27,19 +23,43 @@ export default function GameBoard({
 
   const selectedKeys = new Set(selectedLetters.map(l => `${l.row}-${l.col}`));
 
+  useEffect(() => {
+    const preventContextMenu = (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      return false;
+    };
+    const container = containerRef.current;
+    if (container) {
+      container.addEventListener('contextmenu', preventContextMenu, { capture: true });
+    }
+    document.addEventListener('contextmenu', preventContextMenu, { capture: true });
+    return () => {
+      if (container) {
+        container.removeEventListener('contextmenu', preventContextMenu, { capture: true });
+      }
+      document.removeEventListener('contextmenu', preventContextMenu, { capture: true });
+    };
+  }, []);
+
   const handleCellClick = useCallback((row, col, letter) => {
     if (!letter) return;
-
     onLetterClick(row, col, letter);
   }, [onLetterClick]);
 
   const handleCellContextMenu = useCallback((e, row, col, letter) => {
     if (!letter) return;
-    e.evt.preventDefault();
+
+    if (e.evt) {
+      e.evt.preventDefault();
+      e.evt.stopPropagation();
+    }
+    e.cancelBubble = true;
+
+    const key = `${row}-${col}`;
 
     onLetterRotate(row, col, 1);
 
-    const key = `${row}-${col}`;
     setFlippingCells(prev => ({ ...prev, [key]: (prev[key] || 0) + 1 }));
 
     setTimeout(() => {
@@ -54,29 +74,6 @@ export default function GameBoard({
       });
     }, 400);
   }, [onLetterRotate]);
-
-  const handleTap = useCallback((row, col, letter) => {
-    if (!letter) return;
-    onLetterClick(row, col, letter);
-  }, [onLetterClick]);
-
-  const getCellColor = (letter, isSelected, row, col) => {
-    const colors = {
-      basic: ['#00d9ff', '#0099cc'],
-      rare: ['#ffbe0b', '#cc9900'],
-      cycle: ['#ff006e', '#cc0055'],
-      massive: ['#8338ec', '#6a2ec5']
-    };
-    const [light, dark] = colors[mode] || colors.basic;
-
-    if (isSelected) return light;
-    return `linear-gradient(135deg, ${dark}, #1a1a2e)`;
-  };
-
-  const getParticlesForCell = (row, col) => {
-    const key = `${row}-${col}`;
-    return particles.filter(p => p.cellKey === key);
-  };
 
   const renderCell = (cell, row, col) => {
     const x = col * (CELL_SIZE + CELL_GAP);
@@ -98,46 +95,39 @@ export default function GameBoard({
           fill="rgba(255,255,255,0.02)"
           stroke="rgba(255,255,255,0.05)"
           strokeWidth={1}
+          listening={false}
         />
       );
     }
 
     const colors = {
-      basic: { light: '#00d9ff', dark: '#0099cc', glow: 'rgba(0,217,255,0.5)' },
-      rare: { light: '#ffbe0b', dark: '#cc9900', glow: 'rgba(255,190,11,0.5)' },
-      cycle: { light: '#ff006e', dark: '#cc0055', glow: 'rgba(255,0,110,0.5)' },
-      massive: { light: '#8338ec', dark: '#6a2ec5', glow: 'rgba(131,56,236,0.5)' }
+      basic: { light: '#00d9ff', dark: '#0077aa', glow: 'rgba(0,217,255,0.8)' },
+      rare: { light: '#ffbe0b', dark: '#b38600', glow: 'rgba(255,190,11,0.8)' },
+      cycle: { light: '#ff006e', dark: '#b3004d', glow: 'rgba(255,0,110,0.8)' },
+      massive: { light: '#8338ec', dark: '#5a24a3', glow: 'rgba(131,56,236,0.8)' }
     };
     const c = colors[mode] || colors.basic;
 
     const fillColor = isSelected ? c.light : c.dark;
+    const strokeColor = isSelected ? '#ffffff' : 'rgba(255,255,255,0.3)';
+    const strokeWidth = isSelected ? 4 : 1.5;
+    const shadowBlur = isSelected ? 25 : 0;
 
     return (
       <Group
         key={key}
         x={x}
         y={y}
-        onClick={() => handleCellClick(row, col, cell.letter)}
-        onTap={() => handleTap(row, col, cell.letter)}
-        onContextMenu={(e) => handleCellContextMenu(e, row, col, cell.letter)}
-        onMouseEnter={(e) => {
-          const container = stageRef.current?.container();
-          if (container) container.style.cursor = 'pointer';
-        }}
-        onMouseLeave={(e) => {
-          const container = stageRef.current?.container();
-          if (container) container.style.cursor = 'default';
-        }}
       >
         <Rect
           width={CELL_SIZE}
           height={CELL_SIZE}
           cornerRadius={10}
           fill={fillColor}
-          stroke={isSelected ? '#fff' : 'rgba(255,255,255,0.2)'}
-          strokeWidth={isSelected ? 3 : 1}
+          stroke={strokeColor}
+          strokeWidth={strokeWidth}
           shadowColor={c.glow}
-          shadowBlur={isSelected ? 20 : 0}
+          shadowBlur={shadowBlur}
           shadowOffset={{ x: 0, y: 0 }}
           shadowOpacity={isSelected ? 1 : 0}
           listening={false}
@@ -151,92 +141,93 @@ export default function GameBoard({
         >
           <Text
             text={cell.letter.toUpperCase()}
-            fontSize={28}
+            fontSize={30}
             fontStyle="bold"
-            fill="#fff"
-            x={-12}
-            y={-16}
-            width={24}
+            fill="#ffffff"
+            x={-15}
+            y={-20}
+            width={30}
             align="center"
             listening={false}
+            shadowColor="rgba(0,0,0,0.5)"
+            shadowBlur={2}
+            shadowOffset={{ x: 1, y: 1 }}
           />
         </Group>
 
+        {isSelected && (
+          <Rect
+            x={4}
+            y={4}
+            width={CELL_SIZE - 8}
+            height={CELL_SIZE - 8}
+            cornerRadius={8}
+            stroke="#ffffff"
+            strokeWidth={3}
+            listening={false}
+            opacity={0.8}
+            dash={[6, 4]}
+          />
+        )}
+
         {isFlipping && (
           <Rect
-            x={0}
-            y={0}
             width={CELL_SIZE}
             height={CELL_SIZE}
             cornerRadius={10}
-            fill="rgba(255,255,255,0.3)"
+            fill="rgba(255,255,255,0.5)"
             listening={false}
-            opacity={0.6}
+            opacity={0.7}
           />
         )}
+
+        <Rect
+          name="hitbox"
+          width={CELL_SIZE}
+          height={CELL_SIZE}
+          cornerRadius={10}
+          fill="rgba(0,0,0,0.001)"
+          onClick={() => handleCellClick(row, col, cell.letter)}
+          onTap={() => handleCellClick(row, col, cell.letter)}
+          onContextMenu={(e) => handleCellContextMenu(e, row, col, cell.letter)}
+          onMouseEnter={() => {
+            const container = stageRef.current?.container();
+            if (container) container.style.cursor = 'pointer';
+          }}
+          onMouseLeave={() => {
+            const container = stageRef.current?.container();
+            if (container) container.style.cursor = 'default';
+          }}
+        />
       </Group>
     );
   };
 
   return (
-    <div style={{ position: 'relative', overflow: 'hidden' }}>
+    <div ref={containerRef} style={{ position: 'relative', overflow: 'hidden' }}>
       <Stage
         ref={stageRef}
         width={Math.max(boardWidth, 100)}
         height={Math.max(boardHeight, 100)}
-        scaleX={1}
-        scaleY={1}
+        style={{ display: 'block' }}
       >
         <Layer>
           {grid?.map((row, rowIndex) =>
             row.map((cell, colIndex) => renderCell(cell, rowIndex, colIndex))
           )}
         </Layer>
-
-        {particles.length > 0 && (
-          <Layer>
-            {particles.map((p, i) => (
-              <Circle
-                key={i}
-                x={p.x}
-                y={p.y}
-                radius={p.radius}
-                fill={p.color}
-                opacity={p.opacity}
-                listening={false}
-              />
-            ))}
-          </Layer>
-        )}
-
-        {pulseActive && (
-          <Layer>
-            {selectedLetters.map((l, i) => (
-              <Rect
-                key={i}
-                x={l.col * (CELL_SIZE + CELL_GAP)}
-                y={l.row * (CELL_SIZE + CELL_GAP)}
-                width={CELL_SIZE}
-                height={CELL_SIZE}
-                cornerRadius={10}
-                stroke="#ff006e"
-                strokeWidth={4}
-                listening={false}
-                opacity={0.8}
-              />
-            ))}
-          </Layer>
-        )}
       </Stage>
 
-      {pulseActive && <PulseWarning active={pulseActive} />}
       <div style={{
-        marginTop: '10px',
-        fontSize: '0.8rem',
+        marginTop: '12px',
+        fontSize: '0.78rem',
         color: '#8892b0',
-        textAlign: 'center'
+        textAlign: 'center',
+        letterSpacing: '0.5px'
       }}>
-        点击选择/取消字母 | 右键旋转方块
+        <span style={{ color: '#00d9ff' }}>●</span> 左键点击选择字母
+        <span style={{ margin: '0 10px', color: '#444' }}>|</span>
+        <span style={{ color: '#ffbe0b' }}>●</span> 右键旋转方块
       </div>
     </div>
   );

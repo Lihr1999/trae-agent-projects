@@ -83,7 +83,7 @@ export default function App() {
     handleGenerateLevel(modeId);
   };
 
-  const handleLetterClick = (row, col, letter) => {
+  const handleLetterClick = useCallback((row, col, letter) => {
     if (frozen) return;
 
     const key = `${row}-${col}`;
@@ -95,9 +95,9 @@ export default function App() {
       setSelectedLetters([...selectedLetters, { key, row, col, letter }]);
     }
     setSelectedWordValid(null);
-  };
+  }, [frozen, selectedLetters]);
 
-  const handleLetterRotate = (row, col, direction = 1) => {
+  const handleLetterRotate = useCallback((row, col, direction = 1) => {
     if (frozen) return;
 
     const key = `${row}-${col}`;
@@ -120,7 +120,7 @@ export default function App() {
       ...prev,
       [key]: ((prev[key] || 0) + direction * 90 + 360) % 360
     }));
-  };
+  }, [frozen, lastRotateTime, handleSimulateScenario]);
 
   const handleValidateWord = useCallback(async () => {
     if (selectedLetters.length < 2) {
@@ -166,7 +166,7 @@ export default function App() {
     handleGenerateLevel(currentMode);
   };
 
-  const handleSimulateScenario = async (scenario) => {
+  const handleSimulateScenario = useCallback(async (scenario) => {
     setSimulationStatus(`正在模拟: ${scenario}...`);
     try {
       const result = await simulateScenario(scenario);
@@ -190,7 +190,7 @@ export default function App() {
       setError(err.message || 'Simulation failed');
       setSimulationStatus(null);
     }
-  };
+  }, []);
 
   const handleUnfreeze = () => {
     setFrozen(false);
