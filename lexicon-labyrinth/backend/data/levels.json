@@ -380,5 +380,5551 @@
       "r"
     ],
     "createdAt": 1779724080624
+  },
+  {
+    "id": "level_1779766921129_ocpcoc3wx",
+    "mode": "basic",
+    "difficulty": 1,
+    "words": [
+      {
+        "word": "work",
+        "solved": false
+      },
+      {
+        "word": "salt",
+        "solved": false
+      },
+      {
+        "word": "port",
+        "solved": false
+      },
+      {
+        "word": "love",
+        "solved": false
+      }
+    ],
+    "dependencyGraph": {
+      "nodes": [
+        {
+          "id": "word_0",
+          "word": "work",
+          "x": 100,
+          "y": 100,
+          "solved": false
+        },
+        {
+          "id": "word_1",
+          "word": "salt",
+          "x": 300,
+          "y": 100,
+          "solved": false
+        },
+        {
+          "id": "word_2",
+          "word": "port",
+          "x": 500,
+          "y": 100,
+          "solved": false
+        },
+        {
+          "id": "word_3",
+          "word": "love",
+          "x": 100,
+          "y": 250,
+          "solved": false
+        }
+      ],
+      "edges": [
+        {
+          "from": "word_0",
+          "to": "word_2",
+          "sharedLetters": [
+            "o",
+            "r"
+          ],
+          "type": "shares_letters"
+        },
+        {
+          "from": "word_2",
+          "to": "word_3",
+          "sharedLetters": [
+            "o"
+          ],
+          "type": "shares_letters"
+        }
+      ]
+    },
+    "grid": [
+      [
+        {
+          "letter": "l",
+          "row": 0,
+          "col": 0,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "w",
+          "row": 0,
+          "col": 1,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "s",
+          "row": 0,
+          "col": 2,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "o",
+          "row": 0,
+          "col": 3,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "t",
+          "row": 0,
+          "col": 4,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "k",
+          "row": 0,
+          "col": 5,
+          "selected": false,
+          "rotation": 180
+        }
+      ],
+      [
+        {
+          "letter": "e",
+          "row": 1,
+          "col": 0,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "r",
+          "row": 1,
+          "col": 1,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "t",
+          "row": 1,
+          "col": 2,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "v",
+          "row": 1,
+          "col": 3,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "l",
+          "row": 1,
+          "col": 4,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "r",
+          "row": 1,
+          "col": 5,
+          "selected": false,
+          "rotation": 90
+        }
+      ],
+      [
+        {
+          "letter": "o",
+          "row": 2,
+          "col": 0,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "a",
+          "row": 2,
+          "col": 1,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "e",
+          "row": 2,
+          "col": 2,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "o",
+          "row": 2,
+          "col": 3,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "p",
+          "row": 2,
+          "col": 4,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "l",
+          "row": 2,
+          "col": 5,
+          "selected": false,
+          "rotation": 270
+        }
+      ],
+      [
+        {
+          "letter": "o",
+          "row": 3,
+          "col": 0,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "v",
+          "row": 3,
+          "col": 1,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "a",
+          "row": 3,
+          "col": 2,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "s",
+          "row": 3,
+          "col": 3,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "k",
+          "row": 3,
+          "col": 4,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "r",
+          "row": 3,
+          "col": 5,
+          "selected": false,
+          "rotation": 0
+        }
+      ],
+      [
+        {
+          "letter": "w",
+          "row": 4,
+          "col": 0,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "o",
+          "row": 4,
+          "col": 1,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "t",
+          "row": 4,
+          "col": 2,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "p",
+          "row": 4,
+          "col": 3,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": null,
+          "row": 4,
+          "col": 4,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 4,
+          "col": 5,
+          "selected": false,
+          "rotation": 0
+        }
+      ],
+      [
+        {
+          "letter": null,
+          "row": 5,
+          "col": 0,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 1,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 2,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 3,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 4,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 5,
+          "selected": false,
+          "rotation": 0
+        }
+      ]
+    ],
+    "letterPool": [
+      "l",
+      "w",
+      "s",
+      "o",
+      "t",
+      "k",
+      "e",
+      "r",
+      "t",
+      "v",
+      "l",
+      "r",
+      "o",
+      "a",
+      "e",
+      "o",
+      "p",
+      "l",
+      "o",
+      "v",
+      "a",
+      "s",
+      "k",
+      "r",
+      "w",
+      "o",
+      "t",
+      "p"
+    ],
+    "createdAt": 1779766921129
+  },
+  {
+    "id": "level_1779767016909_apekn5i0c",
+    "mode": "basic",
+    "difficulty": 1,
+    "words": [
+      {
+        "word": "nose",
+        "solved": false
+      },
+      {
+        "word": "room",
+        "solved": false
+      },
+      {
+        "word": "head",
+        "solved": false
+      },
+      {
+        "word": "time",
+        "solved": false
+      }
+    ],
+    "dependencyGraph": {
+      "nodes": [
+        {
+          "id": "word_0",
+          "word": "nose",
+          "x": 100,
+          "y": 100,
+          "solved": false
+        },
+        {
+          "id": "word_1",
+          "word": "room",
+          "x": 300,
+          "y": 100,
+          "solved": false
+        },
+        {
+          "id": "word_2",
+          "word": "head",
+          "x": 500,
+          "y": 100,
+          "solved": false
+        },
+        {
+          "id": "word_3",
+          "word": "time",
+          "x": 100,
+          "y": 250,
+          "solved": false
+        }
+      ],
+      "edges": [
+        {
+          "from": "word_0",
+          "to": "word_1",
+          "sharedLetters": [
+            "o"
+          ],
+          "type": "shares_letters"
+        },
+        {
+          "from": "word_1",
+          "to": "word_3",
+          "sharedLetters": [
+            "m"
+          ],
+          "type": "shares_letters"
+        },
+        {
+          "from": "word_0",
+          "to": "word_2",
+          "sharedLetters": [
+            "e"
+          ],
+          "type": "shares_letters"
+        }
+      ]
+    },
+    "grid": [
+      [
+        {
+          "letter": "m",
+          "row": 0,
+          "col": 0,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "e",
+          "row": 0,
+          "col": 1,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "e",
+          "row": 0,
+          "col": 2,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "n",
+          "row": 0,
+          "col": 3,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "o",
+          "row": 0,
+          "col": 4,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "m",
+          "row": 0,
+          "col": 5,
+          "selected": false,
+          "rotation": 270
+        }
+      ],
+      [
+        {
+          "letter": "r",
+          "row": 1,
+          "col": 0,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "h",
+          "row": 1,
+          "col": 1,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "h",
+          "row": 1,
+          "col": 2,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "e",
+          "row": 1,
+          "col": 3,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "d",
+          "row": 1,
+          "col": 4,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "a",
+          "row": 1,
+          "col": 5,
+          "selected": false,
+          "rotation": 0
+        }
+      ],
+      [
+        {
+          "letter": "m",
+          "row": 2,
+          "col": 0,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "o",
+          "row": 2,
+          "col": 1,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "s",
+          "row": 2,
+          "col": 2,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "e",
+          "row": 2,
+          "col": 3,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "d",
+          "row": 2,
+          "col": 4,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "o",
+          "row": 2,
+          "col": 5,
+          "selected": false,
+          "rotation": 270
+        }
+      ],
+      [
+        {
+          "letter": "t",
+          "row": 3,
+          "col": 0,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "s",
+          "row": 3,
+          "col": 1,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "n",
+          "row": 3,
+          "col": 2,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "o",
+          "row": 3,
+          "col": 3,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "i",
+          "row": 3,
+          "col": 4,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "e",
+          "row": 3,
+          "col": 5,
+          "selected": false,
+          "rotation": 270
+        }
+      ],
+      [
+        {
+          "letter": "r",
+          "row": 4,
+          "col": 0,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "i",
+          "row": 4,
+          "col": 1,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "a",
+          "row": 4,
+          "col": 2,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "o",
+          "row": 4,
+          "col": 3,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "t",
+          "row": 4,
+          "col": 4,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": null,
+          "row": 4,
+          "col": 5,
+          "selected": false,
+          "rotation": 0
+        }
+      ],
+      [
+        {
+          "letter": null,
+          "row": 5,
+          "col": 0,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 1,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 2,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 3,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 4,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 5,
+          "selected": false,
+          "rotation": 0
+        }
+      ]
+    ],
+    "letterPool": [
+      "m",
+      "e",
+      "e",
+      "n",
+      "o",
+      "m",
+      "r",
+      "h",
+      "h",
+      "e",
+      "d",
+      "a",
+      "m",
+      "o",
+      "s",
+      "e",
+      "d",
+      "o",
+      "t",
+      "s",
+      "n",
+      "o",
+      "i",
+      "e",
+      "r",
+      "i",
+      "a",
+      "o",
+      "t"
+    ],
+    "createdAt": 1779767016909
+  },
+  {
+    "id": "level_1779767016913_hg2jfs9kd",
+    "mode": "basic",
+    "difficulty": 1,
+    "words": [
+      {
+        "word": "dream",
+        "solved": false
+      },
+      {
+        "word": "bag",
+        "solved": false
+      },
+      {
+        "word": "user",
+        "solved": false
+      },
+      {
+        "word": "face",
+        "solved": false
+      }
+    ],
+    "dependencyGraph": {
+      "nodes": [
+        {
+          "id": "word_0",
+          "word": "dream",
+          "x": 100,
+          "y": 100,
+          "solved": false
+        },
+        {
+          "id": "word_1",
+          "word": "bag",
+          "x": 300,
+          "y": 100,
+          "solved": false
+        },
+        {
+          "id": "word_2",
+          "word": "user",
+          "x": 500,
+          "y": 100,
+          "solved": false
+        },
+        {
+          "id": "word_3",
+          "word": "face",
+          "x": 100,
+          "y": 250,
+          "solved": false
+        }
+      ],
+      "edges": [
+        {
+          "from": "word_0",
+          "to": "word_1",
+          "sharedLetters": [
+            "a"
+          ],
+          "type": "shares_letters"
+        },
+        {
+          "from": "word_1",
+          "to": "word_3",
+          "sharedLetters": [
+            "a"
+          ],
+          "type": "shares_letters"
+        },
+        {
+          "from": "word_0",
+          "to": "word_2",
+          "sharedLetters": [
+            "r",
+            "e"
+          ],
+          "type": "shares_letters"
+        }
+      ]
+    },
+    "grid": [
+      [
+        {
+          "letter": "f",
+          "row": 0,
+          "col": 0,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "s",
+          "row": 0,
+          "col": 1,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "g",
+          "row": 0,
+          "col": 2,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "d",
+          "row": 0,
+          "col": 3,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "g",
+          "row": 0,
+          "col": 4,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "f",
+          "row": 0,
+          "col": 5,
+          "selected": false,
+          "rotation": 0
+        }
+      ],
+      [
+        {
+          "letter": "r",
+          "row": 1,
+          "col": 0,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "e",
+          "row": 1,
+          "col": 1,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "e",
+          "row": 1,
+          "col": 2,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "e",
+          "row": 1,
+          "col": 3,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "u",
+          "row": 1,
+          "col": 4,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "a",
+          "row": 1,
+          "col": 5,
+          "selected": false,
+          "rotation": 0
+        }
+      ],
+      [
+        {
+          "letter": "e",
+          "row": 2,
+          "col": 0,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "a",
+          "row": 2,
+          "col": 1,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "m",
+          "row": 2,
+          "col": 2,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "d",
+          "row": 2,
+          "col": 3,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "e",
+          "row": 2,
+          "col": 4,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "c",
+          "row": 2,
+          "col": 5,
+          "selected": false,
+          "rotation": 180
+        }
+      ],
+      [
+        {
+          "letter": "a",
+          "row": 3,
+          "col": 0,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "s",
+          "row": 3,
+          "col": 1,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "r",
+          "row": 3,
+          "col": 2,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "u",
+          "row": 3,
+          "col": 3,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "a",
+          "row": 3,
+          "col": 4,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "a",
+          "row": 3,
+          "col": 5,
+          "selected": false,
+          "rotation": 180
+        }
+      ],
+      [
+        {
+          "letter": "c",
+          "row": 4,
+          "col": 0,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "b",
+          "row": 4,
+          "col": 1,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "r",
+          "row": 4,
+          "col": 2,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "b",
+          "row": 4,
+          "col": 3,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "m",
+          "row": 4,
+          "col": 4,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": null,
+          "row": 4,
+          "col": 5,
+          "selected": false,
+          "rotation": 0
+        }
+      ],
+      [
+        {
+          "letter": null,
+          "row": 5,
+          "col": 0,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 1,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 2,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 3,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 4,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 5,
+          "selected": false,
+          "rotation": 0
+        }
+      ]
+    ],
+    "letterPool": [
+      "f",
+      "s",
+      "g",
+      "d",
+      "g",
+      "f",
+      "r",
+      "e",
+      "e",
+      "e",
+      "u",
+      "a",
+      "e",
+      "a",
+      "m",
+      "d",
+      "e",
+      "c",
+      "a",
+      "s",
+      "r",
+      "u",
+      "a",
+      "a",
+      "c",
+      "b",
+      "r",
+      "b",
+      "m"
+    ],
+    "createdAt": 1779767016913
+  },
+  {
+    "id": "level_1779767019492_x979wwv54",
+    "mode": "basic",
+    "difficulty": 1,
+    "words": [
+      {
+        "word": "water",
+        "solved": false
+      },
+      {
+        "word": "arm",
+        "solved": false
+      },
+      {
+        "word": "hope",
+        "solved": false
+      },
+      {
+        "word": "fish",
+        "solved": false
+      }
+    ],
+    "dependencyGraph": {
+      "nodes": [
+        {
+          "id": "word_0",
+          "word": "water",
+          "x": 100,
+          "y": 100,
+          "solved": false
+        },
+        {
+          "id": "word_1",
+          "word": "arm",
+          "x": 300,
+          "y": 100,
+          "solved": false
+        },
+        {
+          "id": "word_2",
+          "word": "hope",
+          "x": 500,
+          "y": 100,
+          "solved": false
+        },
+        {
+          "id": "word_3",
+          "word": "fish",
+          "x": 100,
+          "y": 250,
+          "solved": false
+        }
+      ],
+      "edges": [
+        {
+          "from": "word_0",
+          "to": "word_1",
+          "sharedLetters": [
+            "a",
+            "r"
+          ],
+          "type": "shares_letters"
+        },
+        {
+          "from": "word_0",
+          "to": "word_2",
+          "sharedLetters": [
+            "e"
+          ],
+          "type": "shares_letters"
+        },
+        {
+          "from": "word_2",
+          "to": "word_3",
+          "sharedLetters": [
+            "h"
+          ],
+          "type": "shares_letters"
+        }
+      ]
+    },
+    "grid": [
+      [
+        {
+          "letter": "f",
+          "row": 0,
+          "col": 0,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "r",
+          "row": 0,
+          "col": 1,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "w",
+          "row": 0,
+          "col": 2,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "h",
+          "row": 0,
+          "col": 3,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "o",
+          "row": 0,
+          "col": 4,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "s",
+          "row": 0,
+          "col": 5,
+          "selected": false,
+          "rotation": 180
+        }
+      ],
+      [
+        {
+          "letter": "i",
+          "row": 1,
+          "col": 0,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "p",
+          "row": 1,
+          "col": 1,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "e",
+          "row": 1,
+          "col": 2,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "e",
+          "row": 1,
+          "col": 3,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "h",
+          "row": 1,
+          "col": 4,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "a",
+          "row": 1,
+          "col": 5,
+          "selected": false,
+          "rotation": 0
+        }
+      ],
+      [
+        {
+          "letter": "m",
+          "row": 2,
+          "col": 0,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "h",
+          "row": 2,
+          "col": 1,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "e",
+          "row": 2,
+          "col": 2,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "t",
+          "row": 2,
+          "col": 3,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "p",
+          "row": 2,
+          "col": 4,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "f",
+          "row": 2,
+          "col": 5,
+          "selected": false,
+          "rotation": 270
+        }
+      ],
+      [
+        {
+          "letter": "s",
+          "row": 3,
+          "col": 0,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "o",
+          "row": 3,
+          "col": 1,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "w",
+          "row": 3,
+          "col": 2,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "a",
+          "row": 3,
+          "col": 3,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "i",
+          "row": 3,
+          "col": 4,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "a",
+          "row": 3,
+          "col": 5,
+          "selected": false,
+          "rotation": 270
+        }
+      ],
+      [
+        {
+          "letter": "m",
+          "row": 4,
+          "col": 0,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "r",
+          "row": 4,
+          "col": 1,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "r",
+          "row": 4,
+          "col": 2,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "t",
+          "row": 4,
+          "col": 3,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": null,
+          "row": 4,
+          "col": 4,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 4,
+          "col": 5,
+          "selected": false,
+          "rotation": 0
+        }
+      ],
+      [
+        {
+          "letter": null,
+          "row": 5,
+          "col": 0,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 1,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 2,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 3,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 4,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 5,
+          "selected": false,
+          "rotation": 0
+        }
+      ]
+    ],
+    "letterPool": [
+      "f",
+      "r",
+      "w",
+      "h",
+      "o",
+      "s",
+      "i",
+      "p",
+      "e",
+      "e",
+      "h",
+      "a",
+      "m",
+      "h",
+      "e",
+      "t",
+      "p",
+      "f",
+      "s",
+      "o",
+      "w",
+      "a",
+      "i",
+      "a",
+      "m",
+      "r",
+      "r",
+      "t"
+    ],
+    "createdAt": 1779767019492
+  },
+  {
+    "id": "level_1779767019502_z4sv5e1dh",
+    "mode": "basic",
+    "difficulty": 1,
+    "words": [
+      {
+        "word": "file",
+        "solved": false
+      },
+      {
+        "word": "tea",
+        "solved": false
+      },
+      {
+        "word": "lock",
+        "solved": false
+      },
+      {
+        "word": "box",
+        "solved": false
+      }
+    ],
+    "dependencyGraph": {
+      "nodes": [
+        {
+          "id": "word_0",
+          "word": "file",
+          "x": 100,
+          "y": 100,
+          "solved": false
+        },
+        {
+          "id": "word_1",
+          "word": "tea",
+          "x": 300,
+          "y": 100,
+          "solved": false
+        },
+        {
+          "id": "word_2",
+          "word": "lock",
+          "x": 500,
+          "y": 100,
+          "solved": false
+        },
+        {
+          "id": "word_3",
+          "word": "box",
+          "x": 100,
+          "y": 250,
+          "solved": false
+        }
+      ],
+      "edges": [
+        {
+          "from": "word_0",
+          "to": "word_1",
+          "sharedLetters": [
+            "e"
+          ],
+          "type": "shares_letters"
+        },
+        {
+          "from": "word_0",
+          "to": "word_2",
+          "sharedLetters": [
+            "l"
+          ],
+          "type": "shares_letters"
+        },
+        {
+          "from": "word_2",
+          "to": "word_3",
+          "sharedLetters": [
+            "o"
+          ],
+          "type": "shares_letters"
+        }
+      ]
+    },
+    "grid": [
+      [
+        {
+          "letter": "e",
+          "row": 0,
+          "col": 0,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "l",
+          "row": 0,
+          "col": 1,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "x",
+          "row": 0,
+          "col": 2,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "o",
+          "row": 0,
+          "col": 3,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "o",
+          "row": 0,
+          "col": 4,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "a",
+          "row": 0,
+          "col": 5,
+          "selected": false,
+          "rotation": 270
+        }
+      ],
+      [
+        {
+          "letter": "e",
+          "row": 1,
+          "col": 0,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "i",
+          "row": 1,
+          "col": 1,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "f",
+          "row": 1,
+          "col": 2,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "c",
+          "row": 1,
+          "col": 3,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "e",
+          "row": 1,
+          "col": 4,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "o",
+          "row": 1,
+          "col": 5,
+          "selected": false,
+          "rotation": 90
+        }
+      ],
+      [
+        {
+          "letter": "k",
+          "row": 2,
+          "col": 0,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "c",
+          "row": 2,
+          "col": 1,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "f",
+          "row": 2,
+          "col": 2,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "t",
+          "row": 2,
+          "col": 3,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "b",
+          "row": 2,
+          "col": 4,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "l",
+          "row": 2,
+          "col": 5,
+          "selected": false,
+          "rotation": 270
+        }
+      ],
+      [
+        {
+          "letter": "i",
+          "row": 3,
+          "col": 0,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "l",
+          "row": 3,
+          "col": 1,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "t",
+          "row": 3,
+          "col": 2,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "k",
+          "row": 3,
+          "col": 3,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "x",
+          "row": 3,
+          "col": 4,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "a",
+          "row": 3,
+          "col": 5,
+          "selected": false,
+          "rotation": 90
+        }
+      ],
+      [
+        {
+          "letter": "b",
+          "row": 4,
+          "col": 0,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": null,
+          "row": 4,
+          "col": 1,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 4,
+          "col": 2,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 4,
+          "col": 3,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 4,
+          "col": 4,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 4,
+          "col": 5,
+          "selected": false,
+          "rotation": 0
+        }
+      ],
+      [
+        {
+          "letter": null,
+          "row": 5,
+          "col": 0,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 1,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 2,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 3,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 4,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 5,
+          "selected": false,
+          "rotation": 0
+        }
+      ]
+    ],
+    "letterPool": [
+      "e",
+      "l",
+      "x",
+      "o",
+      "o",
+      "a",
+      "e",
+      "i",
+      "f",
+      "c",
+      "e",
+      "o",
+      "k",
+      "c",
+      "f",
+      "t",
+      "b",
+      "l",
+      "i",
+      "l",
+      "t",
+      "k",
+      "x",
+      "a",
+      "b"
+    ],
+    "createdAt": 1779767019502
+  },
+  {
+    "id": "level_1779767028199_6ocmtpkmv",
+    "mode": "rare",
+    "difficulty": 2,
+    "words": [
+      {
+        "word": "ethereal",
+        "solved": false
+      },
+      {
+        "word": "fjord",
+        "solved": false
+      },
+      {
+        "word": "azure",
+        "solved": false
+      },
+      {
+        "word": "ensign",
+        "solved": false
+      },
+      {
+        "word": "whisper",
+        "solved": false
+      }
+    ],
+    "dependencyGraph": {
+      "nodes": [
+        {
+          "id": "word_0",
+          "word": "ethereal",
+          "x": 100,
+          "y": 100,
+          "solved": false
+        },
+        {
+          "id": "word_1",
+          "word": "fjord",
+          "x": 300,
+          "y": 100,
+          "solved": false
+        },
+        {
+          "id": "word_2",
+          "word": "azure",
+          "x": 500,
+          "y": 100,
+          "solved": false
+        },
+        {
+          "id": "word_3",
+          "word": "ensign",
+          "x": 100,
+          "y": 250,
+          "solved": false
+        },
+        {
+          "id": "word_4",
+          "word": "whisper",
+          "x": 300,
+          "y": 250,
+          "solved": false
+        }
+      ],
+      "edges": [
+        {
+          "from": "word_0",
+          "to": "word_1",
+          "sharedLetters": [
+            "r"
+          ],
+          "type": "shares_letters"
+        },
+        {
+          "from": "word_1",
+          "to": "word_2",
+          "sharedLetters": [
+            "r"
+          ],
+          "type": "shares_letters"
+        },
+        {
+          "from": "word_2",
+          "to": "word_3",
+          "sharedLetters": [
+            "e"
+          ],
+          "type": "shares_letters"
+        },
+        {
+          "from": "word_3",
+          "to": "word_4",
+          "sharedLetters": [
+            "e",
+            "s",
+            "i"
+          ],
+          "type": "shares_letters"
+        }
+      ]
+    },
+    "grid": [
+      [
+        {
+          "letter": "l",
+          "row": 0,
+          "col": 0,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "n",
+          "row": 0,
+          "col": 1,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "p",
+          "row": 0,
+          "col": 2,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "z",
+          "row": 0,
+          "col": 3,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "j",
+          "row": 0,
+          "col": 4,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "g",
+          "row": 0,
+          "col": 5,
+          "selected": false,
+          "rotation": 90
+        }
+      ],
+      [
+        {
+          "letter": "a",
+          "row": 1,
+          "col": 0,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "e",
+          "row": 1,
+          "col": 1,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "r",
+          "row": 1,
+          "col": 2,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "r",
+          "row": 1,
+          "col": 3,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "w",
+          "row": 1,
+          "col": 4,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "l",
+          "row": 1,
+          "col": 5,
+          "selected": false,
+          "rotation": 180
+        }
+      ],
+      [
+        {
+          "letter": "r",
+          "row": 2,
+          "col": 0,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "e",
+          "row": 2,
+          "col": 1,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "f",
+          "row": 2,
+          "col": 2,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "w",
+          "row": 2,
+          "col": 3,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "e",
+          "row": 2,
+          "col": 4,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "j",
+          "row": 2,
+          "col": 5,
+          "selected": false,
+          "rotation": 0
+        }
+      ],
+      [
+        {
+          "letter": "h",
+          "row": 3,
+          "col": 0,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "t",
+          "row": 3,
+          "col": 1,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "a",
+          "row": 3,
+          "col": 2,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "s",
+          "row": 3,
+          "col": 3,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "i",
+          "row": 3,
+          "col": 4,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "e",
+          "row": 3,
+          "col": 5,
+          "selected": false,
+          "rotation": 270
+        }
+      ],
+      [
+        {
+          "letter": "r",
+          "row": 4,
+          "col": 0,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "u",
+          "row": 4,
+          "col": 1,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "t",
+          "row": 4,
+          "col": 2,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "r",
+          "row": 4,
+          "col": 3,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "z",
+          "row": 4,
+          "col": 4,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "d",
+          "row": 4,
+          "col": 5,
+          "selected": false,
+          "rotation": 0
+        }
+      ],
+      [
+        {
+          "letter": "s",
+          "row": 5,
+          "col": 0,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "i",
+          "row": 5,
+          "col": 1,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "f",
+          "row": 5,
+          "col": 2,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "p",
+          "row": 5,
+          "col": 3,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "o",
+          "row": 5,
+          "col": 4,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "e",
+          "row": 5,
+          "col": 5,
+          "selected": false,
+          "rotation": 180
+        }
+      ]
+    ],
+    "letterPool": [
+      "l",
+      "n",
+      "p",
+      "z",
+      "j",
+      "g",
+      "a",
+      "e",
+      "r",
+      "r",
+      "w",
+      "l",
+      "r",
+      "e",
+      "f",
+      "w",
+      "e",
+      "j",
+      "h",
+      "t",
+      "a",
+      "s",
+      "i",
+      "e",
+      "r",
+      "u",
+      "t",
+      "r",
+      "z",
+      "d",
+      "s",
+      "i",
+      "f",
+      "p",
+      "o",
+      "e",
+      "i",
+      "r",
+      "a",
+      "e",
+      "h",
+      "h",
+      "d",
+      "e",
+      "n",
+      "o",
+      "u",
+      "s",
+      "g",
+      "e",
+      "e",
+      "n"
+    ],
+    "createdAt": 1779767028199
+  },
+  {
+    "id": "level_1779767044098_p62bzp1k8",
+    "mode": "rare",
+    "difficulty": 2,
+    "words": [
+      {
+        "word": "sphinx",
+        "solved": false
+      },
+      {
+        "word": "behemoth",
+        "solved": false
+      },
+      {
+        "word": "vortex",
+        "solved": false
+      },
+      {
+        "word": "fjord",
+        "solved": false
+      },
+      {
+        "word": "bosque",
+        "solved": false
+      }
+    ],
+    "dependencyGraph": {
+      "nodes": [
+        {
+          "id": "word_0",
+          "word": "sphinx",
+          "x": 100,
+          "y": 100,
+          "solved": false
+        },
+        {
+          "id": "word_1",
+          "word": "behemoth",
+          "x": 300,
+          "y": 100,
+          "solved": false
+        },
+        {
+          "id": "word_2",
+          "word": "vortex",
+          "x": 500,
+          "y": 100,
+          "solved": false
+        },
+        {
+          "id": "word_3",
+          "word": "fjord",
+          "x": 100,
+          "y": 250,
+          "solved": false
+        },
+        {
+          "id": "word_4",
+          "word": "bosque",
+          "x": 300,
+          "y": 250,
+          "solved": false
+        }
+      ],
+      "edges": [
+        {
+          "from": "word_0",
+          "to": "word_1",
+          "sharedLetters": [
+            "h"
+          ],
+          "type": "shares_letters"
+        },
+        {
+          "from": "word_1",
+          "to": "word_2",
+          "sharedLetters": [
+            "e",
+            "o",
+            "t"
+          ],
+          "type": "shares_letters"
+        },
+        {
+          "from": "word_2",
+          "to": "word_3",
+          "sharedLetters": [
+            "o",
+            "r"
+          ],
+          "type": "shares_letters"
+        },
+        {
+          "from": "word_3",
+          "to": "word_4",
+          "sharedLetters": [
+            "o"
+          ],
+          "type": "shares_letters"
+        }
+      ]
+    },
+    "grid": [
+      [
+        {
+          "letter": "b",
+          "row": 0,
+          "col": 0,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "e",
+          "row": 0,
+          "col": 1,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "i",
+          "row": 0,
+          "col": 2,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "h",
+          "row": 0,
+          "col": 3,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "t",
+          "row": 0,
+          "col": 4,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "e",
+          "row": 0,
+          "col": 5,
+          "selected": false,
+          "rotation": 90
+        }
+      ],
+      [
+        {
+          "letter": "q",
+          "row": 1,
+          "col": 0,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "v",
+          "row": 1,
+          "col": 1,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "t",
+          "row": 1,
+          "col": 2,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "j",
+          "row": 1,
+          "col": 3,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "m",
+          "row": 1,
+          "col": 4,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "p",
+          "row": 1,
+          "col": 5,
+          "selected": false,
+          "rotation": 270
+        }
+      ],
+      [
+        {
+          "letter": "h",
+          "row": 2,
+          "col": 0,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "o",
+          "row": 2,
+          "col": 1,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "e",
+          "row": 2,
+          "col": 2,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "q",
+          "row": 2,
+          "col": 3,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "x",
+          "row": 2,
+          "col": 4,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "h",
+          "row": 2,
+          "col": 5,
+          "selected": false,
+          "rotation": 180
+        }
+      ],
+      [
+        {
+          "letter": "r",
+          "row": 3,
+          "col": 0,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "o",
+          "row": 3,
+          "col": 1,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "r",
+          "row": 3,
+          "col": 2,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "b",
+          "row": 3,
+          "col": 3,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "u",
+          "row": 3,
+          "col": 4,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "e",
+          "row": 3,
+          "col": 5,
+          "selected": false,
+          "rotation": 270
+        }
+      ],
+      [
+        {
+          "letter": "v",
+          "row": 4,
+          "col": 0,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "s",
+          "row": 4,
+          "col": 1,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "b",
+          "row": 4,
+          "col": 2,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "u",
+          "row": 4,
+          "col": 3,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "r",
+          "row": 4,
+          "col": 4,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "s",
+          "row": 4,
+          "col": 5,
+          "selected": false,
+          "rotation": 270
+        }
+      ],
+      [
+        {
+          "letter": "t",
+          "row": 5,
+          "col": 0,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "x",
+          "row": 5,
+          "col": 1,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "e",
+          "row": 5,
+          "col": 2,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "o",
+          "row": 5,
+          "col": 3,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "o",
+          "row": 5,
+          "col": 4,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "d",
+          "row": 5,
+          "col": 5,
+          "selected": false,
+          "rotation": 0
+        }
+      ]
+    ],
+    "letterPool": [
+      "b",
+      "e",
+      "i",
+      "h",
+      "t",
+      "e",
+      "q",
+      "v",
+      "t",
+      "j",
+      "m",
+      "p",
+      "h",
+      "o",
+      "e",
+      "q",
+      "x",
+      "h",
+      "r",
+      "o",
+      "r",
+      "b",
+      "u",
+      "e",
+      "v",
+      "s",
+      "b",
+      "u",
+      "r",
+      "s",
+      "t",
+      "x",
+      "e",
+      "o",
+      "o",
+      "d",
+      "i",
+      "h",
+      "e",
+      "o",
+      "x",
+      "f",
+      "o",
+      "p",
+      "h",
+      "s",
+      "n",
+      "d",
+      "n",
+      "j",
+      "f",
+      "m"
+    ],
+    "createdAt": 1779767044098
+  },
+  {
+    "id": "level_1779767044557_gpij9fs6h",
+    "mode": "cycle",
+    "difficulty": 3,
+    "words": [
+      {
+        "word": "weave",
+        "solved": false
+      },
+      {
+        "word": "node",
+        "solved": false
+      },
+      {
+        "word": "join",
+        "solved": false
+      },
+      {
+        "word": "net",
+        "solved": false
+      },
+      {
+        "word": "cycle",
+        "solved": false
+      },
+      {
+        "word": "braid",
+        "solved": false
+      }
+    ],
+    "dependencyGraph": {
+      "nodes": [
+        {
+          "id": "word_0",
+          "word": "weave",
+          "x": 100,
+          "y": 100,
+          "solved": false
+        },
+        {
+          "id": "word_1",
+          "word": "node",
+          "x": 300,
+          "y": 100,
+          "solved": false
+        },
+        {
+          "id": "word_2",
+          "word": "join",
+          "x": 500,
+          "y": 100,
+          "solved": false
+        },
+        {
+          "id": "word_3",
+          "word": "net",
+          "x": 100,
+          "y": 250,
+          "solved": false
+        },
+        {
+          "id": "word_4",
+          "word": "cycle",
+          "x": 300,
+          "y": 250,
+          "solved": false
+        },
+        {
+          "id": "word_5",
+          "word": "braid",
+          "x": 500,
+          "y": 250,
+          "solved": false
+        }
+      ],
+      "edges": [
+        {
+          "from": "word_0",
+          "to": "word_1",
+          "sharedLetters": [
+            "e"
+          ],
+          "type": "shares_letters"
+        },
+        {
+          "from": "word_1",
+          "to": "word_2",
+          "sharedLetters": [
+            "n",
+            "o"
+          ],
+          "type": "shares_letters"
+        },
+        {
+          "from": "word_2",
+          "to": "word_3",
+          "sharedLetters": [
+            "n"
+          ],
+          "type": "shares_letters"
+        },
+        {
+          "from": "word_3",
+          "to": "word_4",
+          "sharedLetters": [
+            "e"
+          ],
+          "type": "shares_letters"
+        },
+        {
+          "from": "word_4",
+          "to": "word_5",
+          "sharedLetters": [],
+          "type": "cycle"
+        },
+        {
+          "from": "word_2",
+          "to": "word_1",
+          "sharedLetters": [
+            "n",
+            "o"
+          ],
+          "type": "cycle",
+          "isCycle": true
+        }
+      ]
+    },
+    "grid": [
+      [
+        {
+          "letter": "e",
+          "row": 0,
+          "col": 0,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "n",
+          "row": 0,
+          "col": 1,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "n",
+          "row": 0,
+          "col": 2,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "t",
+          "row": 0,
+          "col": 3,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "c",
+          "row": 0,
+          "col": 4,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "o",
+          "row": 0,
+          "col": 5,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "n",
+          "row": 0,
+          "col": 6,
+          "selected": false,
+          "rotation": 0
+        }
+      ],
+      [
+        {
+          "letter": "a",
+          "row": 1,
+          "col": 0,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "e",
+          "row": 1,
+          "col": 1,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "d",
+          "row": 1,
+          "col": 2,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "w",
+          "row": 1,
+          "col": 3,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "r",
+          "row": 1,
+          "col": 4,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "c",
+          "row": 1,
+          "col": 5,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "i",
+          "row": 1,
+          "col": 6,
+          "selected": false,
+          "rotation": 180
+        }
+      ],
+      [
+        {
+          "letter": "a",
+          "row": 2,
+          "col": 0,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "o",
+          "row": 2,
+          "col": 1,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "b",
+          "row": 2,
+          "col": 2,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "y",
+          "row": 2,
+          "col": 3,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "t",
+          "row": 2,
+          "col": 4,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "i",
+          "row": 2,
+          "col": 5,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "c",
+          "row": 2,
+          "col": 6,
+          "selected": false,
+          "rotation": 270
+        }
+      ],
+      [
+        {
+          "letter": "e",
+          "row": 3,
+          "col": 0,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "l",
+          "row": 3,
+          "col": 1,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "n",
+          "row": 3,
+          "col": 2,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "o",
+          "row": 3,
+          "col": 3,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "j",
+          "row": 3,
+          "col": 4,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "v",
+          "row": 3,
+          "col": 5,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "y",
+          "row": 3,
+          "col": 6,
+          "selected": false,
+          "rotation": 0
+        }
+      ],
+      [
+        {
+          "letter": "e",
+          "row": 4,
+          "col": 0,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "i",
+          "row": 4,
+          "col": 1,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "w",
+          "row": 4,
+          "col": 2,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "j",
+          "row": 4,
+          "col": 3,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "e",
+          "row": 4,
+          "col": 4,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "d",
+          "row": 4,
+          "col": 5,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "b",
+          "row": 4,
+          "col": 6,
+          "selected": false,
+          "rotation": 90
+        }
+      ],
+      [
+        {
+          "letter": "n",
+          "row": 5,
+          "col": 0,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "d",
+          "row": 5,
+          "col": 1,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "r",
+          "row": 5,
+          "col": 2,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "e",
+          "row": 5,
+          "col": 3,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "a",
+          "row": 5,
+          "col": 4,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "v",
+          "row": 5,
+          "col": 5,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "e",
+          "row": 5,
+          "col": 6,
+          "selected": false,
+          "rotation": 270
+        }
+      ],
+      [
+        {
+          "letter": "l",
+          "row": 6,
+          "col": 0,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "e",
+          "row": 6,
+          "col": 1,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 6,
+          "col": 2,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 6,
+          "col": 3,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 6,
+          "col": 4,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 6,
+          "col": 5,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 6,
+          "col": 6,
+          "selected": false,
+          "rotation": 0
+        }
+      ]
+    ],
+    "letterPool": [
+      "e",
+      "n",
+      "n",
+      "t",
+      "c",
+      "o",
+      "n",
+      "a",
+      "e",
+      "d",
+      "w",
+      "r",
+      "c",
+      "i",
+      "a",
+      "o",
+      "b",
+      "y",
+      "t",
+      "i",
+      "c",
+      "e",
+      "l",
+      "n",
+      "o",
+      "j",
+      "v",
+      "y",
+      "e",
+      "i",
+      "w",
+      "j",
+      "e",
+      "d",
+      "b",
+      "n",
+      "d",
+      "r",
+      "e",
+      "a",
+      "v",
+      "e",
+      "l",
+      "e"
+    ],
+    "createdAt": 1779767044557
+  },
+  {
+    "id": "level_1779767045988_6eus3vish",
+    "mode": "basic",
+    "difficulty": 1,
+    "words": [
+      {
+        "word": "user",
+        "solved": false
+      },
+      {
+        "word": "sugar",
+        "solved": false
+      },
+      {
+        "word": "white",
+        "solved": false
+      },
+      {
+        "word": "lock",
+        "solved": false
+      }
+    ],
+    "dependencyGraph": {
+      "nodes": [
+        {
+          "id": "word_0",
+          "word": "user",
+          "x": 100,
+          "y": 100,
+          "solved": false
+        },
+        {
+          "id": "word_1",
+          "word": "sugar",
+          "x": 300,
+          "y": 100,
+          "solved": false
+        },
+        {
+          "id": "word_2",
+          "word": "white",
+          "x": 500,
+          "y": 100,
+          "solved": false
+        },
+        {
+          "id": "word_3",
+          "word": "lock",
+          "x": 100,
+          "y": 250,
+          "solved": false
+        }
+      ],
+      "edges": [
+        {
+          "from": "word_0",
+          "to": "word_1",
+          "sharedLetters": [
+            "u",
+            "s",
+            "r"
+          ],
+          "type": "shares_letters"
+        },
+        {
+          "from": "word_0",
+          "to": "word_2",
+          "sharedLetters": [
+            "e"
+          ],
+          "type": "shares_letters"
+        }
+      ]
+    },
+    "grid": [
+      [
+        {
+          "letter": "i",
+          "row": 0,
+          "col": 0,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "l",
+          "row": 0,
+          "col": 1,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "u",
+          "row": 0,
+          "col": 2,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "e",
+          "row": 0,
+          "col": 3,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "a",
+          "row": 0,
+          "col": 4,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "u",
+          "row": 0,
+          "col": 5,
+          "selected": false,
+          "rotation": 90
+        }
+      ],
+      [
+        {
+          "letter": "i",
+          "row": 1,
+          "col": 0,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "t",
+          "row": 1,
+          "col": 1,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "e",
+          "row": 1,
+          "col": 2,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "s",
+          "row": 1,
+          "col": 3,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "g",
+          "row": 1,
+          "col": 4,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "c",
+          "row": 1,
+          "col": 5,
+          "selected": false,
+          "rotation": 0
+        }
+      ],
+      [
+        {
+          "letter": "r",
+          "row": 2,
+          "col": 0,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "k",
+          "row": 2,
+          "col": 1,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "t",
+          "row": 2,
+          "col": 2,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "r",
+          "row": 2,
+          "col": 3,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "g",
+          "row": 2,
+          "col": 4,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "c",
+          "row": 2,
+          "col": 5,
+          "selected": false,
+          "rotation": 0
+        }
+      ],
+      [
+        {
+          "letter": "u",
+          "row": 3,
+          "col": 0,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "w",
+          "row": 3,
+          "col": 1,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "r",
+          "row": 3,
+          "col": 2,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "o",
+          "row": 3,
+          "col": 3,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "s",
+          "row": 3,
+          "col": 4,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "h",
+          "row": 3,
+          "col": 5,
+          "selected": false,
+          "rotation": 270
+        }
+      ],
+      [
+        {
+          "letter": "o",
+          "row": 4,
+          "col": 0,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "l",
+          "row": 4,
+          "col": 1,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "a",
+          "row": 4,
+          "col": 2,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "e",
+          "row": 4,
+          "col": 3,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "s",
+          "row": 4,
+          "col": 4,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "k",
+          "row": 4,
+          "col": 5,
+          "selected": false,
+          "rotation": 270
+        }
+      ],
+      [
+        {
+          "letter": "w",
+          "row": 5,
+          "col": 0,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "h",
+          "row": 5,
+          "col": 1,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 2,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 3,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 4,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 5,
+          "selected": false,
+          "rotation": 0
+        }
+      ]
+    ],
+    "letterPool": [
+      "i",
+      "l",
+      "u",
+      "e",
+      "a",
+      "u",
+      "i",
+      "t",
+      "e",
+      "s",
+      "g",
+      "c",
+      "r",
+      "k",
+      "t",
+      "r",
+      "g",
+      "c",
+      "u",
+      "w",
+      "r",
+      "o",
+      "s",
+      "h",
+      "o",
+      "l",
+      "a",
+      "e",
+      "s",
+      "k",
+      "w",
+      "h"
+    ],
+    "createdAt": 1779767045988
+  },
+  {
+    "id": "level_1779767123290_rqpmkwfpp",
+    "mode": "basic",
+    "difficulty": 1,
+    "words": [
+      {
+        "word": "foot",
+        "solved": false
+      },
+      {
+        "word": "bird",
+        "solved": false
+      },
+      {
+        "word": "sing",
+        "solved": false
+      },
+      {
+        "word": "body",
+        "solved": false
+      }
+    ],
+    "dependencyGraph": {
+      "nodes": [
+        {
+          "id": "word_0",
+          "word": "foot",
+          "x": 100,
+          "y": 100,
+          "solved": false
+        },
+        {
+          "id": "word_1",
+          "word": "bird",
+          "x": 300,
+          "y": 100,
+          "solved": false
+        },
+        {
+          "id": "word_2",
+          "word": "sing",
+          "x": 500,
+          "y": 100,
+          "solved": false
+        },
+        {
+          "id": "word_3",
+          "word": "body",
+          "x": 100,
+          "y": 250,
+          "solved": false
+        }
+      ],
+      "edges": [
+        {
+          "from": "word_0",
+          "to": "word_3",
+          "sharedLetters": [
+            "o"
+          ],
+          "type": "shares_letters"
+        }
+      ]
+    },
+    "grid": [
+      [
+        {
+          "letter": "g",
+          "row": 0,
+          "col": 0,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "y",
+          "row": 0,
+          "col": 1,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "o",
+          "row": 0,
+          "col": 2,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "n",
+          "row": 0,
+          "col": 3,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "d",
+          "row": 0,
+          "col": 4,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "i",
+          "row": 0,
+          "col": 5,
+          "selected": false,
+          "rotation": 270
+        }
+      ],
+      [
+        {
+          "letter": "r",
+          "row": 1,
+          "col": 0,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "s",
+          "row": 1,
+          "col": 1,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "o",
+          "row": 1,
+          "col": 2,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "o",
+          "row": 1,
+          "col": 3,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "n",
+          "row": 1,
+          "col": 4,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "f",
+          "row": 1,
+          "col": 5,
+          "selected": false,
+          "rotation": 90
+        }
+      ],
+      [
+        {
+          "letter": "d",
+          "row": 2,
+          "col": 0,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "d",
+          "row": 2,
+          "col": 1,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "i",
+          "row": 2,
+          "col": 2,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "t",
+          "row": 2,
+          "col": 3,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "f",
+          "row": 2,
+          "col": 4,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "t",
+          "row": 2,
+          "col": 5,
+          "selected": false,
+          "rotation": 90
+        }
+      ],
+      [
+        {
+          "letter": "r",
+          "row": 3,
+          "col": 0,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "b",
+          "row": 3,
+          "col": 1,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "o",
+          "row": 3,
+          "col": 2,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "y",
+          "row": 3,
+          "col": 3,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "i",
+          "row": 3,
+          "col": 4,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "g",
+          "row": 3,
+          "col": 5,
+          "selected": false,
+          "rotation": 270
+        }
+      ],
+      [
+        {
+          "letter": "s",
+          "row": 4,
+          "col": 0,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "o",
+          "row": 4,
+          "col": 1,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "b",
+          "row": 4,
+          "col": 2,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "b",
+          "row": 4,
+          "col": 3,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": null,
+          "row": 4,
+          "col": 4,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 4,
+          "col": 5,
+          "selected": false,
+          "rotation": 0
+        }
+      ],
+      [
+        {
+          "letter": null,
+          "row": 5,
+          "col": 0,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 1,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 2,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 3,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 4,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 5,
+          "selected": false,
+          "rotation": 0
+        }
+      ]
+    ],
+    "letterPool": [
+      "g",
+      "y",
+      "o",
+      "n",
+      "d",
+      "i",
+      "r",
+      "s",
+      "o",
+      "o",
+      "n",
+      "f",
+      "d",
+      "d",
+      "i",
+      "t",
+      "f",
+      "t",
+      "r",
+      "b",
+      "o",
+      "y",
+      "i",
+      "g",
+      "s",
+      "o",
+      "b",
+      "b"
+    ],
+    "createdAt": 1779767123291
+  },
+  {
+    "id": "level_1779767123298_rjlfhsfld",
+    "mode": "basic",
+    "difficulty": 1,
+    "words": [
+      {
+        "word": "blue",
+        "solved": false
+      },
+      {
+        "word": "dog",
+        "solved": false
+      },
+      {
+        "word": "byte",
+        "solved": false
+      },
+      {
+        "word": "car",
+        "solved": false
+      }
+    ],
+    "dependencyGraph": {
+      "nodes": [
+        {
+          "id": "word_0",
+          "word": "blue",
+          "x": 100,
+          "y": 100,
+          "solved": false
+        },
+        {
+          "id": "word_1",
+          "word": "dog",
+          "x": 300,
+          "y": 100,
+          "solved": false
+        },
+        {
+          "id": "word_2",
+          "word": "byte",
+          "x": 500,
+          "y": 100,
+          "solved": false
+        },
+        {
+          "id": "word_3",
+          "word": "car",
+          "x": 100,
+          "y": 250,
+          "solved": false
+        }
+      ],
+      "edges": [
+        {
+          "from": "word_0",
+          "to": "word_2",
+          "sharedLetters": [
+            "b",
+            "e"
+          ],
+          "type": "shares_letters"
+        }
+      ]
+    },
+    "grid": [
+      [
+        {
+          "letter": "c",
+          "row": 0,
+          "col": 0,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "e",
+          "row": 0,
+          "col": 1,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "d",
+          "row": 0,
+          "col": 2,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "l",
+          "row": 0,
+          "col": 3,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "r",
+          "row": 0,
+          "col": 4,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "g",
+          "row": 0,
+          "col": 5,
+          "selected": false,
+          "rotation": 0
+        }
+      ],
+      [
+        {
+          "letter": "u",
+          "row": 1,
+          "col": 0,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "u",
+          "row": 1,
+          "col": 1,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "o",
+          "row": 1,
+          "col": 2,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "b",
+          "row": 1,
+          "col": 3,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "o",
+          "row": 1,
+          "col": 4,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "r",
+          "row": 1,
+          "col": 5,
+          "selected": false,
+          "rotation": 90
+        }
+      ],
+      [
+        {
+          "letter": "a",
+          "row": 2,
+          "col": 0,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "e",
+          "row": 2,
+          "col": 1,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "d",
+          "row": 2,
+          "col": 2,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "t",
+          "row": 2,
+          "col": 3,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "e",
+          "row": 2,
+          "col": 4,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "y",
+          "row": 2,
+          "col": 5,
+          "selected": false,
+          "rotation": 90
+        }
+      ],
+      [
+        {
+          "letter": "y",
+          "row": 3,
+          "col": 0,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "t",
+          "row": 3,
+          "col": 1,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "c",
+          "row": 3,
+          "col": 2,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "g",
+          "row": 3,
+          "col": 3,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "b",
+          "row": 3,
+          "col": 4,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "a",
+          "row": 3,
+          "col": 5,
+          "selected": false,
+          "rotation": 0
+        }
+      ],
+      [
+        {
+          "letter": "l",
+          "row": 4,
+          "col": 0,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "b",
+          "row": 4,
+          "col": 1,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 4,
+          "col": 2,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 4,
+          "col": 3,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 4,
+          "col": 4,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 4,
+          "col": 5,
+          "selected": false,
+          "rotation": 0
+        }
+      ],
+      [
+        {
+          "letter": null,
+          "row": 5,
+          "col": 0,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 1,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 2,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 3,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 4,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 5,
+          "selected": false,
+          "rotation": 0
+        }
+      ]
+    ],
+    "letterPool": [
+      "c",
+      "e",
+      "d",
+      "l",
+      "r",
+      "g",
+      "u",
+      "u",
+      "o",
+      "b",
+      "o",
+      "r",
+      "a",
+      "e",
+      "d",
+      "t",
+      "e",
+      "y",
+      "y",
+      "t",
+      "c",
+      "g",
+      "b",
+      "a",
+      "l",
+      "b"
+    ],
+    "createdAt": 1779767123298
+  },
+  {
+    "id": "level_1779767128360_yposek212",
+    "mode": "basic",
+    "difficulty": 1,
+    "words": [
+      {
+        "word": "map",
+        "solved": false
+      },
+      {
+        "word": "moon",
+        "solved": false
+      },
+      {
+        "word": "orange",
+        "solved": false
+      },
+      {
+        "word": "roof",
+        "solved": false
+      }
+    ],
+    "dependencyGraph": {
+      "nodes": [
+        {
+          "id": "word_0",
+          "word": "map",
+          "x": 100,
+          "y": 100,
+          "solved": false
+        },
+        {
+          "id": "word_1",
+          "word": "moon",
+          "x": 300,
+          "y": 100,
+          "solved": false
+        },
+        {
+          "id": "word_2",
+          "word": "orange",
+          "x": 500,
+          "y": 100,
+          "solved": false
+        },
+        {
+          "id": "word_3",
+          "word": "roof",
+          "x": 100,
+          "y": 250,
+          "solved": false
+        }
+      ],
+      "edges": [
+        {
+          "from": "word_0",
+          "to": "word_1",
+          "sharedLetters": [
+            "m"
+          ],
+          "type": "shares_letters"
+        },
+        {
+          "from": "word_1",
+          "to": "word_2",
+          "sharedLetters": [
+            "o",
+            "n"
+          ],
+          "type": "shares_letters"
+        },
+        {
+          "from": "word_2",
+          "to": "word_3",
+          "sharedLetters": [
+            "o",
+            "r"
+          ],
+          "type": "shares_letters"
+        }
+      ]
+    },
+    "grid": [
+      [
+        {
+          "letter": "o",
+          "row": 0,
+          "col": 0,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "p",
+          "row": 0,
+          "col": 1,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "n",
+          "row": 0,
+          "col": 2,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "a",
+          "row": 0,
+          "col": 3,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "o",
+          "row": 0,
+          "col": 4,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "g",
+          "row": 0,
+          "col": 5,
+          "selected": false,
+          "rotation": 180
+        }
+      ],
+      [
+        {
+          "letter": "f",
+          "row": 1,
+          "col": 0,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "o",
+          "row": 1,
+          "col": 1,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "r",
+          "row": 1,
+          "col": 2,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "e",
+          "row": 1,
+          "col": 3,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "o",
+          "row": 1,
+          "col": 4,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "m",
+          "row": 1,
+          "col": 5,
+          "selected": false,
+          "rotation": 90
+        }
+      ],
+      [
+        {
+          "letter": "o",
+          "row": 2,
+          "col": 0,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "r",
+          "row": 2,
+          "col": 1,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "g",
+          "row": 2,
+          "col": 2,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "a",
+          "row": 2,
+          "col": 3,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "r",
+          "row": 2,
+          "col": 4,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "f",
+          "row": 2,
+          "col": 5,
+          "selected": false,
+          "rotation": 90
+        }
+      ],
+      [
+        {
+          "letter": "o",
+          "row": 3,
+          "col": 0,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "a",
+          "row": 3,
+          "col": 1,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "o",
+          "row": 3,
+          "col": 2,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "m",
+          "row": 3,
+          "col": 3,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "n",
+          "row": 3,
+          "col": 4,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "o",
+          "row": 3,
+          "col": 5,
+          "selected": false,
+          "rotation": 90
+        }
+      ],
+      [
+        {
+          "letter": "m",
+          "row": 4,
+          "col": 0,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "p",
+          "row": 4,
+          "col": 1,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "e",
+          "row": 4,
+          "col": 2,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "n",
+          "row": 4,
+          "col": 3,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 4,
+          "col": 4,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 4,
+          "col": 5,
+          "selected": false,
+          "rotation": 0
+        }
+      ],
+      [
+        {
+          "letter": null,
+          "row": 5,
+          "col": 0,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 1,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 2,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 3,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 4,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 5,
+          "selected": false,
+          "rotation": 0
+        }
+      ]
+    ],
+    "letterPool": [
+      "o",
+      "p",
+      "n",
+      "a",
+      "o",
+      "g",
+      "f",
+      "o",
+      "r",
+      "e",
+      "o",
+      "m",
+      "o",
+      "r",
+      "g",
+      "a",
+      "r",
+      "f",
+      "o",
+      "a",
+      "o",
+      "m",
+      "n",
+      "o",
+      "m",
+      "p",
+      "e",
+      "n"
+    ],
+    "createdAt": 1779767128360
+  },
+  {
+    "id": "level_1779767153025_vlam9un82",
+    "mode": "rare",
+    "difficulty": 2,
+    "words": [
+      {
+        "word": "eclipse",
+        "solved": false
+      },
+      {
+        "word": "azure",
+        "solved": false
+      },
+      {
+        "word": "mosaic",
+        "solved": false
+      },
+      {
+        "word": "quasar",
+        "solved": false
+      },
+      {
+        "word": "nebula",
+        "solved": false
+      }
+    ],
+    "dependencyGraph": {
+      "nodes": [
+        {
+          "id": "word_0",
+          "word": "eclipse",
+          "x": 100,
+          "y": 100,
+          "solved": false
+        },
+        {
+          "id": "word_1",
+          "word": "azure",
+          "x": 300,
+          "y": 100,
+          "solved": false
+        },
+        {
+          "id": "word_2",
+          "word": "mosaic",
+          "x": 500,
+          "y": 100,
+          "solved": false
+        },
+        {
+          "id": "word_3",
+          "word": "quasar",
+          "x": 100,
+          "y": 250,
+          "solved": false
+        },
+        {
+          "id": "word_4",
+          "word": "nebula",
+          "x": 300,
+          "y": 250,
+          "solved": false
+        }
+      ],
+      "edges": [
+        {
+          "from": "word_0",
+          "to": "word_1",
+          "sharedLetters": [
+            "e"
+          ],
+          "type": "shares_letters"
+        },
+        {
+          "from": "word_1",
+          "to": "word_2",
+          "sharedLetters": [
+            "a"
+          ],
+          "type": "shares_letters"
+        },
+        {
+          "from": "word_2",
+          "to": "word_3",
+          "sharedLetters": [
+            "s",
+            "a"
+          ],
+          "type": "shares_letters"
+        },
+        {
+          "from": "word_3",
+          "to": "word_4",
+          "sharedLetters": [
+            "u",
+            "a"
+          ],
+          "type": "shares_letters"
+        }
+      ]
+    },
+    "grid": [
+      [
+        {
+          "letter": "u",
+          "row": 0,
+          "col": 0,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "a",
+          "row": 0,
+          "col": 1,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "r",
+          "row": 0,
+          "col": 2,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "l",
+          "row": 0,
+          "col": 3,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "b",
+          "row": 0,
+          "col": 4,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "i",
+          "row": 0,
+          "col": 5,
+          "selected": false,
+          "rotation": 90
+        }
+      ],
+      [
+        {
+          "letter": "z",
+          "row": 1,
+          "col": 0,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "m",
+          "row": 1,
+          "col": 1,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "a",
+          "row": 1,
+          "col": 2,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "l",
+          "row": 1,
+          "col": 3,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "s",
+          "row": 1,
+          "col": 4,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "s",
+          "row": 1,
+          "col": 5,
+          "selected": false,
+          "rotation": 90
+        }
+      ],
+      [
+        {
+          "letter": "p",
+          "row": 2,
+          "col": 0,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "a",
+          "row": 2,
+          "col": 1,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "u",
+          "row": 2,
+          "col": 2,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "e",
+          "row": 2,
+          "col": 3,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "r",
+          "row": 2,
+          "col": 4,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "e",
+          "row": 2,
+          "col": 5,
+          "selected": false,
+          "rotation": 0
+        }
+      ],
+      [
+        {
+          "letter": "q",
+          "row": 3,
+          "col": 0,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "s",
+          "row": 3,
+          "col": 1,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "n",
+          "row": 3,
+          "col": 2,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "o",
+          "row": 3,
+          "col": 3,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "u",
+          "row": 3,
+          "col": 4,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "a",
+          "row": 3,
+          "col": 5,
+          "selected": false,
+          "rotation": 270
+        }
+      ],
+      [
+        {
+          "letter": "a",
+          "row": 4,
+          "col": 0,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "e",
+          "row": 4,
+          "col": 1,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "a",
+          "row": 4,
+          "col": 2,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "a",
+          "row": 4,
+          "col": 3,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "p",
+          "row": 4,
+          "col": 4,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "r",
+          "row": 4,
+          "col": 5,
+          "selected": false,
+          "rotation": 270
+        }
+      ],
+      [
+        {
+          "letter": "e",
+          "row": 5,
+          "col": 0,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "i",
+          "row": 5,
+          "col": 1,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "a",
+          "row": 5,
+          "col": 2,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "m",
+          "row": 5,
+          "col": 3,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "b",
+          "row": 5,
+          "col": 4,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "u",
+          "row": 5,
+          "col": 5,
+          "selected": false,
+          "rotation": 270
+        }
+      ]
+    ],
+    "letterPool": [
+      "u",
+      "a",
+      "r",
+      "l",
+      "b",
+      "i",
+      "z",
+      "m",
+      "a",
+      "l",
+      "s",
+      "s",
+      "p",
+      "a",
+      "u",
+      "e",
+      "r",
+      "e",
+      "q",
+      "s",
+      "n",
+      "o",
+      "u",
+      "a",
+      "a",
+      "e",
+      "a",
+      "a",
+      "p",
+      "r",
+      "e",
+      "i",
+      "a",
+      "m",
+      "b",
+      "u",
+      "e",
+      "s",
+      "l",
+      "i",
+      "o",
+      "c",
+      "n",
+      "z",
+      "q",
+      "c",
+      "c",
+      "s",
+      "e",
+      "u"
+    ],
+    "createdAt": 1779767153025
+  },
+  {
+    "id": "level_1779767154631_muqod2csj",
+    "mode": "basic",
+    "difficulty": 1,
+    "words": [
+      {
+        "word": "host",
+        "solved": false
+      },
+      {
+        "word": "hope",
+        "solved": false
+      },
+      {
+        "word": "home",
+        "solved": false
+      },
+      {
+        "word": "talk",
+        "solved": false
+      }
+    ],
+    "dependencyGraph": {
+      "nodes": [
+        {
+          "id": "word_0",
+          "word": "host",
+          "x": 100,
+          "y": 100,
+          "solved": false
+        },
+        {
+          "id": "word_1",
+          "word": "hope",
+          "x": 300,
+          "y": 100,
+          "solved": false
+        },
+        {
+          "id": "word_2",
+          "word": "home",
+          "x": 500,
+          "y": 100,
+          "solved": false
+        },
+        {
+          "id": "word_3",
+          "word": "talk",
+          "x": 100,
+          "y": 250,
+          "solved": false
+        }
+      ],
+      "edges": [
+        {
+          "from": "word_0",
+          "to": "word_1",
+          "sharedLetters": [
+            "h",
+            "o"
+          ],
+          "type": "shares_letters"
+        },
+        {
+          "from": "word_1",
+          "to": "word_2",
+          "sharedLetters": [
+            "h",
+            "o",
+            "e"
+          ],
+          "type": "shares_letters"
+        },
+        {
+          "from": "word_0",
+          "to": "word_3",
+          "sharedLetters": [
+            "t"
+          ],
+          "type": "shares_letters"
+        }
+      ]
+    },
+    "grid": [
+      [
+        {
+          "letter": "m",
+          "row": 0,
+          "col": 0,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "l",
+          "row": 0,
+          "col": 1,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "k",
+          "row": 0,
+          "col": 2,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "l",
+          "row": 0,
+          "col": 3,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "a",
+          "row": 0,
+          "col": 4,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "h",
+          "row": 0,
+          "col": 5,
+          "selected": false,
+          "rotation": 270
+        }
+      ],
+      [
+        {
+          "letter": "t",
+          "row": 1,
+          "col": 0,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "t",
+          "row": 1,
+          "col": 1,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "h",
+          "row": 1,
+          "col": 2,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "h",
+          "row": 1,
+          "col": 3,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "s",
+          "row": 1,
+          "col": 4,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "o",
+          "row": 1,
+          "col": 5,
+          "selected": false,
+          "rotation": 0
+        }
+      ],
+      [
+        {
+          "letter": "a",
+          "row": 2,
+          "col": 0,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "m",
+          "row": 2,
+          "col": 1,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "h",
+          "row": 2,
+          "col": 2,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "h",
+          "row": 2,
+          "col": 3,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "s",
+          "row": 2,
+          "col": 4,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "o",
+          "row": 2,
+          "col": 5,
+          "selected": false,
+          "rotation": 90
+        }
+      ],
+      [
+        {
+          "letter": "e",
+          "row": 3,
+          "col": 0,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "o",
+          "row": 3,
+          "col": 1,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "e",
+          "row": 3,
+          "col": 2,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "k",
+          "row": 3,
+          "col": 3,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "p",
+          "row": 3,
+          "col": 4,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "e",
+          "row": 3,
+          "col": 5,
+          "selected": false,
+          "rotation": 90
+        }
+      ],
+      [
+        {
+          "letter": "p",
+          "row": 4,
+          "col": 0,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "o",
+          "row": 4,
+          "col": 1,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "t",
+          "row": 4,
+          "col": 2,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "o",
+          "row": 4,
+          "col": 3,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 4,
+          "col": 4,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 4,
+          "col": 5,
+          "selected": false,
+          "rotation": 0
+        }
+      ],
+      [
+        {
+          "letter": null,
+          "row": 5,
+          "col": 0,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 1,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 2,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 3,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 4,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 5,
+          "selected": false,
+          "rotation": 0
+        }
+      ]
+    ],
+    "letterPool": [
+      "m",
+      "l",
+      "k",
+      "l",
+      "a",
+      "h",
+      "t",
+      "t",
+      "h",
+      "h",
+      "s",
+      "o",
+      "a",
+      "m",
+      "h",
+      "h",
+      "s",
+      "o",
+      "e",
+      "o",
+      "e",
+      "k",
+      "p",
+      "e",
+      "p",
+      "o",
+      "t",
+      "o"
+    ],
+    "createdAt": 1779767154631
   }
 ]
