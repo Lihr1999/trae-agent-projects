@@ -1,0 +1,15 @@
+{
+  "name": "lexicon-labyrinth-backend",
+  "version": "1.0.0",
+  "description": "Lexicon Labyrinth - Word Puzzle Game Backend API",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node src/server.js"
+  },
+  "dependencies": {
+    "fastify": "^4.26.0",
+    "cors": "^2.8.5",
+    "uuid": "^9.0.0"
+  }
+}

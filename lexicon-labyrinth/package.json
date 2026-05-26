@@ -1,0 +1,11 @@
+{
+  "name": "lexicon-labyrinth",
+  "version": "1.0.0",
+  "description": "词构迷宫 | Lexicon Labyrinth - 文字解谜游戏",
+  "scripts": {
+    "install:all": "cd backend && npm install && cd ../frontend && npm install",
+    "start:backend": "cd backend && npm run dev",
+    "start:frontend": "cd frontend && npm run dev",
+    "build:frontend": "cd frontend && npm run build"
+  }
+}

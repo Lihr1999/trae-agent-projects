@@ -1,0 +1,384 @@
+[
+  {
+    "id": "level_1779724080624_en6zilqr9",
+    "mode": "basic",
+    "difficulty": 1,
+    "words": [
+      {
+        "word": "orange",
+        "solved": false
+      },
+      {
+        "word": "user",
+        "solved": false
+      },
+      {
+        "word": "pink",
+        "solved": false
+      },
+      {
+        "word": "wall",
+        "solved": false
+      }
+    ],
+    "dependencyGraph": {
+      "nodes": [
+        {
+          "id": "word_0",
+          "word": "orange",
+          "x": 100,
+          "y": 100,
+          "solved": false
+        },
+        {
+          "id": "word_1",
+          "word": "user",
+          "x": 300,
+          "y": 100,
+          "solved": false
+        },
+        {
+          "id": "word_2",
+          "word": "pink",
+          "x": 500,
+          "y": 100,
+          "solved": false
+        },
+        {
+          "id": "word_3",
+          "word": "wall",
+          "x": 100,
+          "y": 250,
+          "solved": false
+        }
+      ],
+      "edges": [
+        {
+          "from": "word_0",
+          "to": "word_1",
+          "sharedLetters": [
+            "r",
+            "e"
+          ],
+          "type": "shares_letters"
+        },
+        {
+          "from": "word_0",
+          "to": "word_2",
+          "sharedLetters": [
+            "n"
+          ],
+          "type": "shares_letters"
+        },
+        {
+          "from": "word_0",
+          "to": "word_3",
+          "sharedLetters": [
+            "a"
+          ],
+          "type": "shares_letters"
+        }
+      ]
+    },
+    "grid": [
+      [
+        {
+          "letter": "n",
+          "row": 0,
+          "col": 0,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "g",
+          "row": 0,
+          "col": 1,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "a",
+          "row": 0,
+          "col": 2,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "a",
+          "row": 0,
+          "col": 3,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "n",
+          "row": 0,
+          "col": 4,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "i",
+          "row": 0,
+          "col": 5,
+          "selected": false,
+          "rotation": 0
+        }
+      ],
+      [
+        {
+          "letter": "s",
+          "row": 1,
+          "col": 0,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "g",
+          "row": 1,
+          "col": 1,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "u",
+          "row": 1,
+          "col": 2,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "s",
+          "row": 1,
+          "col": 3,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "p",
+          "row": 1,
+          "col": 4,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "o",
+          "row": 1,
+          "col": 5,
+          "selected": false,
+          "rotation": 180
+        }
+      ],
+      [
+        {
+          "letter": "w",
+          "row": 2,
+          "col": 0,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "l",
+          "row": 2,
+          "col": 1,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "l",
+          "row": 2,
+          "col": 2,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "p",
+          "row": 2,
+          "col": 3,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "l",
+          "row": 2,
+          "col": 4,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "r",
+          "row": 2,
+          "col": 5,
+          "selected": false,
+          "rotation": 90
+        }
+      ],
+      [
+        {
+          "letter": "a",
+          "row": 3,
+          "col": 0,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "u",
+          "row": 3,
+          "col": 1,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "n",
+          "row": 3,
+          "col": 2,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "e",
+          "row": 3,
+          "col": 3,
+          "selected": false,
+          "rotation": 90
+        },
+        {
+          "letter": "e",
+          "row": 3,
+          "col": 4,
+          "selected": false,
+          "rotation": 270
+        },
+        {
+          "letter": "r",
+          "row": 3,
+          "col": 5,
+          "selected": false,
+          "rotation": 0
+        }
+      ],
+      [
+        {
+          "letter": "i",
+          "row": 4,
+          "col": 0,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "w",
+          "row": 4,
+          "col": 1,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "e",
+          "row": 4,
+          "col": 2,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "k",
+          "row": 4,
+          "col": 3,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": "o",
+          "row": 4,
+          "col": 4,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": "k",
+          "row": 4,
+          "col": 5,
+          "selected": false,
+          "rotation": 90
+        }
+      ],
+      [
+        {
+          "letter": "r",
+          "row": 5,
+          "col": 0,
+          "selected": false,
+          "rotation": 180
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 1,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 2,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 3,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 4,
+          "selected": false,
+          "rotation": 0
+        },
+        {
+          "letter": null,
+          "row": 5,
+          "col": 5,
+          "selected": false,
+          "rotation": 0
+        }
+      ]
+    ],
+    "letterPool": [
+      "n",
+      "g",
+      "a",
+      "a",
+      "n",
+      "i",
+      "s",
+      "g",
+      "u",
+      "s",
+      "p",
+      "o",
+      "w",
+      "l",
+      "l",
+      "p",
+      "l",
+      "r",
+      "a",
+      "u",
+      "n",
+      "e",
+      "e",
+      "r",
+      "i",
+      "w",
+      "e",
+      "k",
+      "o",
+      "k",
+      "r"
+    ],
+    "createdAt": 1779724080624
+  }
+]
