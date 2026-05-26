@@ -1,5 +1,56 @@
 {
   "version": "1.0.0",
-  "lastModified": "2024-01-01T00:00:00.000Z",
-  "configs": []
+  "lastModified": "2026-05-26T02:25:38.900Z",
+  "configs": [
+    {
+      "id": "1779761971331-n0lp6p130",
+      "name": "test-config",
+      "description": "test",
+      "params": {
+        "cloudDensity": 1,
+        "cloudThickness": 2,
+        "cloudCoverage": 0.5,
+        "cloudHeight": 1500,
+        "lightIntensity": 1.5,
+        "scatterCoeff": 0.8,
+        "sunHeight": 45,
+        "sunAzimuth": 180,
+        "windSpeed": 10,
+        "windDirection": 90,
+        "particleSpeed": 2,
+        "sampleCount": 64,
+        "noiseResolution": 128,
+        "renderScale": 1,
+        "transitionProgress": 1,
+        "noiseVisualization": false
+      },
+      "createdAt": "2026-05-26T02:19:31.331Z",
+      "updatedAt": "2026-05-26T02:19:31.334Z"
+    },
+    {
+      "id": "1779762338900-e9znielmm",
+      "name": "测试保存\"动态风暴云\"配置",
+      "description": "快速流动的风暴云层配置",
+      "params": {
+        "cloudDensity": 3.5,
+        "cloudThickness": 8,
+        "cloudCoverage": 0.9,
+        "cloudHeight": 2500,
+        "lightIntensity": 0.8,
+        "scatterCoeff": 1.5,
+        "sunHeight": 20,
+        "sunAzimuth": 270,
+        "windSpeed": 80,
+        "windDirection": 180,
+        "particleSpeed": 8,
+        "sampleCount": 128,
+        "noiseResolution": 192,
+        "renderScale": 0.75,
+        "transitionProgress": 1,
+        "noiseVisualization": false
+      },
+      "createdAt": "2026-05-26T02:25:38.900Z",
+      "updatedAt": "2026-05-26T02:25:38.900Z"
+    }
+  ]
 }

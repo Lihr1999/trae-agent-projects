@@ -21,9 +21,9 @@ const rayMarchSchema = Joi.object({
     sunAzimuth: Joi.number().min(0).max(360).required(),
     windSpeed: Joi.number().min(0).max(100).default(0),
     windDirection: Joi.number().min(0).max(360).default(0)
-  }).required(),
+  }).unknown(true).required(),
   maxSteps: Joi.number().min(16).max(256).integer().default(64)
-});
+}).unknown(true);
 
 const noiseSchema = Joi.object({
   position: vec3Schema,

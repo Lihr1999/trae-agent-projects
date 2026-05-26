@@ -18,7 +18,9 @@ const paramsSchema = Joi.object({
   particleSpeed: Joi.number().min(0).max(10).required(),
   sampleCount: Joi.number().min(16).max(256).integer().required(),
   noiseResolution: Joi.number().min(32).max(256).integer().required(),
-  renderScale: Joi.number().min(0.25).max(2.0).required()
+  renderScale: Joi.number().min(0.25).max(2.0).required(),
+  transitionProgress: Joi.number().min(0).max(1).optional(),
+  noiseVisualization: Joi.boolean().optional()
 });
 
 const saveConfigSchema = Joi.object({
