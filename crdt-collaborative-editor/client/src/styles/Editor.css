@@ -1,0 +1,116 @@
+.editor-container {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.editor-container.shaking {
+  animation: shake 0.3s ease-in-out infinite;
+}
+
+.editor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.editor-header h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.anomaly-badge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  animation: pulse 1s infinite;
+}
+
+.anomaly-badge.tombstone-bloat {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.anomaly-badge.out-of-order-jitter {
+  background: #e0e7ff;
+  color: #3730a3;
+}
+
+.anomaly-badge.intention-violation {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.anomaly-badge.offline-reconnect {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.editor-wrapper {
+  position: relative;
+  min-height: 400px;
+}
+
+.editor-textarea {
+  width: 100%;
+  min-height: 400px;
+  padding: 16px;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 14px;
+  line-height: 1.6;
+  font-family: 'Monaco', 'Menlo', monospace;
+  resize: vertical;
+  transition: border-color 0.2s;
+  background: #fafafa;
+}
+
+.editor-textarea:focus {
+  outline: none;
+  border-color: #667eea;
+  background: #fff;
+}
+
+.remote-cursor {
+  position: absolute;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.cursor-line {
+  width: 2px;
+  height: 20px;
+  animation: blink 1s infinite;
+}
+
+.cursor-label {
+  position: absolute;
+  top: -20px;
+  left: 0;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 10px;
+  color: white;
+  white-space: nowrap;
+  font-weight: 600;
+}
+
+.insert-animation {
+  font-size: 14px;
+  z-index: 5;
+}
+
+.editor-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  padding: 10px 0 0;
+  border-top: 1px solid #e5e7eb;
+  font-size: 12px;
+  color: #6b7280;
+}

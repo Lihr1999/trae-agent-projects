@@ -1,0 +1,128 @@
+.branch-timeline {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  flex: 1;
+}
+
+.timeline-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.timeline-header h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.create-branch-btn {
+  padding: 6px 14px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.branch-tree {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.empty-timeline {
+  text-align: center;
+  padding: 40px 20px;
+  color: #9ca3af;
+}
+
+.empty-icon {
+  font-size: 48px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.branch-list {
+  position: relative;
+}
+
+.branch-item {
+  display: flex;
+  gap: 12px;
+  padding-bottom: 20px;
+  position: relative;
+}
+
+.branch-line {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  width: 16px;
+}
+
+.branch-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.95);
+}
+
+.branch-connector {
+  width: 2px;
+  flex: 1;
+  min-height: 30px;
+}
+
+.branch-info {
+  flex: 1;
+  background: #f9fafb;
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+.branch-name-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.branch-name {
+  font-weight: 600;
+  font-size: 13px;
+  color: #1f2937;
+}
+
+.merged-badge {
+  background: #d1fae5;
+  color: #065f46;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.branch-meta {
+  font-size: 11px;
+  color: #6b7280;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.branch-parent {
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px dashed #e5e7eb;
+  font-size: 10px;
+  color: #9ca3af;
+  font-family: monospace;
+}

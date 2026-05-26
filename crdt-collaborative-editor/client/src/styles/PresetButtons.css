@@ -1,0 +1,51 @@
+.preset-buttons-container {
+  margin-bottom: 20px;
+}
+
+.preset-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.preset-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s;
+}
+
+.preset-button:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.preset-button:active {
+  transform: scale(0.98);
+}
+
+.preset-icon {
+  font-size: 20px;
+}
+
+.preset-name {
+  white-space: nowrap;
+}
+
+.reset-button {
+  background: linear-gradient(135deg, #f87171 0%, #ef4444 100%);
+  color: white;
+}
+
+.reset-button:hover {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+}

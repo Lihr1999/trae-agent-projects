@@ -1,0 +1,53 @@
+.sync-progress-container {
+  margin-top: 15px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 12px;
+  padding: 15px 20px;
+  color: white;
+}
+
+.sync-progress-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.sync-icon {
+  font-size: 18px;
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.sync-text {
+  flex: 1;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.sync-percentage {
+  font-size: 14px;
+  font-weight: 700;
+  font-family: monospace;
+}
+
+.sync-progress-bar {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.sync-progress-fill {
+  height: 100%;
+  background: white;
+  border-radius: 3px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
