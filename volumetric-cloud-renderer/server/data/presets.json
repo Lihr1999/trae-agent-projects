@@ -1,0 +1,102 @@
+{
+  "version": "1.0.0",
+  "lastModified": "2024-01-01T00:00:00.000Z",
+  "presets": [
+    {
+      "id": "static-cumulus",
+      "name": "静态积云",
+      "description": "经典的晴天积云场景，适合观察云层细节",
+      "thumbnail": "preset1.png",
+      "category": "static",
+      "params": {
+        "cloudDensity": 1.2,
+        "cloudThickness": 2.5,
+        "cloudCoverage": 0.5,
+        "cloudHeight": 1500,
+        "lightIntensity": 2.0,
+        "scatterCoeff": 0.6,
+        "sunHeight": 60,
+        "sunAzimuth": 135,
+        "windSpeed": 0,
+        "windDirection": 0,
+        "particleSpeed": 0,
+        "sampleCount": 96,
+        "noiseResolution": 128,
+        "renderScale": 1.0
+      },
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "dynamic-storm",
+      "name": "动态风暴云",
+      "description": "快速流动的风暴云层，展现动态效果",
+      "thumbnail": "preset2.png",
+      "category": "dynamic",
+      "params": {
+        "cloudDensity": 3.5,
+        "cloudThickness": 8.0,
+        "cloudCoverage": 0.9,
+        "cloudHeight": 2500,
+        "lightIntensity": 0.8,
+        "scatterCoeff": 1.5,
+        "sunHeight": 20,
+        "sunAzimuth": 270,
+        "windSpeed": 80,
+        "windDirection": 180,
+        "particleSpeed": 8,
+        "sampleCount": 128,
+        "noiseResolution": 192,
+        "renderScale": 0.75
+      },
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "sunrise-lighting",
+      "name": "日出光照效果",
+      "description": "温暖的日出光线穿透云层的散射效果",
+      "thumbnail": "preset3.png",
+      "category": "lighting",
+      "params": {
+        "cloudDensity": 1.8,
+        "cloudThickness": 3.5,
+        "cloudCoverage": 0.7,
+        "cloudHeight": 1800,
+        "lightIntensity": 3.0,
+        "scatterCoeff": 1.2,
+        "sunHeight": 8,
+        "sunAzimuth": 90,
+        "windSpeed": 15,
+        "windDirection": 45,
+        "particleSpeed": 1.5,
+        "sampleCount": 96,
+        "noiseResolution": 128,
+        "renderScale": 1.0
+      },
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "stress-test",
+      "name": "超大体积压力测试",
+      "description": "极限参数测试系统性能边界",
+      "thumbnail": "preset4.png",
+      "category": "stress",
+      "params": {
+        "cloudDensity": 5.0,
+        "cloudThickness": 10.0,
+        "cloudCoverage": 1.0,
+        "cloudHeight": 5000,
+        "lightIntensity": 1.0,
+        "scatterCoeff": 2.0,
+        "sunHeight": 45,
+        "sunAzimuth": 180,
+        "windSpeed": 50,
+        "windDirection": 0,
+        "particleSpeed": 5,
+        "sampleCount": 256,
+        "noiseResolution": 256,
+        "renderScale": 2.0
+      },
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    }
+  ]
+}
