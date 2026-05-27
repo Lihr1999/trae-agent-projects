@@ -101,7 +101,7 @@ const getTileColor = (x: number, y: number, type: TileType): string => {
 
 const render = () => {
   const canvas = canvasRef.value;
-  if (!canvas || !props.tiles) return;
+  if (!canvas || !props.tiles || props.tiles.length === 0 || !props.tiles[0]) return;
 
   const ctx = canvas.getContext('2d');
   if (!ctx) return;
@@ -195,7 +195,7 @@ const drawBSPTree = (ctx: CanvasRenderingContext2D, node: any) => {
 
 const handleClick = (e: MouseEvent) => {
   const canvas = canvasRef.value;
-  if (!canvas || !props.tiles) return;
+  if (!canvas || !props.tiles || props.tiles.length === 0 || !props.tiles[0]) return;
 
   const rect = canvas.getBoundingClientRect();
   const x = Math.floor((e.clientX - rect.left - offsetX.value) / tileSize.value);
@@ -208,7 +208,7 @@ const handleClick = (e: MouseEvent) => {
 
 const handleMouseMove = (e: MouseEvent) => {
   const canvas = canvasRef.value;
-  if (!canvas || !props.tiles) return;
+  if (!canvas || !props.tiles || props.tiles.length === 0 || !props.tiles[0]) return;
 
   if (isDragging.value) {
     offsetX.value += e.clientX - lastMousePos.value.x;
@@ -249,7 +249,7 @@ const handleWheel = (e: WheelEvent) => {
 };
 
 const fitToScreen = () => {
-  if (!props.tiles || !containerRef.value) return;
+  if (!props.tiles || props.tiles.length === 0 || !props.tiles[0] || !containerRef.value) return;
   const width = props.tiles[0].length;
   const height = props.tiles.length;
   const containerWidth = containerRef.value.clientWidth;

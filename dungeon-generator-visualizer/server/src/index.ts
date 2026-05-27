@@ -264,6 +264,8 @@ server.get('/api/presets', async () => {
 
 const start = async () => {
   try {
+    await db.init();
+    console.log('数据库初始化完成');
     await server.listen({ port: 3001, host: '0.0.0.0' });
     console.log('服务器运行在 http://localhost:3001');
   } catch (err) {
