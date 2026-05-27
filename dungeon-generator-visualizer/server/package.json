@@ -1,0 +1,23 @@
+{
+  "name": "dungeon-server",
+  "version": "1.0.0",
+  "description": "Fastify backend for procedural dungeon generator",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@fastify/cors": "^8.5.0",
+    "better-sqlite3": "^9.4.3",
+    "fastify": "^4.26.0",
+    "seedrandom": "^3.0.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/seedrandom": "^3.0.8",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3"
+  }
+}
