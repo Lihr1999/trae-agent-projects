@@ -71,7 +71,7 @@ const emit = defineEmits<{
   (e: 'update:isPlaying', value: boolean): void;
   (e: 'update:currentStep', value: number): void;
   (e: 'update:speed', value: number): void;
-  (e: 'animationFrame', visited: Set<string>, path: Set<string>): void;
+  (e: 'animationFrame', visited: Record<string, boolean>, path: Record<string, boolean>): void;
 }>();
 
 const localSpeed = ref(props.speed);
@@ -127,19 +127,19 @@ const animate = (timestamp: number) => {
 };
 
 const updateAnimationFrame = (step: number) => {
-  const visitedSet = new Set<string>();
-  const pathSet = new Set<string>();
+  const visitedSet: Record<string, boolean> = {};
+  const pathSet: Record<string, boolean> = {};
 
   if (animationType.value === 'visited') {
     for (let i = 0; i < Math.min(step, props.visited.length); i++) {
-      visitedSet.add(props.visited[i]);
+      visitedSet[props.visited[i]] = true;
     }
   } else {
     for (let i = 0; i < props.visited.length; i++) {
-      visitedSet.add(props.visited[i]);
+      visitedSet[props.visited[i]] = true;
     }
     for (let i = 0; i < Math.min(step, props.path.length); i++) {
-      pathSet.add(props.path[i]);
+      pathSet[props.path[i]] = true;
     }
   }
 

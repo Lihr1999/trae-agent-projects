@@ -3,13 +3,11 @@ export default defineNuxtConfig({
   typescript: {
     strict: true
   },
-  vite: {
-    server: {
-      proxy: {
-        '/api': {
-          target: 'http://localhost:3001',
-          changeOrigin: true
-        }
+  nitro: {
+    devProxy: {
+      '/api': {
+        target: 'http://localhost:3001',
+        changeOrigin: true
       }
     }
   },

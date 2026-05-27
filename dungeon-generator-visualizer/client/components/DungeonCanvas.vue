@@ -20,10 +20,10 @@ import type { Position } from '~/types';
 
 const props = defineProps<{
   tiles: TileType[][] | null;
-  visitedTiles: Set<string>;
-  pathTiles: Set<string>;
-  animationVisited?: Set<string>;
-  animationPath?: Set<string>;
+  visitedTiles: Record<string, boolean>;
+  pathTiles: Record<string, boolean>;
+  animationVisited?: Record<string, boolean>;
+  animationPath?: Record<string, boolean>;
   showBSP?: boolean;
   bspTree?: any;
 }>();
@@ -62,25 +62,45 @@ const getTileTypeName = (type: TileType): string => {
   return names[type] || '未知';
 };
 
+const hasKey = (set: Set<string> | undefined | null, key: string): boolean => {
+  if (!set) return false;
+  if (set instanceof Set) return set.has(key);
+  return Object.prototype.hasOwnProperty.call(set, key);
+};
+
+const getSetSize = (set: Set<string> | undefined | null): number => {
+  if (!set) return 0;
+  if (set instanceof Set) return set.size;
+  return Object.keys(set).length;
+};
+
+const getSetArray = (set: Set<string> | undefined | null): string[] => {
+  if (!set) return [];
+  if (set instanceof Set) return Array.from(set);
+  return Object.keys(set);
+};
+
 const getTileColor = (x: number, y: number, type: TileType): string => {
   const key = `${x},${y}`;
   
-  if (props.animationPath?.has(key)) {
+  if (hasKey(props.animationPath, key)) {
     return '#ffd700';
   }
-  if (props.animationVisited?.has(key)) {
-    const idx = Array.from(props.animationVisited).indexOf(key);
-    const ratio = idx / props.animationVisited.size;
+  if (hasKey(props.animationVisited, key)) {
+    const arr = getSetArray(props.animationVisited);
+    const idx = arr.indexOf(key);
+    const size = getSetSize(props.animationVisited);
+    const ratio = size > 0 ? idx / size : 0;
     const r = Math.floor(14 + ratio * 100);
     const g = Math.floor(165 + ratio * 90);
     const b = Math.floor(233);
     return `rgb(${r}, ${g}, ${b})`;
   }
   
-  if (props.pathTiles.has(key)) {
+  if (hasKey(props.pathTiles, key)) {
     return '#ffd700';
   }
-  if (props.visitedTiles.has(key)) {
+  if (hasKey(props.visitedTiles, key)) {
     return 'rgba(14, 165, 233, 0.6)';
   }
 

@@ -189,8 +189,8 @@ const canvasRef = ref<InstanceType<typeof DungeonCanvas> | null>(null);
 const showHelp = ref(false);
 const showBSP = ref(false);
 const setPointMode = ref<'start' | 'end' | null>(null);
-const animationVisited = ref<Set<string>>(new Set());
-const animationPath = ref<Set<string>>(new Set());
+const animationVisited = ref<Record<string, boolean>>({});
+const animationPath = ref<Record<string, boolean>>({});
 
 const canFindPath = computed(() => {
   return store.startPoint && store.endPoint && store.dungeonResult;
@@ -275,8 +275,8 @@ const runPathfinding = async () => {
     store.animationState.type = 'pathfinding';
     store.animationState.currentStep = 0;
     store.animationState.isPlaying = false;
-    animationVisited.value.clear();
-    animationPath.value.clear();
+    animationVisited.value = {};
+    animationPath.value = {};
   } catch (e) {
     store.error = '寻路失败';
     console.error(e);
@@ -300,13 +300,13 @@ const compareAllAlgorithms = async () => {
     );
     store.setComparisonResults(results);
     store.currentPathResult = null;
-    store.visitedTiles.clear();
-    store.pathTiles.clear();
+    store.visitedTiles.value = {};
+    store.pathTiles.value = {};
     store.animationState.type = 'pathfinding';
     store.animationState.currentStep = 0;
     store.animationState.isPlaying = false;
-    animationVisited.value.clear();
-    animationPath.value.clear();
+    animationVisited.value = {};
+    animationPath.value = {};
   } catch (e) {
     store.error = '对比算法失败';
     console.error(e);
@@ -315,7 +315,7 @@ const compareAllAlgorithms = async () => {
   }
 };
 
-const handleAnimationFrame = (visited: Set<string>, path: Set<string>) => {
+const handleAnimationFrame = (visited: Record<string, boolean>, path: Record<string, boolean>) => {
   animationVisited.value = visited;
   animationPath.value = path;
 };
@@ -329,8 +329,8 @@ const fitCanvas = () => {
 watch(
   () => store.currentPathResult,
   () => {
-    animationVisited.value.clear();
-    animationPath.value.clear();
+    animationVisited.value = {};
+    animationPath.value = {};
   }
 );
 </script>

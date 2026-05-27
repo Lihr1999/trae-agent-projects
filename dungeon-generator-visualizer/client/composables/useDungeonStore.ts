@@ -47,8 +47,8 @@ export const useDungeonStore = () => {
   const error = ref<string | null>(null);
 
   const displayTiles = ref<TileType[][] | null>(null);
-  const visitedTiles = ref<Set<string>>(new Set());
-  const pathTiles = ref<Set<string>>(new Set());
+  const visitedTiles = ref<Record<string, boolean>>({});
+  const pathTiles = ref<Record<string, boolean>>({});
 
   const setConfig = (newConfig: Partial<DungeonConfig>) => {
     Object.assign(config, newConfig);
@@ -64,8 +64,8 @@ export const useDungeonStore = () => {
     startPoint.value = null;
     endPoint.value = null;
     currentPathResult.value = null;
-    visitedTiles.value.clear();
-    pathTiles.value.clear();
+    visitedTiles.value = {};
+    pathTiles.value = {};
     pathfindingComparison.results = [];
     pathfindingComparison.bestAlgorithm = null;
   };
@@ -90,8 +90,8 @@ export const useDungeonStore = () => {
 
   const clearPathfinding = () => {
     currentPathResult.value = null;
-    visitedTiles.value.clear();
-    pathTiles.value.clear();
+    visitedTiles.value = {};
+    pathTiles.value = {};
     pathfindingComparison.results = [];
     pathfindingComparison.bestAlgorithm = null;
     if (dungeonResult.value) {
@@ -108,8 +108,12 @@ export const useDungeonStore = () => {
 
   const setPathResult = (result: PathResult) => {
     currentPathResult.value = result;
-    visitedTiles.value = new Set(result.visited.map(p => `${p.x},${p.y}`));
-    pathTiles.value = new Set(result.path.map(p => `${p.x},${p.y}`));
+    const visited: Record<string, boolean> = {};
+    result.visited.forEach(p => { visited[`${p.x},${p.y}`] = true; });
+    visitedTiles.value = visited;
+    const path: Record<string, boolean> = {};
+    result.path.forEach(p => { path[`${p.x},${p.y}`] = true; });
+    pathTiles.value = path;
   };
 
   const setComparisonResults = (results: PathResult[]) => {
@@ -128,8 +132,8 @@ export const useDungeonStore = () => {
     endPoint.value = null;
     currentPathResult.value = null;
     displayTiles.value = null;
-    visitedTiles.value.clear();
-    pathTiles.value.clear();
+    visitedTiles.value = {};
+    pathTiles.value = {};
     pathfindingComparison.results = [];
     pathfindingComparison.bestAlgorithm = null;
     error.value = null;
