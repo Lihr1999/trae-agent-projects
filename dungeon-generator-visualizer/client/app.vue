@@ -18,9 +18,9 @@
       <aside class="sidebar">
         <ConfigPanel
           :config="store.config"
-          :isGenerating="store.isGenerating"
+          :isGenerating="store.isGenerating.value"
           :canFindPath="canFindPath"
-          :currentPathResult="store.currentPathResult"
+          :currentPathResult="store.currentPathResult.value"
           :comparisonResults="store.pathfindingComparison.results"
           :bestAlgorithm="store.pathfindingComparison.bestAlgorithm"
           :isComparing="store.pathfindingComparison.isComparing"
@@ -85,13 +85,13 @@
         <div class="canvas-wrapper">
           <DungeonCanvas
             ref="canvasRef"
-            :tiles="store.displayTiles"
-            :visitedTiles="store.visitedTiles"
-            :pathTiles="store.pathTiles"
+            :tiles="store.displayTiles.value"
+            :visitedTiles="store.visitedTiles.value"
+            :pathTiles="store.pathTiles.value"
             :animationVisited="animationVisited"
             :animationPath="animationPath"
             :showBSP="showBSP"
-            :bspTree="store.dungeonResult?.bspTree"
+            :bspTree="store.dungeonResult.value?.bspTree"
             @tileClick="handleTileClick"
           />
           
@@ -299,7 +299,7 @@ const compareAllAlgorithms = async () => {
       store.dungeonResult.snapshotId
     );
     store.setComparisonResults(results);
-    store.currentPathResult = null;
+    store.currentPathResult.value = null;
     store.visitedTiles.value = {};
     store.pathTiles.value = {};
     store.animationState.type = 'pathfinding';

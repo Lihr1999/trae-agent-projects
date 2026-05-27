@@ -26,7 +26,7 @@ server.get('/health', async () => {
   return { status: 'ok', timestamp: Date.now() };
 });
 
-server.post<{ Body: DungeonConfig }>('/api/generate', async (request, reply) => {
+server.post<{ Body: DungeonConfig }>('/generate', async (request, reply) => {
   try {
     const config = request.body;
     let result: DungeonResult;
@@ -56,7 +56,7 @@ server.post<{ Body: DungeonConfig }>('/api/generate', async (request, reply) => 
   }
 });
 
-server.post<{ Body: PathRequest }>('/api/pathfind', async (request, reply) => {
+server.post<{ Body: PathRequest }>('/pathfind', async (request, reply) => {
   try {
     const { tiles, start, end, algorithm, allowDiagonal } = request.body;
 
@@ -99,7 +99,7 @@ server.post<{ Body: PathRequest }>('/api/pathfind', async (request, reply) => {
 });
 
 server.post<{ Body: { tiles: TileType[][]; start: any; end: any; snapshotId?: number } }>(
-  '/api/pathfind/all',
+  '/pathfind/all',
   async (request, reply) => {
     try {
       const { tiles, start, end, snapshotId } = request.body;
@@ -147,11 +147,11 @@ server.post<{ Body: { tiles: TileType[][]; start: any; end: any; snapshotId?: nu
   }
 );
 
-server.get('/api/snapshots', async () => {
+server.get('/snapshots', async () => {
   return db.listSnapshots();
 });
 
-server.get<{ Params: { id: string } }>('/api/snapshots/:id', async (request, reply) => {
+server.get<{ Params: { id: string } }>('/snapshots/:id', async (request, reply) => {
   const snapshot = db.getSnapshot(parseInt(request.params.id));
   if (!snapshot) {
     reply.status(404).send({ error: '快照不存在' });
@@ -160,17 +160,17 @@ server.get<{ Params: { id: string } }>('/api/snapshots/:id', async (request, rep
   return snapshot;
 });
 
-server.delete<{ Params: { id: string } }>('/api/snapshots/:id', async (request, reply) => {
+server.delete<{ Params: { id: string } }>('/snapshots/:id', async (request, reply) => {
   db.deleteSnapshot(parseInt(request.params.id));
   return { success: true };
 });
 
-server.get('/api/stats/algorithm/:name', async (request) => {
+server.get('/stats/algorithm/:name', async (request) => {
   const { name } = request.params as { name: string };
   return db.getAlgorithmStats(name);
 });
 
-server.get('/api/presets', async () => {
+server.get('/presets', async () => {
   const presets = [
     {
       id: 'small-dungeon',
