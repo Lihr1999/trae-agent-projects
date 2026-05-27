@@ -173,7 +173,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue';
+import { ref, computed, watch, nextTick } from 'vue';
 import { useApi } from '~/composables/useApi';
 import { useDungeonStore } from '~/composables/useDungeonStore';
 import { TileType } from '~/types';
@@ -197,27 +197,27 @@ const canFindPath = computed(() => {
 });
 
 const visitedArray = computed(() => {
-  if (store.currentPathResult) {
+  if (store.currentPathResult?.visited) {
     return store.currentPathResult.visited.map(p => `${p.x},${p.y}`);
   }
   if (store.pathfindingComparison.results.length > 0) {
     const best = store.pathfindingComparison.results.find(
       r => r.algorithm === store.pathfindingComparison.bestAlgorithm
     );
-    return best ? best.visited.map(p => `${p.x},${p.y}`) : [];
+    return best?.visited ? best.visited.map(p => `${p.x},${p.y}`) : [];
   }
   return [];
 });
 
 const pathArray = computed(() => {
-  if (store.currentPathResult) {
+  if (store.currentPathResult?.path) {
     return store.currentPathResult.path.map(p => `${p.x},${p.y}`);
   }
   if (store.pathfindingComparison.results.length > 0) {
     const best = store.pathfindingComparison.results.find(
       r => r.algorithm === store.pathfindingComparison.bestAlgorithm
     );
-    return best ? best.path.map(p => `${p.x},${p.y}`) : [];
+    return best?.path ? best.path.map(p => `${p.x},${p.y}`) : [];
   }
   return [];
 });

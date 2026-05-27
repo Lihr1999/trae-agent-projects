@@ -109,7 +109,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-label">走廊弯曲度: {{ localConfig.corridorBendiness.toFixed(2) }}</label>
+          <label class="form-label">走廊弯曲度: {{ (localConfig.corridorBendiness ?? 0).toFixed(2) }}</label>
           <input
             type="range"
             class="slider"
@@ -121,7 +121,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-label">门密度: {{ localConfig.doorDensity.toFixed(2) }}</label>
+          <label class="form-label">门密度: {{ (localConfig.doorDensity ?? 0).toFixed(2) }}</label>
           <input
             type="range"
             class="slider"
@@ -133,7 +133,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-label">宝箱密度: {{ localConfig.chestDensity.toFixed(2) }}</label>
+          <label class="form-label">宝箱密度: {{ (localConfig.chestDensity ?? 0).toFixed(2) }}</label>
           <input
             type="range"
             class="slider"
@@ -145,7 +145,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-label">怪物密度: {{ localConfig.monsterDensity.toFixed(2) }}</label>
+          <label class="form-label">怪物密度: {{ (localConfig.monsterDensity ?? 0).toFixed(2) }}</label>
           <input
             type="range"
             class="slider"
@@ -157,7 +157,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-label">陷阱密度: {{ localConfig.trapDensity.toFixed(2) }}</label>
+          <label class="form-label">陷阱密度: {{ (localConfig.trapDensity ?? 0).toFixed(2) }}</label>
           <input
             type="range"
             class="slider"
@@ -288,7 +288,7 @@
         >
           <span class="algorithm-name">{{ result.algorithm }}</span>
           <span :class="{ 'best': result.algorithm === bestAlgorithm }">
-            {{ result.timeMs.toFixed(2) }}ms
+            {{ (result.timeMs ?? 0).toFixed(2) }}ms
           </span>
           <span>{{ result.nodesExpanded }}</span>
           <span>{{ result.pathLength }}</span>
@@ -308,7 +308,7 @@
         </div>
         <div class="stat-item">
           <span class="stat-label">耗时</span>
-          <span class="stat-value">{{ currentPathResult.timeMs.toFixed(2) }}ms</span>
+          <span class="stat-value">{{ (currentPathResult.timeMs ?? 0).toFixed(2) }}ms</span>
         </div>
         <div class="stat-item">
           <span class="stat-label">展开节点</span>
@@ -334,7 +334,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, computed, onMounted } from 'vue';
+import { ref, reactive, computed, onMounted, watch } from 'vue';
 import { useApi } from '~/composables/useApi';
 import type { DungeonConfig, PresetScenario, PathResult } from '~/types';
 

@@ -1,4 +1,5 @@
 import seedrandom from 'seedrandom';
+import { TileType } from '../types';
 import type {
   Position,
   Room,
@@ -8,7 +9,6 @@ import type {
   Monster,
   Trap,
   BSPNode,
-  TileType,
   DungeonConfig,
   DungeonResult,
   GenerationStep

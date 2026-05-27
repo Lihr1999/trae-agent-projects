@@ -1,7 +1,7 @@
 import seedrandom from 'seedrandom';
+import { TileType } from '../types';
 import type {
   Position,
-  TileType,
   DungeonConfig,
   DungeonResult,
   GenerationStep

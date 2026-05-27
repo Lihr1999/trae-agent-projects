@@ -1,4 +1,5 @@
-import type { Position, TileType, PathResult } from '../types';
+import { TileType } from '../types';
+import type { Position, PathResult } from '../types';
 
 interface Node {
   x: number;
