@@ -1,0 +1,12 @@
+{
+  "name": "asymmetric-chess",
+  "version": "1.0.0",
+  "description": "非对称棋类游戏 - 规则执行与AI对弈系统",
+  "private": true,
+  "scripts": {
+    "dev:server": "cd server && node index.js",
+    "dev:client": "cd client && npx rollup -c -w",
+    "start": "cd server && node index.js",
+    "build": "cd client && npx rollup -c"
+  }
+}

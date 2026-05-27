@@ -1,0 +1,24 @@
+{
+  "name": "asymmetric-chess-client",
+  "version": "1.0.0",
+  "description": "非对称棋类游戏前端",
+  "private": true,
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "start": "sirv public --no-clear -p 5000"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "rollup": "^3.29.4",
+    "rollup-plugin-css-only": "^4.5.2",
+    "rollup-plugin-livereload": "^2.0.5",
+    "rollup-plugin-svelte": "^7.2.0",
+    "svelte": "^4.2.12",
+    "sirv-cli": "^2.0.2"
+  },
+  "dependencies": {
+    "sirv": "^2.0.4"
+  }
+}
