@@ -12,21 +12,25 @@ function rowsToObjects(columns, values) {
   });
 }
 
-function wrapDatabase(db, dbPath) {
+function wrapDatabase(db, dbPath, persistToDisk = false) {
   let saveTimeout = null;
+  let pendingSaves = 0;
 
   function scheduleSave() {
+    if (!persistToDisk) return;
+    pendingSaves++;
     if (saveTimeout) clearTimeout(saveTimeout);
     saveTimeout = setTimeout(() => {
       try {
         const data = db.export();
         const buffer = Buffer.from(data);
         fs.writeFileSync(dbPath, buffer);
+        pendingSaves = 0;
       } catch (e) {
         console.warn('Failed to persist database to disk:', e.message);
       }
       saveTimeout = null;
-    }, 100);
+    }, 500);
   }
 
   function getChanges() {
@@ -41,7 +45,7 @@ function wrapDatabase(db, dbPath) {
   }
 
   function prepare(sql) {
-    const isWrite = /^\s*(INSERT|UPDATE|DELETE|CREATE|ALTER|DROP)/i.test(sql);
+    const isWrite = /^\s*(INSERT|UPDATE|DELETE|CREATE|ALTER|DROP|REPLACE)/i.test(sql);
 
     return {
       run(...params) {
@@ -63,7 +67,7 @@ function wrapDatabase(db, dbPath) {
           if (e.message && e.message.includes('UNIQUE constraint') && sql.includes('OR IGNORE')) {
             return { lastInsertRowid: null, changes: 0 };
           }
-          console.error('SQL Error in run:', e.message, sql.substring(0, 100), params?.length);
+          console.error('SQL Error in run:', e.message, sql.substring(0, 80));
           throw e;
         }
       },
@@ -80,7 +84,7 @@ function wrapDatabase(db, dbPath) {
           stmt.free();
           return undefined;
         } catch (e) {
-          console.error('SQL Error in get:', e.message, sql.substring(0, 100));
+          console.error('SQL Error in get:', e.message, sql.substring(0, 80));
           throw e;
         }
       },
@@ -96,7 +100,7 @@ function wrapDatabase(db, dbPath) {
           stmt.free();
           return results;
         } catch (e) {
-          console.error('SQL Error in all:', e.message, sql.substring(0, 100));
+          console.error('SQL Error in all:', e.message, sql.substring(0, 80));
           throw e;
         }
       }
@@ -105,14 +109,14 @@ function wrapDatabase(db, dbPath) {
 
   function exec(sql) {
     try {
-      const isWrite = /^\s*(INSERT|UPDATE|DELETE|CREATE|ALTER|DROP|BEGIN|COMMIT|ROLLBACK)/i.test(sql);
+      const isWrite = /^\s*(INSERT|UPDATE|DELETE|CREATE|ALTER|DROP|BEGIN|COMMIT|ROLLBACK|REPLACE)/i.test(sql);
       const results = db.exec(sql);
       if (isWrite) {
         scheduleSave();
       }
       return results;
     } catch (e) {
-      console.error('SQL Error in exec:', e.message, sql.substring(0, 100));
+      console.error('SQL Error in exec:', e.message, sql.substring(0, 80));
       throw e;
     }
   }
@@ -139,6 +143,7 @@ function wrapDatabase(db, dbPath) {
     _rawDb: db,
     _saveToDisk: scheduleSave,
     _forceSave: () => {
+      if (!persistToDisk) return;
       try {
         const data = db.export();
         const buffer = Buffer.from(data);
@@ -217,7 +222,6 @@ function initDatabase(db) {
       CREATE INDEX IF NOT EXISTS idx_games_hash ON games(state_hash);
     `);
   } catch (e) {
-    console.warn('Index creation warning (may already exist):', e.message);
   }
 
   const count = db.prepare('SELECT COUNT(*) as cnt FROM opening_book').get();
@@ -236,7 +240,6 @@ function initDatabase(db) {
       try {
         insertOpening.run(...item);
       } catch (e) {
-        console.warn('Opening insert skipped (may exist):', e.message);
       }
     }
   }

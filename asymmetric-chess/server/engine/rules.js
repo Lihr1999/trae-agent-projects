@@ -204,7 +204,7 @@ function getPawnMoves(board, x, y, piece) {
   return moves;
 }
 
-function getPieceMoves(board, x, y, visitedJumps = new Set()) {
+function getPieceMoves(board, x, y) {
   const piece = board[x][y];
   if (!piece) return [];
 
@@ -219,30 +219,6 @@ function getPieceMoves(board, x, y, visitedJumps = new Set()) {
     case 'N': {
       const knightMoves = getKnightMoves(board, x, y, side);
       moves = knightMoves;
-
-      if (info.canMultiJump) {
-        const jumpKey = `${x},${y}`;
-        if (!visitedJumps.has(jumpKey)) {
-          const newVisited = new Set(visitedJumps);
-          newVisited.add(jumpKey);
-          for (const km of knightMoves) {
-            if (!km.capture) {
-              const testBoard = cloneBoard(board);
-              testBoard[km.to[0]][km.to[1]] = testBoard[x][y];
-              testBoard[x][y] = null;
-              const furtherJumps = getPieceMoves(testBoard, km.to[0], km.to[1], newVisited);
-              for (const fj of furtherJumps) {
-                moves.push({
-                  from: [x, y],
-                  to: fj.to,
-                  multiJump: true,
-                  jumpPath: [[x, y], km.to, ...(fj.jumpPath || [])]
-                });
-              }
-            }
-          }
-        }
-      }
       break;
     }
     case 'B':
