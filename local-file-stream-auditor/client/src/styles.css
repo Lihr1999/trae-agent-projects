@@ -170,16 +170,18 @@ body {
 
 .rule-item {
   display: grid;
-  grid-template-columns: minmax(120px, 1fr) 90px 65px 65px 55px;
-  gap: 8px;
+  grid-template-columns: 1fr 80px;
+  grid-template-rows: auto auto;
+  gap: 6px 8px;
   align-items: center;
   padding: 8px;
   background: #f7fafc;
   border-radius: 6px;
 }
 
-.rule-item input[type="text"],
-.rule-item select {
+.rule-item input[type="text"] {
+  grid-column: 1;
+  grid-row: 1;
   padding: 6px 8px;
   border: 1px solid #e2e8f0;
   border-radius: 4px;
@@ -188,22 +190,42 @@ body {
   box-sizing: border-box;
 }
 
+.rule-item select {
+  grid-column: 2;
+  grid-row: 1;
+  padding: 6px 4px;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
 .rule-item input[type="checkbox"] {
-  width: 16px;
-  height: 16px;
+  width: 15px;
+  height: 15px;
   margin: 0;
   cursor: pointer;
   accent-color: #667eea;
+  flex-shrink: 0;
 }
 
 .rule-item label {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   color: #4a5568;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 3px;
+  gap: 2px;
   white-space: nowrap;
   cursor: pointer;
+}
+
+.rule-item .rule-actions {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .add-rule-btn {

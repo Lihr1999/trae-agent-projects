@@ -441,36 +441,39 @@ export default function App() {
                     <option value="boolean">布尔</option>
                     <option value="date">日期</option>
                   </select>
-                  <label>
-                    <input
-                      type="checkbox"
-                      checked={!!rule.required}
-                      onChange={(e) => updateRule(index, 'required', e.target.checked)}
-                    />
-                    必填
-                  </label>
-                  <label>
-                    <input
-                      type="checkbox"
-                      checked={!!rule.unique}
-                      onChange={(e) => updateRule(index, 'unique', e.target.checked)}
-                    />
-                    唯一
-                  </label>
-                  <button
-                    onClick={() => removeRule(index)}
-                    style={{
-                      background: '#fc8181',
-                      color: 'white',
-                      border: 'none',
-                      borderRadius: '4px',
-                      padding: '4px 8px',
-                      cursor: 'pointer',
-                      fontSize: '0.75rem',
-                    }}
-                  >
-                    删除
-                  </button>
+                  <div className="rule-actions">
+                    <label>
+                      <input
+                        type="checkbox"
+                        checked={!!rule.required}
+                        onChange={(e) => updateRule(index, 'required', e.target.checked)}
+                      />
+                      必填
+                    </label>
+                    <label>
+                      <input
+                        type="checkbox"
+                        checked={!!rule.unique}
+                        onChange={(e) => updateRule(index, 'unique', e.target.checked)}
+                      />
+                      唯一
+                    </label>
+                    <button
+                      onClick={() => removeRule(index)}
+                      style={{
+                        background: '#fc8181',
+                        color: 'white',
+                        border: 'none',
+                        borderRadius: '4px',
+                        padding: '4px 8px',
+                        cursor: 'pointer',
+                        fontSize: '0.75rem',
+                        marginLeft: 'auto',
+                      }}
+                    >
+                      删除
+                    </button>
+                  </div>
                 </div>
               ))}
               <button className="add-rule-btn" onClick={addRule}>
