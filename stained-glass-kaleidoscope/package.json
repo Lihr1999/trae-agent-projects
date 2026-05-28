@@ -1,0 +1,18 @@
+{
+  "name": "stained-glass-kaleidoscope",
+  "version": "1.0.0",
+  "description": "彩色玻璃万花筒工作台 - 基于计算几何与群论对称性的3D交互式可视化系统",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "dev:server": "cd server && npm run dev",
+    "dev:client": "cd client && npm run dev",
+    "build": "npm run build:server && npm run build:client",
+    "build:server": "cd server && npm run build",
+    "build:client": "cd client && npm run build",
+    "install:all": "npm install && cd server && npm install && cd ../client && npm install"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
