@@ -170,22 +170,22 @@ body {
 
 .rule-item {
   display: grid;
-  grid-template-columns: 1fr 90px 60px 60px 52px;
-  gap: 6px;
+  grid-template-columns: minmax(120px, 1fr) 90px 65px 65px 55px;
+  gap: 8px;
   align-items: center;
   padding: 8px;
   background: #f7fafc;
   border-radius: 6px;
-  overflow: hidden;
 }
 
 .rule-item input[type="text"],
 .rule-item select {
-  padding: 6px;
+  padding: 6px 8px;
   border: 1px solid #e2e8f0;
   border-radius: 4px;
   font-size: 0.85rem;
-  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .rule-item input[type="checkbox"] {
