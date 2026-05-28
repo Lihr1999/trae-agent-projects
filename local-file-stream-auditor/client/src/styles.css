@@ -170,25 +170,40 @@ body {
 
 .rule-item {
   display: grid;
-  grid-template-columns: 1fr 100px 80px 80px;
-  gap: 8px;
+  grid-template-columns: 1fr 90px 60px 60px 52px;
+  gap: 6px;
   align-items: center;
   padding: 8px;
   background: #f7fafc;
   border-radius: 6px;
+  overflow: hidden;
 }
 
-.rule-item input,
+.rule-item input[type="text"],
 .rule-item select {
   padding: 6px;
   border: 1px solid #e2e8f0;
   border-radius: 4px;
   font-size: 0.85rem;
+  min-width: 0;
+}
+
+.rule-item input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  cursor: pointer;
+  accent-color: #667eea;
 }
 
 .rule-item label {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: #4a5568;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  white-space: nowrap;
+  cursor: pointer;
 }
 
 .add-rule-btn {

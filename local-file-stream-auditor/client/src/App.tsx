@@ -25,11 +25,11 @@ import {
 
 const DEFAULT_RULES: FieldRule[] = [
   { field: 'id', type: 'number', required: true, unique: true },
-  { field: 'name', type: 'string', required: true },
-  { field: 'email', type: 'string', required: false, pattern: '^[^@]+@[^@]+\\.[^@]+$' },
-  { field: 'age', type: 'number', required: false, min: 0, max: 150 },
-  { field: 'department', type: 'string', required: false },
-  { field: 'notes', type: 'string', required: false },
+  { field: 'name', type: 'string', required: true, unique: false },
+  { field: 'email', type: 'string', required: false, unique: false, pattern: '^[^@]+@[^@]+\\.[^@]+$' },
+  { field: 'age', type: 'number', required: false, unique: false, min: 0, max: 150 },
+  { field: 'department', type: 'string', required: false, unique: false },
+  { field: 'notes', type: 'string', required: false, unique: false },
 ];
 
 const ANOMALY_TYPES = [
@@ -266,7 +266,7 @@ export default function App() {
   };
 
   const addRule = () => {
-    setRules([...rules, { field: '', type: 'string', required: false }]);
+    setRules([...rules, { field: '', type: 'string', required: false, unique: false }]);
   };
 
   const updateRule = (index: number, field: keyof FieldRule, value: any) => {
@@ -425,7 +425,7 @@ export default function App() {
             <h2>⚙️ 字段规则配置</h2>
             <div className="rules-config">
               {rules.map((rule, index) => (
-                <div key={index} className="rule-item">
+                <div key={`${rule.field}-${index}`} className="rule-item">
                   <input
                     type="text"
                     placeholder="字段名"
@@ -444,7 +444,7 @@ export default function App() {
                   <label>
                     <input
                       type="checkbox"
-                      checked={rule.required}
+                      checked={!!rule.required}
                       onChange={(e) => updateRule(index, 'required', e.target.checked)}
                     />
                     必填
@@ -452,7 +452,7 @@ export default function App() {
                   <label>
                     <input
                       type="checkbox"
-                      checked={rule.unique}
+                      checked={!!rule.unique}
                       onChange={(e) => updateRule(index, 'unique', e.target.checked)}
                     />
                     唯一
