@@ -123,6 +123,18 @@ var app = (function () {
 	}
 
 	/**
+	 * @param {EventTarget} node
+	 * @param {string} event
+	 * @param {EventListenerOrEventListenerObject} handler
+	 * @param {boolean | AddEventListenerOptions | EventListenerOptions} [options]
+	 * @returns {() => void}
+	 */
+	function listen(node, event, handler, options) {
+		node.addEventListener(event, handler, options);
+		return () => node.removeEventListener(event, handler, options);
+	}
+
+	/**
 	 * @param {Element} node
 	 * @param {string} attribute
 	 * @param {string} [value]
@@ -746,6 +758,38 @@ var app = (function () {
 	}
 
 	/**
+	 * @param {Node} node
+	 * @param {string} event
+	 * @param {EventListenerOrEventListenerObject} handler
+	 * @param {boolean | AddEventListenerOptions | EventListenerOptions} [options]
+	 * @param {boolean} [has_prevent_default]
+	 * @param {boolean} [has_stop_propagation]
+	 * @param {boolean} [has_stop_immediate_propagation]
+	 * @returns {() => void}
+	 */
+	function listen_dev(
+		node,
+		event,
+		handler,
+		options,
+		has_prevent_default,
+		has_stop_propagation,
+		has_stop_immediate_propagation
+	) {
+		const modifiers =
+			options === true ? ['capture'] : options ? Array.from(Object.keys(options)) : [];
+		if (has_prevent_default) modifiers.push('preventDefault');
+		if (has_stop_propagation) modifiers.push('stopPropagation');
+		if (has_stop_immediate_propagation) modifiers.push('stopImmediatePropagation');
+		dispatch_dev('SvelteDOMAddEventListener', { node, event, handler, modifiers });
+		const dispose = listen(node, event, handler, options);
+		return () => {
+			dispatch_dev('SvelteDOMRemoveEventListener', { node, event, handler, modifiers });
+			dispose();
+		};
+	}
+
+	/**
 	 * @param {Element} node
 	 * @param {string} attribute
 	 * @param {string} [value]
@@ -930,7 +974,7 @@ var app = (function () {
 			c: function create() {
 				div = element("div");
 				attr_dev(div, "class", div_class_value = "move-indicator " + (/*piece*/ ctx[23] ? 'capture' : '') + " svelte-1r8o1r7");
-				add_location(div, file$4, 74, 12, 2594);
+				add_location(div, file$4, 74, 12, 2595);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, div, anchor);
@@ -979,16 +1023,16 @@ var app = (function () {
 				span1 = element("span");
 				t2 = text(t2_value);
 				attr_dev(span0, "class", "piece-symbol svelte-1r8o1r7");
-				add_location(span0, file$4, 82, 14, 2894);
+				add_location(span0, file$4, 82, 14, 2895);
 				attr_dev(span1, "class", "piece-chinese svelte-1r8o1r7");
-				add_location(span1, file$4, 83, 14, 2992);
+				add_location(span1, file$4, 83, 14, 2993);
 				attr_dev(div, "class", div_class_value = "piece " + /*piece*/ ctx[23].side + " " + (/*flipping*/ ctx[29] ? 'flipping' : '') + " svelte-1r8o1r7");
 
 				set_style(div, "--piece-color", /*piece*/ ctx[23].side === 'north'
 				? '#c0392b'
 				: '#2980b9');
 
-				add_location(div, file$4, 78, 12, 2705);
+				add_location(div, file$4, 78, 12, 2706);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, div, anchor);
@@ -1056,17 +1100,17 @@ var app = (function () {
 				span1 = element("span");
 				t2 = text(t2_value);
 				attr_dev(span0, "class", "piece-symbol svelte-1r8o1r7");
-				add_location(span0, file$4, 91, 18, 3268);
+				add_location(span0, file$4, 91, 18, 3269);
 				attr_dev(div0, "class", "flip-front svelte-1r8o1r7");
-				add_location(div0, file$4, 90, 16, 3225);
+				add_location(div0, file$4, 90, 16, 3226);
 				attr_dev(span1, "class", "piece-symbol svelte-1r8o1r7");
-				add_location(span1, file$4, 94, 18, 3422);
+				add_location(span1, file$4, 94, 18, 3423);
 				attr_dev(div1, "class", "flip-back svelte-1r8o1r7");
-				add_location(div1, file$4, 93, 16, 3380);
+				add_location(div1, file$4, 93, 16, 3381);
 				attr_dev(div2, "class", "flip-inner svelte-1r8o1r7");
-				add_location(div2, file$4, 89, 14, 3184);
+				add_location(div2, file$4, 89, 14, 3185);
 				attr_dev(div3, "class", "flip-overlay svelte-1r8o1r7");
-				add_location(div3, file$4, 88, 12, 3143);
+				add_location(div3, file$4, 88, 12, 3144);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, div3, anchor);
@@ -1110,7 +1154,7 @@ var app = (function () {
 				span = element("span");
 				span.textContent = `${String.fromCharCode(97 + /*y*/ ctx[32])}`;
 				attr_dev(span, "class", "coord-label y-label svelte-1r8o1r7");
-				add_location(span, file$4, 102, 12, 3668);
+				add_location(span, file$4, 102, 12, 3669);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, span, anchor);
@@ -1143,13 +1187,15 @@ var app = (function () {
 		let span;
 		let t4;
 		let div_class_value;
+		let mounted;
+		let dispose;
 		let if_block0 = /*legalTarget*/ ctx[25] && create_if_block_3$3(ctx);
 		let if_block1 = /*piece*/ ctx[23] && create_if_block_2$3(ctx);
 		let if_block2 = /*flipping*/ ctx[29] && create_if_block_1$4(ctx);
 		let if_block3 = /*x*/ ctx[21] === 7 && create_if_block$4(ctx);
 
-		function func() {
-			return /*func*/ ctx[14](/*x*/ ctx[21], /*y*/ ctx[32]);
+		function click_handler() {
+			return /*click_handler*/ ctx[14](/*x*/ ctx[21], /*y*/ ctx[32]);
 		}
 
 		const block = {
@@ -1166,9 +1212,8 @@ var app = (function () {
 				t4 = space();
 				if (if_block3) if_block3.c();
 				attr_dev(span, "class", "coord-label x-label svelte-1r8o1r7");
-				add_location(span, file$4, 100, 10, 3583);
+				add_location(span, file$4, 100, 10, 3584);
 				attr_dev(div, "class", div_class_value = "square " + (/*isLight*/ ctx[24] ? 'light' : 'dark') + " " + (/*selected*/ ctx[26] ? 'selected' : '') + " " + (/*lastMoveSquare*/ ctx[27] ? 'last-move' : '') + " " + (/*invalid*/ ctx[28] ? 'invalid' : '') + " " + (/*showProgress*/ ctx[30] ? 'progress' : '') + " " + (/*legalTarget*/ ctx[25] ? 'legal-target' : '') + " svelte-1r8o1r7");
-				attr_dev(div, "onclick", func);
 				set_style(div, "--delay", (/*x*/ ctx[21] * 8 + /*y*/ ctx[32]) * 20 + "ms");
 				add_location(div, file$4, 66, 8, 2191);
 			},
@@ -1183,6 +1228,11 @@ var app = (function () {
 				append_dev(div, span);
 				append_dev(div, t4);
 				if (if_block3) if_block3.m(div, null);
+
+				if (!mounted) {
+					dispose = listen_dev(div, "click", click_handler, false, false, false, false);
+					mounted = true;
+				}
 			},
 			p: function update(new_ctx, dirty) {
 				ctx = new_ctx;
@@ -1229,6 +1279,8 @@ var app = (function () {
 				if (if_block1) if_block1.d();
 				if (if_block2) if_block2.d();
 				if (if_block3) if_block3.d();
+				mounted = false;
+				dispose();
 			}
 		};
 
@@ -1329,7 +1381,7 @@ var app = (function () {
 				set_style(div, "--life", /*p*/ ctx[16].life);
 				set_style(div, "--color", /*p*/ ctx[16].color);
 				set_style(div, "--size", /*p*/ ctx[16].size + "px");
-				add_location(div, file$4, 109, 6, 3830);
+				add_location(div, file$4, 109, 6, 3831);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, div, anchor);
@@ -1576,7 +1628,7 @@ var app = (function () {
 			if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<Board> was created with unknown prop '${key}'`);
 		});
 
-		const func = (x, y) => handleSquareClick(x, y);
+		const click_handler = (x, y) => handleSquareClick(x, y);
 
 		$$self.$$set = $$props => {
 			if ('board' in $$props) $$invalidate(0, board = $$props.board);
@@ -1638,7 +1690,7 @@ var app = (function () {
 			legalMoves,
 			lastMove,
 			invalidMoveError,
-			func
+			click_handler
 		];
 	}
 
@@ -1790,13 +1842,13 @@ var app = (function () {
 				span2 = element("span");
 				span2.textContent = ".";
 				attr_dev(span0, "class", "svelte-1wsg024");
-				add_location(span0, file$3, 24, 15, 679);
+				add_location(span0, file$3, 24, 15, 680);
 				attr_dev(span1, "class", "svelte-1wsg024");
-				add_location(span1, file$3, 24, 29, 693);
+				add_location(span1, file$3, 24, 29, 694);
 				attr_dev(span2, "class", "svelte-1wsg024");
-				add_location(span2, file$3, 24, 43, 707);
+				add_location(span2, file$3, 24, 43, 708);
 				attr_dev(span3, "class", "thinking-dots svelte-1wsg024");
-				add_location(span3, file$3, 23, 8, 635);
+				add_location(span3, file$3, 23, 8, 636);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, span3, anchor);
@@ -1840,13 +1892,13 @@ var app = (function () {
 				span = element("span");
 				span.textContent = "AI正在使用Alpha-Beta剪枝搜索最优着法...";
 				attr_dev(div0, "class", "thinking-progress svelte-1wsg024");
-				add_location(div0, file$3, 46, 8, 1159);
+				add_location(div0, file$3, 46, 8, 1162);
 				attr_dev(div1, "class", "thinking-bar svelte-1wsg024");
-				add_location(div1, file$3, 45, 6, 1124);
+				add_location(div1, file$3, 45, 6, 1127);
 				attr_dev(span, "class", "thinking-text svelte-1wsg024");
-				add_location(span, file$3, 48, 6, 1216);
+				add_location(span, file$3, 48, 6, 1219);
 				attr_dev(div2, "class", "thinking-animation svelte-1wsg024");
-				add_location(div2, file$3, 44, 4, 1085);
+				add_location(div2, file$3, 44, 4, 1088);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, div2, anchor);
@@ -1882,7 +1934,6 @@ var app = (function () {
 		let button0_disabled_value;
 		let t2;
 		let button1;
-		let t3;
 		let t4;
 		let button2;
 		let t5;
@@ -1891,6 +1942,8 @@ var app = (function () {
 		let t7;
 		let button2_class_value;
 		let t8;
+		let mounted;
+		let dispose;
 
 		function select_block_type(ctx, dirty) {
 			if (/*aiThinking*/ ctx[0]) return create_if_block_1$3;
@@ -1912,7 +1965,7 @@ var app = (function () {
 				if_block0.c();
 				t2 = space();
 				button1 = element("button");
-				t3 = text("🔄 重置游戏");
+				button1.textContent = "🔄 重置游戏";
 				t4 = space();
 				button2 = element("button");
 				t5 = text("🌳 ");
@@ -1923,15 +1976,12 @@ var app = (function () {
 				attr_dev(h3, "class", "svelte-1wsg024");
 				add_location(h3, file$3, 14, 2, 417);
 				attr_dev(button0, "class", "control-btn primary svelte-1wsg024");
-				attr_dev(button0, "onclick", /*handleAiMove*/ ctx[4]);
 				button0.disabled = button0_disabled_value = /*aiThinking*/ ctx[0] || /*gameOver*/ ctx[1] && /*gameOver*/ ctx[1].over;
 				add_location(button0, file$3, 17, 4, 468);
 				attr_dev(button1, "class", "control-btn svelte-1wsg024");
-				attr_dev(button1, "onclick", /*handleReset*/ ctx[3]);
-				add_location(button1, file$3, 31, 4, 799);
+				add_location(button1, file$3, 31, 4, 800);
 				attr_dev(button2, "class", button2_class_value = "control-btn " + (/*showSearchTree*/ ctx[2] ? 'active' : '') + " svelte-1wsg024");
-				attr_dev(button2, "onclick", /*handleToggleSearchTree*/ ctx[5]);
-				add_location(button2, file$3, 35, 4, 883);
+				add_location(button2, file$3, 35, 4, 885);
 				attr_dev(div0, "class", "control-buttons svelte-1wsg024");
 				add_location(div0, file$3, 16, 2, 434);
 				attr_dev(div1, "class", "controls-section svelte-1wsg024");
@@ -1949,7 +1999,6 @@ var app = (function () {
 				if_block0.m(button0, null);
 				append_dev(div0, t2);
 				append_dev(div0, button1);
-				append_dev(button1, t3);
 				append_dev(div0, t4);
 				append_dev(div0, button2);
 				append_dev(button2, t5);
@@ -1957,6 +2006,16 @@ var app = (function () {
 				append_dev(button2, t7);
 				append_dev(div1, t8);
 				if (if_block1) if_block1.m(div1, null);
+
+				if (!mounted) {
+					dispose = [
+						listen_dev(button0, "click", /*handleAiMove*/ ctx[4], false, false, false, false),
+						listen_dev(button1, "click", /*handleReset*/ ctx[3], false, false, false, false),
+						listen_dev(button2, "click", /*handleToggleSearchTree*/ ctx[5], false, false, false, false)
+					];
+
+					mounted = true;
+				}
 			},
 			p: function update(ctx, [dirty]) {
 				if (current_block_type !== (current_block_type = select_block_type(ctx))) {
@@ -1999,6 +2058,8 @@ var app = (function () {
 
 				if_block0.d();
 				if (if_block1) if_block1.d();
+				mounted = false;
+				run_all(dispose);
 			}
 		};
 
@@ -3056,9 +3117,11 @@ var app = (function () {
 		let t1;
 		let span1;
 		let t3;
+		let mounted;
+		let dispose;
 
-		function func() {
-			return /*func*/ ctx[5](/*ec*/ ctx[14]);
+		function click_handler() {
+			return /*click_handler*/ ctx[5](/*ec*/ ctx[14]);
 		}
 
 		const block = {
@@ -3071,12 +3134,11 @@ var app = (function () {
 				span1.textContent = `${/*ec*/ ctx[14].name}`;
 				t3 = space();
 				attr_dev(span0, "class", "edge-icon svelte-nh9mc7");
-				add_location(span0, file$1, 69, 8, 1486);
+				add_location(span0, file$1, 69, 8, 1487);
 				attr_dev(span1, "class", "edge-name svelte-nh9mc7");
-				add_location(span1, file$1, 70, 8, 1535);
+				add_location(span1, file$1, 70, 8, 1536);
 				attr_dev(button, "class", "edge-case-btn svelte-nh9mc7");
 				set_style(button, "--accent", /*ec*/ ctx[14].color);
-				attr_dev(button, "onclick", func);
 				attr_dev(button, "title", /*ec*/ ctx[14].description);
 				add_location(button, file$1, 63, 6, 1317);
 			},
@@ -3086,6 +3148,11 @@ var app = (function () {
 				append_dev(button, t1);
 				append_dev(button, span1);
 				append_dev(button, t3);
+
+				if (!mounted) {
+					dispose = listen_dev(button, "click", click_handler, false, false, false, false);
+					mounted = true;
+				}
 			},
 			p: function update(new_ctx, dirty) {
 				ctx = new_ctx;
@@ -3094,6 +3161,9 @@ var app = (function () {
 				if (detaching) {
 					detach_dev(button);
 				}
+
+				mounted = false;
+				dispose();
 			}
 		};
 
@@ -3112,8 +3182,9 @@ var app = (function () {
 	function create_if_block$1(ctx) {
 		let div;
 		let button;
-		let t0;
 		let t1;
+		let mounted;
+		let dispose;
 
 		function select_block_type(ctx, dirty) {
 			if (/*result*/ ctx[0].caseType === 'threefold') return create_if_block_1$1;
@@ -3129,22 +3200,25 @@ var app = (function () {
 			c: function create() {
 				div = element("div");
 				button = element("button");
-				t0 = text("✕");
+				button.textContent = "✕";
 				t1 = space();
 				if (if_block) if_block.c();
 				attr_dev(button, "class", "close-btn svelte-nh9mc7");
-				attr_dev(button, "onclick", /*handleClose*/ ctx[4]);
-				add_location(button, file$1, 77, 6, 1722);
+				add_location(button, file$1, 77, 6, 1723);
 				attr_dev(div, "class", "edge-result-panel svelte-nh9mc7");
 				set_style(div, "--accent", getResultColor(/*result*/ ctx[0]));
-				add_location(div, file$1, 76, 4, 1641);
+				add_location(div, file$1, 76, 4, 1642);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, div, anchor);
 				append_dev(div, button);
-				append_dev(button, t0);
 				append_dev(div, t1);
 				if (if_block) if_block.m(div, null);
+
+				if (!mounted) {
+					dispose = listen_dev(button, "click", /*handleClose*/ ctx[4], false, false, false, false);
+					mounted = true;
+				}
 			},
 			p: function update(ctx, dirty) {
 				if (current_block_type === (current_block_type = select_block_type(ctx)) && if_block) {
@@ -3171,6 +3245,9 @@ var app = (function () {
 				if (if_block) {
 					if_block.d();
 				}
+
+				mounted = false;
+				dispose();
 			}
 		};
 
@@ -3235,21 +3312,21 @@ var app = (function () {
 				t10 = text(t10_value);
 				t11 = text("。\n            当搜索深度不足以看清长远后果时，AI可能为获得短期物质优势而放弃战略位置。");
 				attr_dev(h4, "class", "svelte-nh9mc7");
-				add_location(h4, file$1, 158, 10, 4674);
+				add_location(h4, file$1, 158, 10, 4676);
 				attr_dev(h50, "class", "svelte-nh9mc7");
-				add_location(h50, file$1, 162, 14, 4787);
+				add_location(h50, file$1, 162, 14, 4789);
 				attr_dev(div0, "class", "depth-col svelte-nh9mc7");
-				add_location(div0, file$1, 161, 12, 4749);
+				add_location(div0, file$1, 161, 12, 4751);
 				attr_dev(h51, "class", "svelte-nh9mc7");
-				add_location(h51, file$1, 173, 14, 5258);
+				add_location(h51, file$1, 173, 14, 5260);
 				attr_dev(div1, "class", "depth-col svelte-nh9mc7");
-				add_location(div1, file$1, 172, 12, 5220);
+				add_location(div1, file$1, 172, 12, 5222);
 				attr_dev(div2, "class", "depth-comparison svelte-nh9mc7");
-				add_location(div2, file$1, 160, 10, 4706);
+				add_location(div2, file$1, 160, 10, 4708);
 				attr_dev(div3, "class", "note svelte-nh9mc7");
-				add_location(div3, file$1, 191, 10, 5851);
+				add_location(div3, file$1, 191, 10, 5853);
 				attr_dev(div4, "class", "result-content svelte-nh9mc7");
-				add_location(div4, file$1, 157, 8, 4635);
+				add_location(div4, file$1, 157, 8, 4637);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, div4, anchor);
@@ -3377,19 +3454,19 @@ var app = (function () {
 				t8 = text(t8_value);
 				t9 = text("。\n            当两个不同局面产生相同哈希时，置换表会返回错误的评估分数。");
 				attr_dev(h4, "class", "svelte-nh9mc7");
-				add_location(h4, file$1, 128, 10, 3557);
+				add_location(h4, file$1, 128, 10, 3559);
 				attr_dev(span0, "class", "hash-label svelte-nh9mc7");
-				add_location(span0, file$1, 131, 14, 3669);
+				add_location(span0, file$1, 131, 14, 3671);
 				attr_dev(span1, "class", "hash-value svelte-nh9mc7");
-				add_location(span1, file$1, 132, 14, 3721);
+				add_location(span1, file$1, 132, 14, 3723);
 				attr_dev(div0, "class", "hash-row svelte-nh9mc7");
-				add_location(div0, file$1, 130, 12, 3632);
+				add_location(div0, file$1, 130, 12, 3634);
 				attr_dev(div1, "class", "hash-display svelte-nh9mc7");
-				add_location(div1, file$1, 129, 10, 3593);
+				add_location(div1, file$1, 129, 10, 3595);
 				attr_dev(div2, "class", "note svelte-nh9mc7");
-				add_location(div2, file$1, 151, 10, 4435);
+				add_location(div2, file$1, 151, 10, 4437);
 				attr_dev(div3, "class", "result-content svelte-nh9mc7");
-				add_location(div3, file$1, 127, 8, 3518);
+				add_location(div3, file$1, 127, 8, 3520);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, div3, anchor);
@@ -3485,17 +3562,17 @@ var app = (function () {
 				t6 = text(t6_value);
 				t7 = text("\n            由于双方棋子的移动模式不对称，传统的长将判定可能产生误判。");
 				attr_dev(h4, "class", "svelte-nh9mc7");
-				add_location(h4, file$1, 105, 10, 2768);
+				add_location(h4, file$1, 105, 10, 2770);
 
 				attr_dev(div0, "class", div0_class_value = "result-status " + (/*result*/ ctx[0].perpetualDetected
 				? 'detected'
 				: 'not-detected') + " svelte-nh9mc7");
 
-				add_location(div0, file$1, 106, 10, 2797);
+				add_location(div0, file$1, 106, 10, 2799);
 				attr_dev(div1, "class", "note svelte-nh9mc7");
-				add_location(div1, file$1, 121, 10, 3327);
+				add_location(div1, file$1, 121, 10, 3329);
 				attr_dev(div2, "class", "result-content svelte-nh9mc7");
-				add_location(div2, file$1, 104, 8, 2729);
+				add_location(div2, file$1, 104, 8, 2731);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, div2, anchor);
@@ -3589,17 +3666,17 @@ var app = (function () {
 				div1 = element("div");
 				div1.textContent = "💡 当同一局面出现3次时，规则引擎应判为和棋。\n            但在非对称棋类中，由于棋子能力差异，重复局面可能带来不同的实际价值。";
 				attr_dev(h4, "class", "svelte-nh9mc7");
-				add_location(h4, file$1, 81, 10, 1873);
+				add_location(h4, file$1, 81, 10, 1875);
 
 				attr_dev(div0, "class", div0_class_value = "result-status " + (/*result*/ ctx[0].threefoldDetected
 				? 'detected'
 				: 'not-detected') + " svelte-nh9mc7");
 
-				add_location(div0, file$1, 82, 10, 1904);
+				add_location(div0, file$1, 82, 10, 1906);
 				attr_dev(div1, "class", "note svelte-nh9mc7");
-				add_location(div1, file$1, 98, 10, 2531);
+				add_location(div1, file$1, 98, 10, 2533);
 				attr_dev(div2, "class", "result-content svelte-nh9mc7");
-				add_location(div2, file$1, 80, 8, 1834);
+				add_location(div2, file$1, 80, 8, 1836);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, div2, anchor);
@@ -3687,15 +3764,15 @@ var app = (function () {
 				div1 = element("div");
 				t6 = text("分数: ");
 				t7 = text(t7_value);
-				add_location(div0, file$1, 165, 18, 4904);
+				add_location(div0, file$1, 165, 18, 4906);
 
 				attr_dev(div1, "class", div1_class_value = "score " + (/*result*/ ctx[0].shallowScore > 0
 				? 'positive'
 				: 'negative') + " svelte-nh9mc7");
 
-				add_location(div1, file$1, 166, 18, 4991);
+				add_location(div1, file$1, 166, 18, 4993);
 				attr_dev(div2, "class", "move-info svelte-nh9mc7");
-				add_location(div2, file$1, 164, 16, 4862);
+				add_location(div2, file$1, 164, 16, 4864);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, div2, anchor);
@@ -3770,15 +3847,15 @@ var app = (function () {
 				div1 = element("div");
 				t6 = text("分数: ");
 				t7 = text(t7_value);
-				add_location(div0, file$1, 176, 18, 5372);
+				add_location(div0, file$1, 176, 18, 5374);
 
 				attr_dev(div1, "class", div1_class_value = "score " + (/*result*/ ctx[0].deepScore > 0
 				? 'positive'
 				: 'negative') + " svelte-nh9mc7");
 
-				add_location(div1, file$1, 177, 18, 5453);
+				add_location(div1, file$1, 177, 18, 5455);
 				attr_dev(div2, "class", "move-info svelte-nh9mc7");
-				add_location(div2, file$1, 175, 16, 5330);
+				add_location(div2, file$1, 175, 16, 5332);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, div2, anchor);
@@ -3831,7 +3908,7 @@ var app = (function () {
 				div = element("div");
 				div.textContent = "⚠️ 深浅层选择不一致! 浅层AI可能做出短视决定";
 				attr_dev(div, "class", "disagreement-warning svelte-nh9mc7");
-				add_location(div, file$1, 186, 12, 5730);
+				add_location(div, file$1, 186, 12, 5732);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, div, anchor);
@@ -3892,17 +3969,17 @@ var app = (function () {
 				if (if_block) if_block.c();
 				if_block_anchor = empty();
 				attr_dev(span0, "class", "hash-label svelte-nh9mc7");
-				add_location(span0, file$1, 136, 16, 3890);
+				add_location(span0, file$1, 136, 16, 3892);
 				attr_dev(span1, "class", "hash-value svelte-nh9mc7");
-				add_location(span1, file$1, 137, 16, 3944);
+				add_location(span1, file$1, 137, 16, 3946);
 				attr_dev(div0, "class", "hash-row svelte-nh9mc7");
-				add_location(div0, file$1, 135, 14, 3851);
+				add_location(div0, file$1, 135, 14, 3853);
 				attr_dev(span2, "class", "hash-label svelte-nh9mc7");
-				add_location(span2, file$1, 140, 16, 4071);
+				add_location(span2, file$1, 140, 16, 4073);
 				attr_dev(span3, "class", "hash-value svelte-nh9mc7");
-				add_location(span3, file$1, 141, 16, 4125);
+				add_location(span3, file$1, 141, 16, 4127);
 				attr_dev(div1, "class", "hash-row svelte-nh9mc7");
-				add_location(div1, file$1, 139, 14, 4032);
+				add_location(div1, file$1, 139, 14, 4034);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, div0, anchor);
@@ -3968,7 +4045,7 @@ var app = (function () {
 				div = element("div");
 				div.textContent = "⚠️ 分数不一致! 可能存在哈希碰撞";
 				attr_dev(div, "class", "collision-warning svelte-nh9mc7");
-				add_location(div, file$1, 144, 16, 4277);
+				add_location(div, file$1, 144, 16, 4279);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, div, anchor);
@@ -4015,9 +4092,9 @@ var app = (function () {
 				}
 
 				attr_dev(h5, "class", "svelte-nh9mc7");
-				add_location(h5, file$1, 112, 14, 3059);
+				add_location(h5, file$1, 112, 14, 3061);
 				attr_dev(div, "class", "check-sequence svelte-nh9mc7");
-				add_location(div, file$1, 111, 12, 3016);
+				add_location(div, file$1, 111, 12, 3018);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, div, anchor);
@@ -4094,7 +4171,7 @@ var app = (function () {
 				t3 = text(t3_value);
 				t4 = space();
 				attr_dev(div, "class", "check-row svelte-nh9mc7");
-				add_location(div, file$1, 114, 16, 3141);
+				add_location(div, file$1, 114, 16, 3143);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, div, anchor);
@@ -4150,9 +4227,9 @@ var app = (function () {
 				}
 
 				attr_dev(h5, "class", "svelte-nh9mc7");
-				add_location(h5, file$1, 88, 14, 2169);
+				add_location(h5, file$1, 88, 14, 2171);
 				attr_dev(div, "class", "position-stats svelte-nh9mc7");
-				add_location(div, file$1, 87, 12, 2126);
+				add_location(div, file$1, 87, 12, 2128);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, div, anchor);
@@ -4235,11 +4312,11 @@ var app = (function () {
 				t4 = text("次");
 				t5 = space();
 				attr_dev(span0, "class", "pos-hash svelte-nh9mc7");
-				add_location(span0, file$1, 91, 18, 2330);
+				add_location(span0, file$1, 91, 18, 2332);
 				attr_dev(span1, "class", "pos-count svelte-nh9mc7");
-				add_location(span1, file$1, 92, 18, 2400);
+				add_location(span1, file$1, 92, 18, 2402);
 				attr_dev(div, "class", "pos-row svelte-nh9mc7");
-				add_location(div, file$1, 90, 16, 2290);
+				add_location(div, file$1, 90, 16, 2292);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, div, anchor);
@@ -4453,7 +4530,7 @@ var app = (function () {
 			if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<EdgeCases> was created with unknown prop '${key}'`);
 		});
 
-		const func = ec => handleTrigger(ec.type);
+		const click_handler = ec => handleTrigger(ec.type);
 
 		$$self.$$set = $$props => {
 			if ('result' in $$props) $$invalidate(0, result = $$props.result);
@@ -4480,7 +4557,7 @@ var app = (function () {
 			$$self.$inject_state($$props.$$inject);
 		}
 
-		return [result, show, EDGE_CASES, handleTrigger, handleClose, func];
+		return [result, show, EDGE_CASES, handleTrigger, handleClose, click_handler];
 	}
 
 	class EdgeCases extends SvelteComponentDev {
@@ -4520,23 +4597,23 @@ var app = (function () {
 
 	function get_each_context(ctx, list, i) {
 		const child_ctx = ctx.slice();
-		child_ctx[42] = list[i];
+		child_ctx[43] = list[i];
 		return child_ctx;
 	}
 
 	function get_each_context_1(ctx, list, i) {
 		const child_ctx = ctx.slice();
-		child_ctx[42] = list[i];
+		child_ctx[43] = list[i];
 		return child_ctx;
 	}
 
 	function get_each_context_2(ctx, list, i) {
 		const child_ctx = ctx.slice();
-		child_ctx[47] = list[i];
+		child_ctx[48] = list[i];
 		return child_ctx;
 	}
 
-	// (295:6) {#if inCheck}
+	// (306:6) {#if inCheck}
 	function create_if_block_5(ctx) {
 		let span;
 
@@ -4545,7 +4622,7 @@ var app = (function () {
 				span = element("span");
 				span.textContent = "⚠️ 将军!";
 				attr_dev(span, "class", "check-warning svelte-144k6ku");
-				add_location(span, file, 295, 8, 8370);
+				add_location(span, file, 306, 8, 8691);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, span, anchor);
@@ -4561,24 +4638,25 @@ var app = (function () {
 			block,
 			id: create_if_block_5.name,
 			type: "if",
-			source: "(295:6) {#if inCheck}",
+			source: "(306:6) {#if inCheck}",
 			ctx
 		});
 
 		return block;
 	}
 
-	// (306:10) {#each presets as preset}
+	// (317:10) {#each presets as preset}
 	function create_each_block_2(ctx) {
 		let button;
-		let t0_value = /*preset*/ ctx[47].name + "";
+		let t0_value = /*preset*/ ctx[48].name + "";
 		let t0;
 		let t1;
 		let button_class_value;
-		let button_onclick_value;
+		let mounted;
+		let dispose;
 
-		function func() {
-			return /*func*/ ctx[28](/*preset*/ ctx[47]);
+		function click_handler() {
+			return /*click_handler*/ ctx[28](/*preset*/ ctx[48]);
 		}
 
 		const block = {
@@ -4587,36 +4665,39 @@ var app = (function () {
 				t0 = text(t0_value);
 				t1 = space();
 
-				attr_dev(button, "class", button_class_value = "preset-btn " + (/*activePreset*/ ctx[21] === /*preset*/ ctx[47].name
+				attr_dev(button, "class", button_class_value = "preset-btn " + (/*activePreset*/ ctx[21] === /*preset*/ ctx[48].name
 				? 'active'
 				: '') + " svelte-144k6ku");
 
-				attr_dev(button, "onclick", button_onclick_value = func);
-				add_location(button, file, 306, 12, 8649);
+				add_location(button, file, 317, 12, 8970);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, button, anchor);
 				append_dev(button, t0);
 				append_dev(button, t1);
+
+				if (!mounted) {
+					dispose = listen_dev(button, "click", click_handler, false, false, false, false);
+					mounted = true;
+				}
 			},
 			p: function update(new_ctx, dirty) {
 				ctx = new_ctx;
-				if (dirty[0] & /*presets*/ 1048576 && t0_value !== (t0_value = /*preset*/ ctx[47].name + "")) set_data_dev(t0, t0_value);
+				if (dirty[0] & /*presets*/ 1048576 && t0_value !== (t0_value = /*preset*/ ctx[48].name + "")) set_data_dev(t0, t0_value);
 
-				if (dirty[0] & /*activePreset, presets*/ 3145728 && button_class_value !== (button_class_value = "preset-btn " + (/*activePreset*/ ctx[21] === /*preset*/ ctx[47].name
+				if (dirty[0] & /*activePreset, presets*/ 3145728 && button_class_value !== (button_class_value = "preset-btn " + (/*activePreset*/ ctx[21] === /*preset*/ ctx[48].name
 				? 'active'
 				: '') + " svelte-144k6ku")) {
 					attr_dev(button, "class", button_class_value);
-				}
-
-				if (dirty[0] & /*presets*/ 1048576 && button_onclick_value !== (button_onclick_value = func)) {
-					attr_dev(button, "onclick", button_onclick_value);
 				}
 			},
 			d: function destroy(detaching) {
 				if (detaching) {
 					detach_dev(button);
 				}
+
+				mounted = false;
+				dispose();
 			}
 		};
 
@@ -4624,14 +4705,14 @@ var app = (function () {
 			block,
 			id: create_each_block_2.name,
 			type: "each",
-			source: "(306:10) {#each presets as preset}",
+			source: "(317:10) {#each presets as preset}",
 			ctx
 		});
 
 		return block;
 	}
 
-	// (324:6) {#if showSearchTree && searchTreeData}
+	// (335:6) {#if showSearchTree && searchTreeData}
 	function create_if_block_4(ctx) {
 		let searchtree;
 		let current;
@@ -4672,19 +4753,20 @@ var app = (function () {
 			block,
 			id: create_if_block_4.name,
 			type: "if",
-			source: "(324:6) {#if showSearchTree && searchTreeData}",
+			source: "(335:6) {#if showSearchTree && searchTreeData}",
 			ctx
 		});
 
 		return block;
 	}
 
-	// (342:6) {#if gameOver && gameOver.over}
+	// (353:6) {#if gameOver && gameOver.over}
 	function create_if_block_1(ctx) {
 		let div;
 		let t0;
 		let button;
-		let t1;
+		let mounted;
+		let dispose;
 
 		function select_block_type(ctx, dirty) {
 			if (/*gameOver*/ ctx[4].result === 'checkmate') return create_if_block_2;
@@ -4700,19 +4782,22 @@ var app = (function () {
 				if (if_block) if_block.c();
 				t0 = space();
 				button = element("button");
-				t1 = text("再来一局");
+				button.textContent = "再来一局";
 				attr_dev(button, "class", "reset-btn svelte-144k6ku");
-				attr_dev(button, "onclick", /*resetGame*/ ctx[26]);
-				add_location(button, file, 348, 10, 9957);
+				add_location(button, file, 359, 10, 10279);
 				attr_dev(div, "class", "game-over-banner svelte-144k6ku");
-				add_location(div, file, 342, 8, 9690);
+				add_location(div, file, 353, 8, 10012);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, div, anchor);
 				if (if_block) if_block.m(div, null);
 				append_dev(div, t0);
 				append_dev(div, button);
-				append_dev(button, t1);
+
+				if (!mounted) {
+					dispose = listen_dev(button, "click", /*resetGame*/ ctx[26], false, false, false, false);
+					mounted = true;
+				}
 			},
 			p: function update(ctx, dirty) {
 				if (current_block_type === (current_block_type = select_block_type(ctx)) && if_block) {
@@ -4735,6 +4820,9 @@ var app = (function () {
 				if (if_block) {
 					if_block.d();
 				}
+
+				mounted = false;
+				dispose();
 			}
 		};
 
@@ -4742,14 +4830,14 @@ var app = (function () {
 			block,
 			id: create_if_block_1.name,
 			type: "if",
-			source: "(342:6) {#if gameOver && gameOver.over}",
+			source: "(353:6) {#if gameOver && gameOver.over}",
 			ctx
 		});
 
 		return block;
 	}
 
-	// (346:52) 
+	// (357:52) 
 	function create_if_block_3(ctx) {
 		let h2;
 
@@ -4758,7 +4846,7 @@ var app = (function () {
 				h2 = element("h2");
 				h2.textContent = "🤝 逼和! 游戏平局";
 				attr_dev(h2, "class", "svelte-144k6ku");
-				add_location(h2, file, 346, 12, 9910);
+				add_location(h2, file, 357, 12, 10232);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, h2, anchor);
@@ -4775,14 +4863,14 @@ var app = (function () {
 			block,
 			id: create_if_block_3.name,
 			type: "if",
-			source: "(346:52) ",
+			source: "(357:52) ",
 			ctx
 		});
 
 		return block;
 	}
 
-	// (344:10) {#if gameOver.result === 'checkmate'}
+	// (355:10) {#if gameOver.result === 'checkmate'}
 	function create_if_block_2(ctx) {
 		let h2;
 		let t0;
@@ -4797,7 +4885,7 @@ var app = (function () {
 				t1 = text(t1_value);
 				t2 = text(" 获胜!");
 				attr_dev(h2, "class", "svelte-144k6ku");
-				add_location(h2, file, 344, 12, 9781);
+				add_location(h2, file, 355, 12, 10103);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, h2, anchor);
@@ -4819,17 +4907,17 @@ var app = (function () {
 			block,
 			id: create_if_block_2.name,
 			type: "if",
-			source: "(344:10) {#if gameOver.result === 'checkmate'}",
+			source: "(355:10) {#if gameOver.result === 'checkmate'}",
 			ctx
 		});
 
 		return block;
 	}
 
-	// (361:14) {#each capturedPieces.north as p}
+	// (372:14) {#each capturedPieces.north as p}
 	function create_each_block_1(ctx) {
 		let span;
-		let t_value = /*p*/ ctx[42].type + "";
+		let t_value = /*p*/ ctx[43].type + "";
 		let t;
 
 		const block = {
@@ -4837,14 +4925,14 @@ var app = (function () {
 				span = element("span");
 				t = text(t_value);
 				attr_dev(span, "class", "captured-piece south svelte-144k6ku");
-				add_location(span, file, 361, 16, 10349);
+				add_location(span, file, 372, 16, 10672);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, span, anchor);
 				append_dev(span, t);
 			},
 			p: function update(ctx, dirty) {
-				if (dirty[0] & /*capturedPieces*/ 32768 && t_value !== (t_value = /*p*/ ctx[42].type + "")) set_data_dev(t, t_value);
+				if (dirty[0] & /*capturedPieces*/ 32768 && t_value !== (t_value = /*p*/ ctx[43].type + "")) set_data_dev(t, t_value);
 			},
 			d: function destroy(detaching) {
 				if (detaching) {
@@ -4857,17 +4945,17 @@ var app = (function () {
 			block,
 			id: create_each_block_1.name,
 			type: "each",
-			source: "(361:14) {#each capturedPieces.north as p}",
+			source: "(372:14) {#each capturedPieces.north as p}",
 			ctx
 		});
 
 		return block;
 	}
 
-	// (369:14) {#each capturedPieces.south as p}
+	// (380:14) {#each capturedPieces.south as p}
 	function create_each_block(ctx) {
 		let span;
-		let t_value = /*p*/ ctx[42].type + "";
+		let t_value = /*p*/ ctx[43].type + "";
 		let t;
 
 		const block = {
@@ -4875,14 +4963,14 @@ var app = (function () {
 				span = element("span");
 				t = text(t_value);
 				attr_dev(span, "class", "captured-piece north svelte-144k6ku");
-				add_location(span, file, 369, 16, 10627);
+				add_location(span, file, 380, 16, 10950);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, span, anchor);
 				append_dev(span, t);
 			},
 			p: function update(ctx, dirty) {
-				if (dirty[0] & /*capturedPieces*/ 32768 && t_value !== (t_value = /*p*/ ctx[42].type + "")) set_data_dev(t, t_value);
+				if (dirty[0] & /*capturedPieces*/ 32768 && t_value !== (t_value = /*p*/ ctx[43].type + "")) set_data_dev(t, t_value);
 			},
 			d: function destroy(detaching) {
 				if (detaching) {
@@ -4895,14 +4983,14 @@ var app = (function () {
 			block,
 			id: create_each_block.name,
 			type: "each",
-			source: "(369:14) {#each capturedPieces.south as p}",
+			source: "(380:14) {#each capturedPieces.south as p}",
 			ctx
 		});
 
 		return block;
 	}
 
-	// (386:2) {#if aiResult && aiResult.stats}
+	// (397:2) {#if aiResult && aiResult.stats}
 	function create_if_block(ctx) {
 		let div1;
 		let h4;
@@ -4971,17 +5059,17 @@ var app = (function () {
 				t18 = text("评估分: ");
 				t19 = text(t19_value);
 				attr_dev(h4, "class", "svelte-144k6ku");
-				add_location(h4, file, 387, 6, 11053);
-				add_location(span0, file, 389, 8, 11108);
-				add_location(span1, file, 390, 8, 11165);
-				add_location(span2, file, 391, 8, 11218);
-				add_location(span3, file, 392, 8, 11270);
-				add_location(span4, file, 393, 8, 11333);
-				add_location(span5, file, 394, 8, 11384);
+				add_location(h4, file, 398, 6, 11376);
+				add_location(span0, file, 400, 8, 11431);
+				add_location(span1, file, 401, 8, 11488);
+				add_location(span2, file, 402, 8, 11541);
+				add_location(span3, file, 403, 8, 11593);
+				add_location(span4, file, 404, 8, 11656);
+				add_location(span5, file, 405, 8, 11707);
 				attr_dev(div0, "class", "stat-grid svelte-144k6ku");
-				add_location(div0, file, 388, 6, 11076);
+				add_location(div0, file, 399, 6, 11399);
 				attr_dev(div1, "class", "ai-stats-panel svelte-144k6ku");
-				add_location(div1, file, 386, 4, 11018);
+				add_location(div1, file, 397, 4, 11341);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, div1, anchor);
@@ -5032,7 +5120,7 @@ var app = (function () {
 			block,
 			id: create_if_block.name,
 			type: "if",
-			source: "(386:2) {#if aiResult && aiResult.stats}",
+			source: "(397:2) {#if aiResult && aiResult.stats}",
 			ctx
 		});
 
@@ -5235,51 +5323,51 @@ var app = (function () {
 				if (if_block3) if_block3.c();
 				document.title = "非对称棋类 AI对弈系统";
 				attr_dev(h1, "class", "svelte-144k6ku");
-				add_location(h1, file, 289, 4, 8074);
+				add_location(h1, file, 300, 4, 8395);
 				attr_dev(span0, "class", span0_class_value = "player-badge " + /*currentPlayer*/ ctx[0] + " svelte-144k6ku");
-				add_location(span0, file, 291, 6, 8136);
+				add_location(span0, file, 302, 6, 8457);
 				attr_dev(span1, "class", "move-count svelte-144k6ku");
-				add_location(span1, file, 292, 6, 8212);
+				add_location(span1, file, 303, 6, 8533);
 				attr_dev(span2, "class", "evaluation svelte-144k6ku");
-				add_location(span2, file, 293, 6, 8266);
+				add_location(span2, file, 304, 6, 8587);
 				attr_dev(div0, "class", "status-bar svelte-144k6ku");
-				add_location(div0, file, 290, 4, 8105);
+				add_location(div0, file, 301, 4, 8426);
 				attr_dev(header, "class", "header svelte-144k6ku");
-				add_location(header, file, 288, 2, 8046);
+				add_location(header, file, 299, 2, 8367);
 				attr_dev(h30, "class", "svelte-144k6ku");
-				add_location(h30, file, 303, 8, 8550);
+				add_location(h30, file, 314, 8, 8871);
 				attr_dev(div1, "class", "preset-buttons svelte-144k6ku");
-				add_location(div1, file, 304, 8, 8572);
+				add_location(div1, file, 315, 8, 8893);
 				attr_dev(div2, "class", "preset-section svelte-144k6ku");
-				add_location(div2, file, 302, 6, 8513);
+				add_location(div2, file, 313, 6, 8834);
 				attr_dev(div3, "class", "left-panel svelte-144k6ku");
-				add_location(div3, file, 301, 4, 8482);
+				add_location(div3, file, 312, 4, 8803);
 				attr_dev(div4, "class", "center-panel svelte-144k6ku");
-				add_location(div4, file, 328, 4, 9252);
+				add_location(div4, file, 339, 4, 9574);
 				attr_dev(h31, "class", "svelte-144k6ku");
-				add_location(h31, file, 355, 8, 10131);
+				add_location(h31, file, 366, 8, 10454);
 				attr_dev(h40, "class", "svelte-144k6ku");
-				add_location(h40, file, 358, 12, 10229);
+				add_location(h40, file, 369, 12, 10552);
 				attr_dev(div5, "class", "captured-pieces svelte-144k6ku");
-				add_location(div5, file, 359, 12, 10255);
+				add_location(div5, file, 370, 12, 10578);
 				attr_dev(div6, "class", "captured-col svelte-144k6ku");
-				add_location(div6, file, 357, 10, 10190);
+				add_location(div6, file, 368, 10, 10513);
 				attr_dev(h41, "class", "svelte-144k6ku");
-				add_location(h41, file, 366, 12, 10507);
+				add_location(h41, file, 377, 12, 10830);
 				attr_dev(div7, "class", "captured-pieces svelte-144k6ku");
-				add_location(div7, file, 367, 12, 10533);
+				add_location(div7, file, 378, 12, 10856);
 				attr_dev(div8, "class", "captured-col svelte-144k6ku");
-				add_location(div8, file, 365, 10, 10468);
+				add_location(div8, file, 376, 10, 10791);
 				attr_dev(div9, "class", "captured-row svelte-144k6ku");
-				add_location(div9, file, 356, 8, 10153);
+				add_location(div9, file, 367, 8, 10476);
 				attr_dev(div10, "class", "captured-section svelte-144k6ku");
-				add_location(div10, file, 354, 6, 10092);
+				add_location(div10, file, 365, 6, 10415);
 				attr_dev(div11, "class", "right-panel svelte-144k6ku");
-				add_location(div11, file, 353, 4, 10060);
+				add_location(div11, file, 364, 4, 10383);
 				attr_dev(main, "class", "main-content svelte-144k6ku");
-				add_location(main, file, 300, 2, 8450);
+				add_location(main, file, 311, 2, 8771);
 				attr_dev(div12, "class", "app-container svelte-144k6ku");
-				add_location(div12, file, 287, 0, 8016);
+				add_location(div12, file, 298, 0, 8337);
 			},
 			l: function claim(nodes) {
 				throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -5596,6 +5684,7 @@ var app = (function () {
 		let invalidMoveError = null;
 		let moveProgress = [];
 		let particles = [];
+		let animationInterval = null;
 		let flippingPiece = null;
 		let gameId = null;
 		let presets = [];
@@ -5619,9 +5708,13 @@ var app = (function () {
 		}
 
 		async function loadPreset(presetId) {
+			console.log('Loading preset:', presetId);
+
 			try {
 				const res = await fetch(`${API_BASE}/preset/${presetId}`);
+				console.log('Preset response status:', res.status);
 				const preset = await res.json();
+				console.log('Preset data:', preset);
 				$$invalidate(1, board = preset.board);
 				$$invalidate(0, currentPlayer = preset.currentPlayer);
 				$$invalidate(2, moveCount = preset.moveCount);
@@ -5634,8 +5727,9 @@ var app = (function () {
 				$$invalidate(8, lastMove = null);
 				$$invalidate(17, moveProgress = []);
 				await tick();
+				console.log('Preset loaded successfully');
 			} catch(e) {
-				console.error(e);
+				console.error('Error loading preset:', e);
 			}
 		}
 
@@ -5884,7 +5978,7 @@ var app = (function () {
 			await fetchGameState();
 			await loadPresets();
 
-			const interval = setInterval(
+			animationInterval = setInterval(
 				() => {
 					$$invalidate(18, particles = particles.map(p => ({
 						...p,
@@ -5896,8 +5990,12 @@ var app = (function () {
 				},
 				30
 			);
+		});
 
-			onDestroy(() => clearInterval(interval));
+		onDestroy(() => {
+			if (animationInterval) {
+				clearInterval(animationInterval);
+			}
 		});
 
 		const writable_props = [];
@@ -5906,7 +6004,7 @@ var app = (function () {
 			if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console_1.warn(`<App> was created with unknown prop '${key}'`);
 		});
 
-		const func = preset => loadPreset(preset.id);
+		const click_handler = preset => loadPreset(preset.id);
 		const toggleSearchTree_handler = () => $$invalidate(12, showSearchTree = !showSearchTree);
 		const squareClick_handler = e => handleSquareClick(e.detail.x, e.detail.y);
 		const trigger_handler = e => handleEdgeCase(e.detail.type);
@@ -5942,6 +6040,7 @@ var app = (function () {
 			invalidMoveError,
 			moveProgress,
 			particles,
+			animationInterval,
 			flippingPiece,
 			gameId,
 			presets,
@@ -5982,6 +6081,7 @@ var app = (function () {
 			if ('invalidMoveError' in $$props) $$invalidate(16, invalidMoveError = $$props.invalidMoveError);
 			if ('moveProgress' in $$props) $$invalidate(17, moveProgress = $$props.moveProgress);
 			if ('particles' in $$props) $$invalidate(18, particles = $$props.particles);
+			if ('animationInterval' in $$props) animationInterval = $$props.animationInterval;
 			if ('flippingPiece' in $$props) $$invalidate(19, flippingPiece = $$props.flippingPiece);
 			if ('gameId' in $$props) gameId = $$props.gameId;
 			if ('presets' in $$props) $$invalidate(20, presets = $$props.presets);
@@ -6028,7 +6128,7 @@ var app = (function () {
 			aiMove,
 			resetGame,
 			handleEdgeCase,
-			func,
+			click_handler,
 			toggleSearchTree_handler,
 			squareClick_handler,
 			trigger_handler,

@@ -17,7 +17,7 @@
   <div class="control-buttons">
     <button
       class="control-btn primary"
-      onclick={handleAiMove}
+      on:click={handleAiMove}
       disabled={aiThinking || (gameOver && gameOver.over)}
     >
       {#if aiThinking}
@@ -29,13 +29,13 @@
       {/if}
     </button>
 
-    <button class="control-btn" onclick={handleReset}>
+    <button class="control-btn" on:click={handleReset}>
       🔄 重置游戏
     </button>
 
     <button
       class="control-btn {showSearchTree ? 'active' : ''}"
-      onclick={handleToggleSearchTree}
+      on:click={handleToggleSearchTree}
     >
       🌳 {showSearchTree ? '隐藏' : '显示'}搜索树
     </button>

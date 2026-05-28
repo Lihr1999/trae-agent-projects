@@ -64,7 +64,7 @@
       <button
         class="edge-case-btn"
         style="--accent: {ec.color}"
-        onclick={() => handleTrigger(ec.type)}
+        on:click={() => handleTrigger(ec.type)}
         title={ec.description}
       >
         <span class="edge-icon">{ec.icon}</span>
@@ -75,7 +75,7 @@
 
   {#if show && result}
     <div class="edge-result-panel" style="--accent: {getResultColor(result)}">
-      <button class="close-btn" onclick={handleClose}>✕</button>
+      <button class="close-btn" on:click={handleClose}>✕</button>
 
       {#if result.caseType === 'threefold'}
         <div class="result-content">

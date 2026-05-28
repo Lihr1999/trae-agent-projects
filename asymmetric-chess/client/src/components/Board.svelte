@@ -68,7 +68,7 @@
           class="square {isLight ? 'light' : 'dark'} {selected ? 'selected' : ''}
                  {lastMoveSquare ? 'last-move' : ''} {invalid ? 'invalid' : ''}
                  {showProgress ? 'progress' : ''} {legalTarget ? 'legal-target' : ''}"
-          onclick={() => handleSquareClick(x, y)}
+          on:click={() => handleSquareClick(x, y)}
           style="--delay: {(x * 8 + y) * 20}ms;"
         >
           {#if legalTarget}

@@ -28,6 +28,7 @@
   let invalidMoveError = null;
   let moveProgress = [];
   let particles = [];
+  let animationInterval = null;
   let flippingPiece = null;
   let gameId = null;
   let presets = [];
@@ -49,9 +50,12 @@
   }
 
   async function loadPreset(presetId) {
+    console.log('Loading preset:', presetId);
     try {
       const res = await fetch(`${API_BASE}/preset/${presetId}`);
+      console.log('Preset response status:', res.status);
       const preset = await res.json();
+      console.log('Preset data:', preset);
       board = preset.board;
       currentPlayer = preset.currentPlayer;
       moveCount = preset.moveCount;
@@ -64,7 +68,10 @@
       lastMove = null;
       moveProgress = [];
       await tick();
-    } catch (e) { console.error(e); }
+      console.log('Preset loaded successfully');
+    } catch (e) {
+      console.error('Error loading preset:', e);
+    }
   }
 
   async function loadPresets() {
@@ -263,7 +270,7 @@
     await fetchGameState();
     await loadPresets();
 
-    const interval = setInterval(() => {
+    animationInterval = setInterval(() => {
       particles = particles
         .map(p => ({
           ...p,
@@ -274,8 +281,12 @@
         }))
         .filter(p => p.life > 0);
     }, 30);
+  });
 
-    onDestroy(() => clearInterval(interval));
+  onDestroy(() => {
+    if (animationInterval) {
+      clearInterval(animationInterval);
+    }
   });
 
   $: currentPlayerName = currentPlayer === 'north' ? '北方 (红方)' : '南方 (蓝方)';
@@ -305,7 +316,7 @@
         <div class="preset-buttons">
           {#each presets as preset}
             <button class="preset-btn {activePreset === preset.name ? 'active' : ''}"
-                    onclick={() => loadPreset(preset.id)}>
+                    on:click={() => loadPreset(preset.id)}>
               {preset.name}
             </button>
           {/each}
@@ -346,7 +357,7 @@
           {:else if gameOver.result === 'stalemate'}
             <h2>🤝 逼和! 游戏平局</h2>
           {/if}
-          <button class="reset-btn" onclick={resetGame}>再来一局</button>
+          <button class="reset-btn" on:click={resetGame}>再来一局</button>
         </div>
       {/if}
     </div>
