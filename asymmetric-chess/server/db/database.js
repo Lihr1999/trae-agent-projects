@@ -1,3 +1,155 @@
+const fs = require('fs');
+const path = require('path');
+
+function rowsToObjects(columns, values) {
+  if (!values || values.length === 0) return [];
+  return values.map(row => {
+    const obj = {};
+    columns.forEach((col, i) => {
+      obj[col] = row[i];
+    });
+    return obj;
+  });
+}
+
+function wrapDatabase(db, dbPath) {
+  let saveTimeout = null;
+
+  function scheduleSave() {
+    if (saveTimeout) clearTimeout(saveTimeout);
+    saveTimeout = setTimeout(() => {
+      try {
+        const data = db.export();
+        const buffer = Buffer.from(data);
+        fs.writeFileSync(dbPath, buffer);
+      } catch (e) {
+        console.warn('Failed to persist database to disk:', e.message);
+      }
+      saveTimeout = null;
+    }, 100);
+  }
+
+  function getChanges() {
+    try {
+      if (typeof db.getRowsModified === 'function') {
+        return db.getRowsModified();
+      }
+      return db.changes || 0;
+    } catch (e) {
+      return 0;
+    }
+  }
+
+  function prepare(sql) {
+    const isWrite = /^\s*(INSERT|UPDATE|DELETE|CREATE|ALTER|DROP)/i.test(sql);
+
+    return {
+      run(...params) {
+        try {
+          const stmt = db.prepare(sql);
+          stmt.bind(params);
+          const hasResult = stmt.step();
+          stmt.free();
+
+          if (isWrite) {
+            scheduleSave();
+          }
+
+          return {
+            lastInsertRowid: db.lastInsertRowid,
+            changes: getChanges()
+          };
+        } catch (e) {
+          if (e.message && e.message.includes('UNIQUE constraint') && sql.includes('OR IGNORE')) {
+            return { lastInsertRowid: null, changes: 0 };
+          }
+          console.error('SQL Error in run:', e.message, sql.substring(0, 100), params?.length);
+          throw e;
+        }
+      },
+
+      get(...params) {
+        try {
+          const stmt = db.prepare(sql);
+          stmt.bind(params);
+          if (stmt.step()) {
+            const result = stmt.getAsObject();
+            stmt.free();
+            return result;
+          }
+          stmt.free();
+          return undefined;
+        } catch (e) {
+          console.error('SQL Error in get:', e.message, sql.substring(0, 100));
+          throw e;
+        }
+      },
+
+      all(...params) {
+        try {
+          const stmt = db.prepare(sql);
+          stmt.bind(params);
+          const results = [];
+          while (stmt.step()) {
+            results.push(stmt.getAsObject());
+          }
+          stmt.free();
+          return results;
+        } catch (e) {
+          console.error('SQL Error in all:', e.message, sql.substring(0, 100));
+          throw e;
+        }
+      }
+    };
+  }
+
+  function exec(sql) {
+    try {
+      const isWrite = /^\s*(INSERT|UPDATE|DELETE|CREATE|ALTER|DROP|BEGIN|COMMIT|ROLLBACK)/i.test(sql);
+      const results = db.exec(sql);
+      if (isWrite) {
+        scheduleSave();
+      }
+      return results;
+    } catch (e) {
+      console.error('SQL Error in exec:', e.message, sql.substring(0, 100));
+      throw e;
+    }
+  }
+
+  function transaction(fn) {
+    return function(...args) {
+      db.exec('BEGIN TRANSACTION');
+      try {
+        const result = fn.apply(this, args);
+        db.exec('COMMIT');
+        scheduleSave();
+        return result;
+      } catch (e) {
+        db.exec('ROLLBACK');
+        throw e;
+      }
+    };
+  }
+
+  return {
+    prepare,
+    exec,
+    transaction,
+    _rawDb: db,
+    _saveToDisk: scheduleSave,
+    _forceSave: () => {
+      try {
+        const data = db.export();
+        const buffer = Buffer.from(data);
+        fs.writeFileSync(dbPath, buffer);
+      } catch (e) {
+        console.warn('Force save failed:', e.message);
+      }
+    }
+  };
+}
+
 function initDatabase(db) {
   db.exec(`
     CREATE TABLE IF NOT EXISTS games (
@@ -24,8 +176,7 @@ function initDatabase(db) {
       captured_piece TEXT,
       is_special TEXT,
       state_hash TEXT NOT NULL,
-      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-      FOREIGN KEY (game_id) REFERENCES games(id)
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     );
 
     CREATE TABLE IF NOT EXISTS opening_book (
@@ -56,15 +207,21 @@ function initDatabase(db) {
       details TEXT,
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     );
-
-    CREATE INDEX IF NOT EXISTS idx_move_history_game ON move_history(game_id);
-    CREATE INDEX IF NOT EXISTS idx_opening_book_hash ON opening_book(state_hash);
-    CREATE INDEX IF NOT EXISTS idx_transposition_hash ON transposition_table(state_hash);
-    CREATE INDEX IF NOT EXISTS idx_games_hash ON games(state_hash);
   `);
 
+  try {
+    db.exec(`
+      CREATE INDEX IF NOT EXISTS idx_move_history_game ON move_history(game_id);
+      CREATE INDEX IF NOT EXISTS idx_opening_book_hash ON opening_book(state_hash);
+      CREATE INDEX IF NOT EXISTS idx_transposition_hash ON transposition_table(state_hash);
+      CREATE INDEX IF NOT EXISTS idx_games_hash ON games(state_hash);
+    `);
+  } catch (e) {
+    console.warn('Index creation warning (may already exist):', e.message);
+  }
+
   const count = db.prepare('SELECT COUNT(*) as cnt FROM opening_book').get();
-  if (count.cnt === 0) {
+  if (!count || count.cnt === 0) {
     const insertOpening = db.prepare(
       'INSERT OR IGNORE INTO opening_book (state_hash, move_data, visit_count, depth) VALUES (?, ?, ?, ?)'
     );
@@ -74,12 +231,14 @@ function initDatabase(db) {
       ['init_south_assassin_g5', JSON.stringify({ from: [7, 6], to: [5, 5], piece: 'assassin' }), 7, 1],
       ['init_south_vanguard_e6', JSON.stringify({ from: [7, 4], to: [7, 7], piece: 'vanguard' }), 6, 1]
     ];
-    const insertMany = db.transaction((items) => {
-      for (const item of items) {
+    
+    for (const item of openings) {
+      try {
         insertOpening.run(...item);
+      } catch (e) {
+        console.warn('Opening insert skipped (may exist):', e.message);
       }
-    });
-    insertMany(openings);
+    }
   }
 }
 
@@ -154,6 +313,7 @@ function saveEdgeCase(db, caseData) {
 
 module.exports = {
   initDatabase,
+  wrapDatabase,
   saveGame,
   getGame,
   updateGame,

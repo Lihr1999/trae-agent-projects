@@ -43,6 +43,17 @@
   function handleClose() {
     dispatch('close');
   }
+
+  function getResultColor(result) {
+    if (!result) return '#888';
+    const colorMap = {
+      threefold: '#f39c12',
+      'perpetual-check': '#e74c3c',
+      'zobrist-collision': '#9b59b6',
+      'depth-exhaustion': '#3498db'
+    };
+    return colorMap[result.caseType] || '#888';
+  }
 </script>
 
 <div class="edge-cases-section">
