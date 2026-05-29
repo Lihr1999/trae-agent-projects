@@ -17,16 +17,18 @@ import {
   setSimulationSettings
 } from './utils/api';
 
+const INITIAL_STATE: SimulationState = {
+  bodies: [],
+  joints: [],
+  manifolds: [],
+  particles: [],
+  gravity: { x: 0, y: 500 },
+  iterations: 10,
+  timeStep: 1 / 60
+};
+
 const App: React.FC = () => {
-  const [simulationState, setSimulationState] = useState<SimulationState>({
-    bodies: [],
-    joints: [],
-    manifolds: [],
-    particles: [],
-    gravity: { x: 0, y: 500 },
-    iterations: 10,
-    timeStep: 1 / 60
-  });
+  const [simulationState, setSimulationState] = useState<SimulationState>(INITIAL_STATE);
   const [toolMode, setToolMode] = useState<ToolMode>('select');
   const [isPaused, setIsPaused] = useState(false);
   const [showTrails, setShowTrails] = useState(true);
@@ -35,25 +37,41 @@ const App: React.FC = () => {
   const [selectedBodyId, setSelectedBodyId] = useState<string | null>(null);
   const [jointStart, setJointStart] = useState<{ bodyId: string; position: Vector2 } | null>(null);
   const [presets, setPresets] = useState<Array<{ id: string; name: string }>>([]);
+  const [backendOnline, setBackendOnline] = useState(true);
   const animationRef = useRef<number>();
   const lastTimeRef = useRef<number>(0);
+  const failCountRef = useRef(0);
 
   useEffect(() => {
-    getPresets().then(setPresets);
-    getSimulationState().then(setSimulationState);
+    getPresets().then(data => {
+      if (data.length > 0) setBackendOnline(true);
+      setPresets(data);
+    });
+    getSimulationState().then(state => {
+      setSimulationState(state);
+      setBackendOnline(true);
+      failCountRef.current = 0;
+    });
   }, []);
 
   const simulate = useCallback(async (timestamp: number) => {
-    if (lastTimeRef.current) {
+    if (lastTimeRef.current && !isPaused && backendOnline) {
       const dt = Math.min((timestamp - lastTimeRef.current) / 1000, 0.05);
-      if (!isPaused) {
+      try {
         const state = await stepSimulation(dt);
         setSimulationState(state);
+        failCountRef.current = 0;
+        setBackendOnline(true);
+      } catch {
+        failCountRef.current++;
+        if (failCountRef.current > 5) {
+          setBackendOnline(false);
+        }
       }
     }
     lastTimeRef.current = timestamp;
     animationRef.current = requestAnimationFrame(simulate);
-  }, [isPaused]);
+  }, [isPaused, backendOnline]);
 
   useEffect(() => {
     animationRef.current = requestAnimationFrame(simulate);
@@ -99,6 +117,8 @@ const App: React.FC = () => {
   const handleLoadPreset = async (id: string) => {
     const state = await loadPreset(id);
     setSimulationState(state);
+    setBackendOnline(true);
+    failCountRef.current = 0;
   };
 
   const handleClearScene = async () => {
@@ -109,12 +129,12 @@ const App: React.FC = () => {
 
   const handleSetGravity = async (gravity: Vector2) => {
     setSimulationState(prev => ({ ...prev, gravity }));
-    setGravity(gravity);
+    await setGravity(gravity);
   };
 
   const handleSetIterations = async (iterations: number) => {
     setSimulationState(prev => ({ ...prev, iterations }));
-    setSimulationSettings({ iterations });
+    await setSimulationSettings({ iterations });
   };
 
   const selectedBody = simulationState.bodies.find(b => b.id === selectedBodyId) || null;
@@ -128,6 +148,13 @@ const App: React.FC = () => {
         <p className="text-gray-400 text-center mt-1">
           2D 多体动力学与关节约束迭代求解器
         </p>
+        {!backendOnline && (
+          <div className="mt-2 text-center">
+            <span className="bg-red-900 text-red-300 px-4 py-1 rounded-full text-sm">
+              ⚠️ 后端服务未连接，请确保服务器运行在端口 3001
+            </span>
+          </div>
+        )}
       </header>
 
       <div className="flex gap-4 justify-center">
