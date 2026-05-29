@@ -56,6 +56,10 @@ export class KaleidoscopeRenderer {
     this.renderer.toneMappingExposure = 1.2;
 
     container.appendChild(this.renderer.domElement);
+    this.renderer.domElement.style.position = 'absolute';
+    this.renderer.domElement.style.top = '0';
+    this.renderer.domElement.style.left = '0';
+    this.renderer.domElement.style.zIndex = '0';
 
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     this.controls.enableDamping = true;

@@ -86,7 +86,7 @@ void main() {
   vec3 dispersedColor = vec3(redColor.r, greenColor.g, blueColor.b);
   
   float causticPattern = caustic(kaleidoUV, uTime) * uCausticIntensity;
-  vec3 causticColor = hsv2rgb(vec3(mod(uTime * 0.1 + length(kaleidoUV), 0.7, 0.9)));
+  vec3 causticColor = hsv2rgb(vec3(mod(uTime * 0.1 + length(kaleidoUV), 1.0), 0.7, 0.9));
   
   float interferencePattern = interference(kaleidoUV, 500.0, uTime) * uInterferenceStrength;
   

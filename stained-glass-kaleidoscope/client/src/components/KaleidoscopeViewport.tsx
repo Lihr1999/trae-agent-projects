@@ -62,6 +62,6 @@ export default function KaleidoscopeViewport() {
   }, [isPlaying]);
 
   return (
-    <div ref={containerRef} className="w-full h-full" />
+    <div ref={containerRef} className="w-full h-full" style={{ position: 'relative' }} />
   );
 }

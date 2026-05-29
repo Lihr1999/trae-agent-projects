@@ -48,7 +48,7 @@ function App() {
           </div>
         </div>
 
-        <div className="flex-1 relative">
+        <div className="flex-1 relative overflow-hidden">
           <KaleidoscopeViewport />
           <Toolbar />
           <StatusBar />

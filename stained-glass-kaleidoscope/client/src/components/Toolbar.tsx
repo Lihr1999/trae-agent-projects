@@ -1,12 +1,14 @@
 import { useKaleidoscopeStore } from '../stores/kaleidoscopeStore';
 
-const tools = [
+type ToolId = 'select' | 'bezier' | 'move' | 'scale' | 'rotate';
+
+const tools: { id: ToolId; label: string; icon: string }[] = [
   { id: 'select', label: 'Select', icon: '↖' },
   { id: 'bezier', label: 'Bezier', icon: '⌒' },
   { id: 'move', label: 'Move', icon: '✥' },
   { id: 'scale', label: 'Scale', icon: '⤢' },
   { id: 'rotate', label: 'Rotate', icon: '↻' }
-] as const;
+];
 
 export default function Toolbar() {
   const { tool, setTool, isPlaying, setPlaying } = useKaleidoscopeStore();
