@@ -171,8 +171,10 @@ export class KaleidoscopeRenderer {
     geometry.setAttribute('aPhotonIntensity', new THREE.BufferAttribute(intensities, 1));
     geometry.setAttribute('aPhotonWavelength', new THREE.BufferAttribute(wavelengths, 1));
 
-    this.causticPoints = new THREE.Points(geometry, this.causticMaterial);
-    this.scene.add(this.causticPoints);
+    if (this.causticMaterial) {
+      this.causticPoints = new THREE.Points(geometry, this.causticMaterial);
+      this.scene.add(this.causticPoints);
+    }
   }
 
   public updateFragments(fragments: GlassFragment[], materials: Material[]): void {

@@ -29,6 +29,7 @@ export class PhotonTracer {
     const angle = (index / PHOTON_COUNT) * Math.PI * 2 + Math.random() * 0.1;
     
     return {
+      id: `photon_${Date.now()}_${index}`,
       position: { ...light.position },
       direction: {
         x: Math.cos(angle),
@@ -267,19 +268,23 @@ export class PhotonTracer {
   }
 
   generateCausticPattern(photons: Photon[]): CausticPattern {
-    const positions: Point[] = [];
+    const positions: number[] = [];
     const intensities: number[] = [];
     const wavelengths: number[] = [];
 
     for (const photon of photons) {
       if (photon.depth >= 2) {
-        positions.push(photon.position);
+        positions.push(photon.position.x, photon.position.y);
         intensities.push(photon.intensity);
         wavelengths.push(photon.wavelength);
       }
     }
 
-    return { positions, intensities, wavelengths };
+    return {
+      positions: new Float32Array(positions),
+      intensities: new Float32Array(intensities),
+      wavelengths: new Float32Array(wavelengths)
+    };
   }
 }
 

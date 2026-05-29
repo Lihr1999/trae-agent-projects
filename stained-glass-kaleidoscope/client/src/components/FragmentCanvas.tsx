@@ -36,7 +36,7 @@ export default function FragmentCanvas() {
         
         const material = config.materials.find(m => m.id === fragment.materialId);
         if (material) {
-          ctx.fillStyle = `rgba(${Math.round(material.color.r * 255}, ${Math.round(material.color.g * 255}, ${Math.round(material.color.b * 255}, 0.6)`;
+          ctx.fillStyle = `rgba(${Math.round(material.color.r * 255)}, ${Math.round(material.color.g * 255)}, ${Math.round(material.color.b * 255)}, 0.6)`;
           ctx.fill();
         }
         
@@ -106,21 +106,20 @@ export default function FragmentCanvas() {
   const handleMouseUp = useCallback(() => {
     isDrawing.current = false;
       
-      if (tool === 'bezier' && drawingPoints.current.length >= 3) {
-        const points = drawingPoints.current;
-        const newFragment = {
-          id: `frag_${Date.now()}',
-          name: `Fragment ${config.fragments.length + 1}`,
-          curves: [],
-          vertices: points,
-          materialId: config.materials[0]?.id || ''
-        };
-        addFragment(newFragment);
-        selectFragment(newFragment.id);
-      }
-      
-      drawingPoints.current = [];
+    if (tool === 'bezier' && drawingPoints.current.length >= 3) {
+      const points = drawingPoints.current;
+      const newFragment = {
+        id: `frag_${Date.now()}`,
+        name: `Fragment ${config.fragments.length + 1}`,
+        curves: [],
+        vertices: points,
+        materialId: config.materials[0]?.id || ''
+      };
+      addFragment(newFragment);
+      selectFragment(newFragment.id);
     }
+    
+    drawingPoints.current = [];
   }, [tool, config.fragments.length, config.materials, addFragment, selectFragment]);
 
   return (
@@ -152,7 +151,7 @@ export default function FragmentCanvas() {
               key={fragment.id}
               className={`p-2 rounded cursor-pointer transition-all text-sm ${
                 selectedFragmentId === fragment.id ? 'bg-white/10 border border-white/20' : 'hover:bg-white/5'
-              }
+              }`}
               onClick={() => selectFragment(fragment.id)}
             >
               <div className="flex items-center justify-between">

@@ -137,7 +137,7 @@ export default function SpaceGroupPanel() {
 
         <div className="form-group">
           <label className="form-label">
-            Mirror Angle: {(config.spaceGroup.mirrorAngle.toFixed(2)} rad
+            Mirror Angle: {(config.spaceGroup.mirrorAngle).toFixed(2)} rad
           </label>
           <input
             type="range"

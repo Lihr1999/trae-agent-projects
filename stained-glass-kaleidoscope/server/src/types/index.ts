@@ -119,3 +119,26 @@ export interface Mesh {
   edges: Map<string, HalfEdge>;
   faces: Map<string, Face>;
 }
+
+export interface Photon {
+  id: string;
+  position: Point;
+  direction: Point;
+  wavelength: number;
+  intensity: number;
+  polarization: number;
+  depth: number;
+}
+
+export interface CausticPattern {
+  positions: Float32Array;
+  intensities: Float32Array;
+  wavelengths: Float32Array;
+}
+
+export interface PresetScene {
+  id: string;
+  name: string;
+  description: string;
+  config: KaleidoscopeConfig;
+}

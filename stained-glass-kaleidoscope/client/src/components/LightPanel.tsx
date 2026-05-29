@@ -6,7 +6,7 @@ export default function LightPanel() {
 
   const handleAddLight = () => {
     const newLight = {
-      id: `light_${Date.now()}',
+      id: `light_${Date.now()}`,
       name: 'New Light',
       position: { x: 0, y: 0, z: 2 },
       spectrum: [

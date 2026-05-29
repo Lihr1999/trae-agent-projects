@@ -99,6 +99,8 @@ const presets: PresetScene[] = [
     name: '经典三面镜六重对称花朵',
     description: 'Traditional three-mirror kaleidoscope with hexagonal symmetry creating beautiful floral patterns',
     config: {
+      id: 'config_classic',
+      name: 'Classic Configuration',
       spaceGroup: {
         type: '2d',
         schlafliSymbol: '{6,3}',
@@ -121,6 +123,8 @@ const presets: PresetScene[] = [
     name: '双曲几何 {5,4} 非欧几里得无限镶嵌',
     description: 'Hyperbolic geometry {5,4} tiling creates infinite patterns within finite bounds',
     config: {
+      id: 'config_hyperbolic',
+      name: 'Hyperbolic Configuration',
       spaceGroup: {
         type: 'hyperbolic',
         schlafliSymbol: '{5,4}',
@@ -143,6 +147,8 @@ const presets: PresetScene[] = [
     name: '高色散率火石玻璃产生剧烈光谱分离',
     description: 'High-dispersion flint glass creates dramatic spectral separation and rainbow effects',
     config: {
+      id: 'config_dispersion',
+      name: 'Dispersion Configuration',
       spaceGroup: {
         type: 'spherical',
         schlafliSymbol: '{4,3}',
@@ -186,6 +192,8 @@ const presets: PresetScene[] = [
     name: '极小夹角镜面引发光线囚禁与焦散能量聚焦',
     description: 'Extreme narrow mirror angles create light trapping and intense caustic energy focusing',
     config: {
+      id: 'config_caustic',
+      name: 'Caustic Configuration',
       spaceGroup: {
         type: '2d',
         schlafliSymbol: '{12,3}',
