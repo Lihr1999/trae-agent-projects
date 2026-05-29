@@ -1,0 +1,22 @@
+{
+  "name": "kaleidoscope-server",
+  "version": "1.0.0",
+  "description": "Backend for Stained Glass Kaleidoscope",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "fastify": "^4.25.2",
+    "@fastify/cors": "^8.5.0",
+    "sql.js": "^1.10.3",
+    "@types/sql.js": "^1.4.9"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3",
+    "tsx": "^4.7.0",
+    "@types/node": "^20.10.5"
+  }
+}
