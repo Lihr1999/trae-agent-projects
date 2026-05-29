@@ -67,7 +67,7 @@ let server: any;
 
 async function startServer() {
   try {
-    initDatabase();
+    await initDatabase();
     console.log('Database initialized successfully');
     
     server = app.listen(PORT, () => {

@@ -47,7 +47,7 @@ router.get('/:id/load', async (ctx) => {
   };
   
   const { createProject } = await import('../db/database');
-  const savedProject = createProject(project);
+  const savedProject = await createProject(project);
   
   ctx.body = {
     ...preset,

@@ -5,13 +5,13 @@ import type { SizeConfig } from '../types';
 const router = new Router({ prefix: '/api/size-configs' });
 
 router.get('/', async (ctx) => {
-  const configs = listSizeConfigs();
+  const configs = await listSizeConfigs();
   ctx.body = configs;
 });
 
 router.get('/:id', async (ctx) => {
   const { id } = ctx.params;
-  const config = getSizeConfig(id);
+  const config = await getSizeConfig(id);
   
   if (!config) {
     ctx.status = 404;
@@ -31,7 +31,7 @@ router.post('/', async (ctx) => {
     return;
   }
   
-  saveSizeConfig(config);
+  await saveSizeConfig(config);
   ctx.status = 201;
   ctx.body = config;
 });

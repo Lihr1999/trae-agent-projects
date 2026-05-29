@@ -5,13 +5,13 @@ import type { Project, MarkerResult } from '../types';
 const router = new Router({ prefix: '/api/projects' });
 
 router.get('/', async (ctx) => {
-  const projects = listProjects();
+  const projects = await listProjects();
   ctx.body = projects;
 });
 
 router.get('/:id', async (ctx) => {
   const { id } = ctx.params;
-  const project = getProject(id);
+  const project = await getProject(id);
   
   if (!project) {
     ctx.status = 404;
@@ -31,7 +31,7 @@ router.post('/', async (ctx) => {
     return;
   }
   
-  const project = createProject(projectData);
+  const project = await createProject(projectData);
   ctx.status = 201;
   ctx.body = project;
 });
@@ -46,28 +46,28 @@ router.put('/:id', async (ctx) => {
     return;
   }
   
-  const existing = getProject(id);
+  const existing = await getProject(id);
   if (!existing) {
     ctx.status = 404;
     ctx.body = { error: '项目不存在' };
     return;
   }
   
-  updateProject(projectData);
-  ctx.body = getProject(id);
+  await updateProject(projectData);
+  ctx.body = await getProject(id);
 });
 
 router.delete('/:id', async (ctx) => {
   const { id } = ctx.params;
   
-  const existing = getProject(id);
+  const existing = await getProject(id);
   if (!existing) {
     ctx.status = 404;
     ctx.body = { error: '项目不存在' };
     return;
   }
   
-  deleteProject(id);
+  await deleteProject(id);
   ctx.status = 204;
 });
 
@@ -75,14 +75,14 @@ router.post('/:id/marker-result', async (ctx) => {
   const { id } = ctx.params;
   const markerResult = ctx.request.body as MarkerResult;
   
-  const existing = getProject(id);
+  const existing = await getProject(id);
   if (!existing) {
     ctx.status = 404;
     ctx.body = { error: '项目不存在' };
     return;
   }
   
-  saveMarkerResult(id, markerResult);
+  await saveMarkerResult(id, markerResult);
   ctx.body = { success: true };
 });
 

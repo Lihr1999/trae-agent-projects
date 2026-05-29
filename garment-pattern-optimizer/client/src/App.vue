@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 import { usePatternStore } from './stores/patternStore';
 import PresetButtons from './components/PresetButtons.vue';
 import Toolbar from './components/Toolbar.vue';
@@ -9,14 +9,31 @@ import UtilizationGauge from './components/UtilizationGauge.vue';
 import WarningPanel from './components/WarningPanel.vue';
 
 const store = usePatternStore();
+const isInitializing = ref(true);
 
-onMounted(() => {
-  store.createNewProject();
+onMounted(async () => {
+  try {
+    await store.createNewProject();
+  } catch (error) {
+    console.error('Failed to initialize project:', error);
+  } finally {
+    isInitializing.value = false;
+  }
 });
 </script>
 
 <template>
   <div class="w-full h-screen flex flex-col bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+    <div 
+      v-if="isInitializing" 
+      class="fixed inset-0 flex items-center justify-center bg-slate-900 z-50"
+    >
+      <div class="text-center">
+        <div class="w-16 h-16 border-4 border-primary-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+        <p class="text-white text-lg">正在初始化...</p>
+      </div>
+    </div>
+    
     <header class="h-16 flex items-center justify-between px-6 bg-slate-800/80 backdrop-blur-md border-b border-slate-700/50 shadow-lg z-10">
       <div class="flex items-center gap-4">
         <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center shadow-lg shadow-primary-500/30">

@@ -45,7 +45,13 @@ export const usePatternStore = defineStore('pattern', () => {
   const highlightedPoints = ref<Point[]>([]);
   const highlightedPolygonIds = ref<string[]>([]);
   
-  const polygons = computed(() => currentProject.value?.polygons || []);
+  const polygons = computed(() => {
+    if (!currentProject.value) return [];
+    if (!currentProject.value.polygons) {
+      currentProject.value.polygons = [];
+    }
+    return currentProject.value.polygons;
+  });
   
   const selectedPolygon = computed(() => {
     if (!drawingState.value.selectedPolygonId || !currentProject.value) return null;
@@ -86,7 +92,14 @@ export const usePatternStore = defineStore('pattern', () => {
   }
   
   function addPolygon(polygon: Omit<Polygon, 'id'>) {
-    if (!currentProject.value) return;
+    if (!currentProject.value) {
+      console.warn('Cannot add polygon: no current project');
+      return;
+    }
+    
+    if (!currentProject.value.polygons) {
+      currentProject.value.polygons = [];
+    }
     
     const newPolygon: Polygon = {
       ...polygon,
@@ -133,6 +146,9 @@ export const usePatternStore = defineStore('pattern', () => {
   
   function finishDrawing() {
     if (drawingState.value.currentPoints.length >= 3 && currentProject.value) {
+      if (!currentProject.value.polygons) {
+        currentProject.value.polygons = [];
+      }
       const newPolygon: Polygon = {
         id: generateId(),
         name: `衣片 ${currentProject.value.polygons.length + 1}`,
@@ -232,7 +248,15 @@ export const usePatternStore = defineStore('pattern', () => {
   }
   
   async function saveProject() {
-    if (!currentProject.value) return;
+    if (!currentProject.value) {
+      console.warn('Cannot save: no current project');
+      return;
+    }
+    
+    if (!currentProject.value.id) {
+      console.error('Cannot save: project has no ID');
+      return;
+    }
     
     try {
       await api.projects.update(currentProject.value);
