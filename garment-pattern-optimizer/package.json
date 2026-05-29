@@ -1,0 +1,16 @@
+{
+  "name": "garment-pattern-optimizer",
+  "version": "1.0.0",
+  "description": "服装纸样打版与排料优化器",
+  "scripts": {
+    "install:all": "npm install && cd client && npm install && cd ../server && npm install",
+    "dev:server": "cd server && npm run dev",
+    "dev:client": "cd client && npm run dev",
+    "build:client": "cd client && npm run build",
+    "build:server": "cd server && npm run build",
+    "start": "cd server && npm start"
+  },
+  "keywords": ["garment", "pattern", "marker-making", "nfp", "optimization"],
+  "author": "",
+  "license": "MIT"
+}
