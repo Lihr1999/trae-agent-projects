@@ -159,9 +159,9 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
           <h3 className="text-gray-400 text-sm">选中物体</h3>
           <div className="bg-gray-700 p-2 rounded text-xs text-gray-300 space-y-1">
             <p>ID: {selectedBody.id.slice(0, 8)}...</p>
-            <p>质量: {selectedBody.mass.toFixed(2)}</p>
-            <p>位置: ({selectedBody.position.x.toFixed(1)}, {selectedBody.position.y.toFixed(1)})</p>
-            <p>速度: ({selectedBody.linearVelocity.x.toFixed(1)}, {selectedBody.linearVelocity.y.toFixed(1)})</p>
+            <p>质量: {selectedBody.isStatic ? '∞ (静态)' : (selectedBody.mass ?? 0).toFixed(2)}</p>
+            <p>位置: ({(selectedBody.position?.x ?? 0).toFixed(1)}, {(selectedBody.position?.y ?? 0).toFixed(1)})</p>
+            <p>速度: ({(selectedBody.linearVelocity?.x ?? 0).toFixed(1)}, {(selectedBody.linearVelocity?.y ?? 0).toFixed(1)})</p>
             <p>状态: {selectedBody.isSleeping ? '休眠' : '活跃'}</p>
           </div>
           <button

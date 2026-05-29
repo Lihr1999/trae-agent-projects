@@ -12,10 +12,29 @@ const DEFAULT_STATE: SimulationState = {
   timeStep: 1 / 60
 };
 
+function sanitizeBody(body: any): RigidBody {
+  const isStatic = body.isStatic === true || body.invMass === 0;
+  return {
+    ...body,
+    mass: body.mass == null ? (isStatic ? Infinity : 0) : body.mass,
+    invMass: body.invMass == null ? (isStatic ? 0 : 1) : body.invMass,
+    inertia: body.inertia == null ? (isStatic ? Infinity : 0) : body.inertia,
+    invInertia: body.invInertia == null ? (isStatic ? 0 : 1) : body.invInertia,
+    position: body.position && typeof body.position.x === 'number' ? body.position : { x: 0, y: 0 },
+    linearVelocity: body.linearVelocity && typeof body.linearVelocity.x === 'number' ? body.linearVelocity : { x: 0, y: 0 },
+    angularVelocity: typeof body.angularVelocity === 'number' ? body.angularVelocity : 0,
+    rotation: typeof body.rotation === 'number' ? body.rotation : 0,
+    shape: body.shape || { type: 'circle', radius: 20 },
+    material: body.material || { friction: 0.3, restitution: 0.2, density: 1 },
+    trail: Array.isArray(body.trail) ? body.trail : [],
+    color: body.color || '#ffffff'
+  };
+}
+
 function mergeWithDefaults(data: Partial<SimulationState> | null | undefined): SimulationState {
   if (!data) return { ...DEFAULT_STATE };
   return {
-    bodies: Array.isArray(data.bodies) ? data.bodies : DEFAULT_STATE.bodies,
+    bodies: Array.isArray(data.bodies) ? data.bodies.map(sanitizeBody) : DEFAULT_STATE.bodies,
     joints: Array.isArray(data.joints) ? data.joints : DEFAULT_STATE.joints,
     manifolds: Array.isArray(data.manifolds) ? data.manifolds : DEFAULT_STATE.manifolds,
     particles: Array.isArray(data.particles) ? data.particles : DEFAULT_STATE.particles,

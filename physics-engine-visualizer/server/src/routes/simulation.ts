@@ -9,23 +9,38 @@ const router = express.Router();
 
 let simulationWorld: PhysicsWorld = createWorld();
 
+function sanitizeBody(body: any) {
+  return {
+    ...body,
+    mass: body.mass === Infinity ? null : body.mass,
+    inertia: body.inertia === Infinity ? null : body.inertia
+  };
+}
+
+function sanitizeResponse(data: any) {
+  if (data.bodies) {
+    data.bodies = data.bodies.map(sanitizeBody);
+  }
+  return data;
+}
+
 router.post('/step', (req, res) => {
   const { dt = 1 / 60 } = req.body;
   step(simulationWorld, dt);
 
-  res.json({
+  res.json(sanitizeResponse({
     bodies: Array.from(simulationWorld.bodies.values()),
     joints: Array.from(simulationWorld.joints.values()),
     manifolds: simulationWorld.manifolds,
     particles: simulationWorld.particles
-  });
+  }));
 });
 
 router.post('/body', (req, res) => {
   const { shape, position, material, isStatic = false } = req.body;
   const body = createRigidBody(shape, position, material, isStatic);
   addBody(simulationWorld, body);
-  res.json(body);
+  res.json(sanitizeBody(body));
 });
 
 router.delete('/body/:id', (req, res) => {
@@ -80,7 +95,7 @@ router.post('/preset/:id', (req, res) => {
   }
 
   simulationWorld = preset.create();
-  res.json({
+  res.json(sanitizeResponse({
     bodies: Array.from(simulationWorld.bodies.values()),
     joints: Array.from(simulationWorld.joints.values()),
     manifolds: simulationWorld.manifolds,
@@ -88,7 +103,7 @@ router.post('/preset/:id', (req, res) => {
     gravity: simulationWorld.gravity,
     iterations: simulationWorld.iterations,
     timeStep: simulationWorld.timeStep
-  });
+  }));
 });
 
 router.get('/presets', (req, res) => {
@@ -101,7 +116,7 @@ router.post('/clear', (req, res) => {
 });
 
 router.get('/state', (req, res) => {
-  res.json({
+  res.json(sanitizeResponse({
     bodies: Array.from(simulationWorld.bodies.values()),
     joints: Array.from(simulationWorld.joints.values()),
     manifolds: simulationWorld.manifolds,
@@ -109,7 +124,7 @@ router.get('/state', (req, res) => {
     gravity: simulationWorld.gravity,
     iterations: simulationWorld.iterations,
     timeStep: simulationWorld.timeStep
-  });
+  }));
 });
 
 router.post('/settings', (req, res) => {
