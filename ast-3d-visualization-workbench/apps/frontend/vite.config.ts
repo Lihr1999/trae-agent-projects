@@ -14,7 +14,6 @@ export default defineConfig({
       '/api': {
         target: 'http://localhost:3001',
         changeOrigin: true,
-        rewrite: (p) => p.replace(/^\/api/, ''),
       },
       '/socket.io': {
         target: 'ws://localhost:3001',
