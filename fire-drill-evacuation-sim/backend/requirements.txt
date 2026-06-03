@@ -1,0 +1,13 @@
+fastapi>=0.95.0
+uvicorn[standard]
+sqlalchemy>=2.0
+pydantic>=2.0
+python-jose[cryptography]
+passlib[bcrypt]
+python-multipart
+aiofiles
+openpyxl
+reportlab
+httpx
+pytest
+pytest-asyncio
