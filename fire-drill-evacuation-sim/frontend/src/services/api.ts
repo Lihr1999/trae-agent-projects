@@ -50,12 +50,7 @@ api.interceptors.response.use(
 
 export const authApi = {
   login(username: string, password: string) {
-    const formData = new URLSearchParams()
-    formData.append('username', username)
-    formData.append('password', password)
-    return api.post<Token>('/auth/login', formData, {
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-    })
+    return api.post<Token>('/auth/login', { username, password })
   },
   register(username: string, password: string) {
     return api.post<User>('/auth/register', { username, password })
