@@ -193,7 +193,7 @@ export const vehicleApi = {
     return api.get<RescueVehicle[]>('/vehicles')
   },
   getAvailable() {
-    return api.get<RescueVehicle[]>('/vehicles/available')
+    return api.get<RescueVehicle[]>('/vehicles/available/list')
   },
   create(data: Partial<RescueVehicle>) {
     return api.post<RescueVehicle>('/vehicles', data)
@@ -211,7 +211,7 @@ export const vehicleApi = {
 
 export const dispatchApi = {
   autoDispatch(fireId: number) {
-    return api.post<ApiResponse>(`/dispatch/auto/${fireId}`)
+    return api.post<ApiResponse>(`/dispatch/auto`, null, { params: { fire_incident_id: fireId } })
   },
   manualDispatch(data: { vehicle_id: number; task_type: string; target_x: number; target_y: number; target_z: number }) {
     return api.post<DispatchTask>('/dispatch/manual', data)
@@ -220,7 +220,7 @@ export const dispatchApi = {
     return api.get<DispatchTask[]>('/dispatch/tasks')
   },
   getVehicleRoute(vehicleId: number) {
-    return api.get<ApiResponse>(`/dispatch/vehicle-route/${vehicleId}`)
+    return api.get<ApiResponse>(`/dispatch/vehicle/${vehicleId}/route`)
   }
 }
 

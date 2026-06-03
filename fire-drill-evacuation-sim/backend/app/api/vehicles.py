@@ -19,6 +19,16 @@ def list_vehicles(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)
     )
 
 
+@router.get("/available/list", response_model=ApiResponse)
+def list_available_vehicles(db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+    vehicles = db.query(RescueVehicle).filter(RescueVehicle.status == "idle").all()
+    return ApiResponse(
+        success=True,
+        data=[RescueVehicleResponse.model_validate(v).model_dump() for v in vehicles],
+        message="获取可用车辆列表成功"
+    )
+
+
 @router.get("/{vehicle_id}", response_model=ApiResponse)
 def get_vehicle(vehicle_id: int, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
     vehicle = db.query(RescueVehicle).filter(RescueVehicle.id == vehicle_id).first()
@@ -69,16 +79,6 @@ def delete_vehicle(vehicle_id: int, db: Session = Depends(get_db), current_user:
     db.delete(vehicle)
     db.commit()
     return ApiResponse(success=True, message="删除车辆成功")
-
-
-@router.get("/available/list", response_model=ApiResponse)
-def list_available_vehicles(db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
-    vehicles = db.query(RescueVehicle).filter(RescueVehicle.status == "idle").all()
-    return ApiResponse(
-        success=True,
-        data=[RescueVehicleResponse.model_validate(v).model_dump() for v in vehicles],
-        message="获取可用车辆列表成功"
-    )
 
 
 @router.post("/{vehicle_id}/dispatch", response_model=ApiResponse)

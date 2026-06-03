@@ -19,18 +19,6 @@ def list_floors(skip: int = 0, limit: int = 100, db: Session = Depends(get_db), 
     )
 
 
-@router.get("/{floor_id}", response_model=ApiResponse)
-def get_floor(floor_id: int, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
-    floor = db.query(Floor).filter(Floor.id == floor_id).first()
-    if not floor:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="楼层不存在")
-    return ApiResponse(
-        success=True,
-        data=FloorResponse.model_validate(floor).model_dump(),
-        message="获取楼层详情成功"
-    )
-
-
 @router.get("/buildings/{building_id}/floors", response_model=ApiResponse)
 def list_building_floors(building_id: int, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
     building = db.query(Building).filter(Building.id == building_id).first()
@@ -41,6 +29,18 @@ def list_building_floors(building_id: int, db: Session = Depends(get_db), curren
         success=True,
         data=[FloorResponse.model_validate(f).model_dump() for f in floors],
         message="获取建筑楼层列表成功"
+    )
+
+
+@router.get("/{floor_id}", response_model=ApiResponse)
+def get_floor(floor_id: int, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+    floor = db.query(Floor).filter(Floor.id == floor_id).first()
+    if not floor:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="楼层不存在")
+    return ApiResponse(
+        success=True,
+        data=FloorResponse.model_validate(floor).model_dump(),
+        message="获取楼层详情成功"
     )
 
 
