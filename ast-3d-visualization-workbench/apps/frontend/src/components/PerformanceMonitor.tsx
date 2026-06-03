@@ -1,5 +1,4 @@
-import React, { useRef, useState } from 'react';
-import { useFrame } from '@react-three/fiber';
+import React, { useRef, useState, useEffect } from 'react';
 import { useStore } from '../store/useStore';
 
 const PerformanceMonitor: React.FC = () => {
@@ -7,14 +6,22 @@ const PerformanceMonitor: React.FC = () => {
   const frameTimesRef = useRef<number[]>([]);
   const [fps, setFps] = useState(0);
   const [nodeCount, setNodeCount] = useState(0);
+  const rafRef = useRef<number>();
 
-  useFrame(() => {
-    const now = performance.now();
-    frameTimesRef.current.push(now);
-    frameTimesRef.current = frameTimesRef.current.filter((t) => now - t < 1000);
-    setFps(frameTimesRef.current.length);
-    setNodeCount(layoutResult?.nodeCount ?? 0);
-  });
+  useEffect(() => {
+    const measureFps = () => {
+      const now = performance.now();
+      frameTimesRef.current.push(now);
+      frameTimesRef.current = frameTimesRef.current.filter((t) => now - t < 1000);
+      setFps(frameTimesRef.current.length);
+      setNodeCount(layoutResult?.nodeCount ?? 0);
+      rafRef.current = requestAnimationFrame(measureFps);
+    };
+    rafRef.current = requestAnimationFrame(measureFps);
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, [layoutResult]);
 
   const fpsColor = fps > 30 ? '#4caf50' : fps >= 15 ? '#ff9800' : '#ff1744';
   const borderColor = fps > 30 ? '#333' : fps >= 15 ? '#ff9800' : '#ff1744';
