@@ -1,0 +1,15 @@
+{
+  "name": "intelligent-warehouse-scheduling-system",
+  "version": "1.0.0",
+  "description": "Intelligent Warehouse Scheduling System",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm -r dev",
+    "build": "pnpm -r build",
+    "lint": "pnpm -r lint",
+    "test": "pnpm -r test"
+  },
+  "keywords": ["warehouse", "scheduling", "robot", "pathfinding"],
+  "author": "",
+  "license": "MIT"
+}
