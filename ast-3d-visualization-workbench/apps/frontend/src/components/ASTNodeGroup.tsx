@@ -1,4 +1,4 @@
-import React, { useRef, useMemo, useCallback, useState } from 'react';
+import React, { useRef, useMemo, useCallback, useState, useEffect } from 'react';
 import * as THREE from 'three';
 import { useFrame, type ThreeEvent } from '@react-three/fiber';
 import { useStore } from '../store/useStore';
@@ -108,7 +108,10 @@ const InstancedNodeGroup: React.FC<InstancedNodeGroupProps> = ({
   const meshRef = useRef<THREE.InstancedMesh>(null);
   const dummy = useMemo(() => new THREE.Object3D(), []);
 
-  const colorArray = useMemo(() => {
+  if (nodes.length === 0) return null;
+
+  const geometry = useMemo(() => {
+    const geo = new THREE.SphereGeometry(1, 12, 12);
     const colors = new Float32Array(nodes.length * 3);
     for (let i = 0; i < nodes.length; i++) {
       const node = nodes[i];
@@ -120,10 +123,11 @@ const InstancedNodeGroup: React.FC<InstancedNodeGroupProps> = ({
       colors[i * 3 + 1] = c.g;
       colors[i * 3 + 2] = c.b;
     }
-    return colors;
+    geo.setAttribute('color', new THREE.InstancedBufferAttribute(colors, 3));
+    return geo;
   }, [nodes, selectedNodeIds]);
 
-  useMemo(() => {
+  useEffect(() => {
     if (!meshRef.current) return;
     for (let i = 0; i < nodes.length; i++) {
       const node = nodes[i];
@@ -157,23 +161,17 @@ const InstancedNodeGroup: React.FC<InstancedNodeGroupProps> = ({
   return (
     <instancedMesh
       ref={meshRef}
-      args={[undefined, undefined, nodes.length]}
+      args={[geometry, undefined, nodes.length]}
       onClick={handleClick}
       frustumCulled
     >
-      <sphereGeometry args={[1, 12, 12]} />
       <meshStandardMaterial
         vertexColors
         emissive="#ffffff"
         emissiveIntensity={0.1}
         transparent
         opacity={0.9}
-      >
-        <instancedBufferAttribute
-          attach="geometry-attributes-color"
-          args={[colorArray, 3]}
-        />
-      </meshStandardMaterial>
+      />
     </instancedMesh>
   );
 };
